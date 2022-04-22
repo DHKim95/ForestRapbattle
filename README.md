@@ -28,8 +28,8 @@
 <table>
   <tr>
     <td align="center"><a href=""><img src="" width="100px;" alt=""/><br /><sub><b>최명재(팀장)<br>Back-end, AI</b></sub></a><br /></td>
-    <td align="center" width="200px;"><a href="https://github.com/DHKim95"><img src="https://avatars.githubusercontent.com/u/68861542?v=4" width="200px;" height="200px;" alt=""/><br /><sub><b>김도훈<br>Front-end, AI</b></sub></a><br /></td>
-    <td align="center"><a href="https://github.com/xogxog"><img src="" width="100px;" alt=""/><br /><sub><b>김태현<br>Back-end, Unity</b></sub></a><br /></td>
+    <td align="center"><a href="https://github.com/DHKim95"><img src="https://avatars.githubusercontent.com/u/68861542?v=4" width="200px;" height="200px;" alt=""/><br /><sub><b>김도훈<br>Front-end, AI</b></sub></a><br /></td>
+    <td align="center"><a href="https://github.com/xogxog"><img src="https://avatars.githubusercontent.com/u/87456669?v=4" width="100px;" alt=""/><br /><sub><b>김태현<br>Back-end, Unity</b></sub></a><br /></td>
     <td align="center"><a href=""><img src="" width="100px;" alt=""/><br /><sub><b>윤찬호<br>Front-end, Unity</b></sub></a><br /></td>
     <td align="center"><a href="https://github.com/eunnuricho"><img src="" width="100px;" alt=""/><br /><sub><b>조은누리<br>Back-end, Unity</b></sub></a><br /></td>
     <td align="center"><a href=""><img src="" width="100px;" alt=""/><br /><sub><b>조성현<br>Front-end, Unity</b></sub></a><br /></td>
