@@ -7,6 +7,11 @@
 - 프로젝트명 : **숲바람 랩배틀**
 - 개발 기간: 2022.04.11 ~ 2022.05.20
 - 서비스 특징 및 주요기능
+- 주요 기술
+  - React
+  - Django
+  - Unity
+
 
 
 
@@ -17,13 +22,14 @@
 <table>
   <tr>
     <td align="center"><a href=""><img src="" width="100px;" alt=""/><br /><sub><b>최명재(팀장)<br>Back-end, AI</b></sub></a><br /></td>
-    <td align="center"><a href="https://github.com/DHKim95"><img src="![dohun](/uploads/8ad9fda8646091e4df9b36ce04977af3/dohun.png)" width="100px;" alt=""/><br /><sub><b>김도훈<br>Front-end, AI</b></sub></a><br /></td>
+    <td align="center"><a href="https://github.com/DHKim95"><img src="https://avatars.githubusercontent.com/u/68861542?v=4" width="100%;" alt=""/><br /><sub><b>김도훈<br>Front-end, AI</b></sub></a><br /></td>
     <td align="center"><a href="https://github.com/xogxog"><img src="" width="100px;" alt=""/><br /><sub><b>김태현<br>Back-end, Unity</b></sub></a><br /></td>
     <td align="center"><a href=""><img src="" width="100px;" alt=""/><br /><sub><b>윤찬호<br>Front-end, Unity</b></sub></a><br /></td>
     <td align="center"><a href="https://github.com/eunnuricho"><img src="" width="100px;" alt=""/><br /><sub><b>조은누리<br>Back-end, Unity</b></sub></a><br /></td>
     <td align="center"><a href=""><img src="" width="100px;" alt=""/><br /><sub><b>조성현<br>Front-end, Unity</b></sub></a><br /></td>
     </tr>
 </table>
+
 
 
 
@@ -35,7 +41,7 @@
 
 ### 3.1 아키텍처
 
-
+![아키텍처](/uploads/d65044c07c8bb1f28f82d52f1d32c5a4/아키텍처.png)
 
 ### 3.2 ERD
 
@@ -51,4 +57,6 @@
 
 ### 3.5 기능 명세서
 
-[기능_명세서_1f27843137454dcba4498cb341d25670.html](/uploads/e669333ed724dc62b555463326249977/기능_명세서_1f27843137454dcba4498cb341d25670.html)
+![기능명세서](/uploads/bf5513f254485d1ec7e93d0c3854f616/기능명세서.png)
+
+### 3.6 요구사항 명세서
