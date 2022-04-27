@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags: []
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - ModalPanel
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Background
+    uniqueID: 4124950871
+    locked: 0
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Layout
+    uniqueID: 912922905
+    locked: 0
+  - name: UI
+    uniqueID: 3244745949
+    locked: 0
+  - name: ModalPanel
+    uniqueID: 1388066493
+    locked: 0
+  - name: Modal
+    uniqueID: 2517927063
+    locked: 0
+  - name: ModalUI
+    uniqueID: 2290272601
+    locked: 0
