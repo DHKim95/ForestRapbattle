@@ -20,4 +20,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/v1/auth/', include('accounts.urls')), # 홈페이지 전반
     path('api/v1/game/', include('game.urls')), # 게임 화면 용
+    path('google/', include('allauth.urls')), # 구글 소셜 로그인
 ]

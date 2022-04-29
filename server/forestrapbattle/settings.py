@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'game',
     #3rd
     'rest_framework',
-
+    'corsheaders',
     #native
     'django.contrib.admin',
     'django.contrib.auth',
@@ -46,9 +46,18 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites', # 자신의 웹앱과 django-allauth 연결
+    # allauth
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+
+    #provider 구글 페이스북 카톡 깃허브 등 소셜로그인 제공업체
+    'allauth.socialaccount.providers.google',
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -57,6 +66,10 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+# cors-headers
+CORS_ORIGIN_WHITELIST = [ 'http://localhost:3000','http://127.0.0.1:3000']
+CORS_ALLOW_CREDENTIALS = True
 
 ROOT_URLCONF = 'forestrapbattle.urls'
 
@@ -149,3 +162,14 @@ JWT_AUTH = {
     # 1일동안 유효한 토큰
     'JWT_EXPIRATION_DELTA': datetime.timedelta(days=1),
 }
+
+AUTHENTICATION_BACKENDS = (
+    #Needed to login by username in Django admin, regardless of 'allauth'
+    'django.contrib.auth.backends.ModelBackend',
+    
+    # 'allauth' specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
+
+SITE_ID = 1
+LOGIN_REDIRECT_URL = '/' # 로그인 후, 호출되는 url
