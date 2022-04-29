@@ -30,7 +30,7 @@ class ProfileImage(models.Model) :
 
 class Rank(models.Model) :
   rank = models.AutoField(primary_key=True) # id가 곧 순위
-  user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.DO_NOTHING)
+  user_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.DO_NOTHING)
 
   class Meta :
     db_table = 'rank'
