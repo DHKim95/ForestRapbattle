@@ -9,7 +9,7 @@ class User(AbstractUser):
     user_id = models.BigAutoField(primary_key=True)
     profile = models.ForeignKey(ProfileImage,on_delete=models.DO_NOTHING)
     email = models.EmailField(_('email address'), max_length=50,unique=True)
-    nickname = models.CharField(max_length=16,unique=True)
+    nickname = models.CharField(max_length=8,unique=True)
     # password
     game_money = models.IntegerField(default = 0)
     total_game_cnt = models.IntegerField(default=0)
