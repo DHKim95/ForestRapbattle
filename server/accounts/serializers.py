@@ -7,12 +7,14 @@ User = get_user_model()
 
 
 class ProfileImageSerializer(serializers.ModelSerializer) :
+  
+  class Meta :
     model = ProfileImage
     fields = '__all__'
 
 # 유저 생성 시
 class UserSerializer(serializers.ModelSerializer) :
-  
+
   password = serializers.CharField(write_only = True)
   profile = ProfileImageSerializer(read_only = True)
 

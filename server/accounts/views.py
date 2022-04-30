@@ -22,6 +22,7 @@ def signup(request) :
   if password != pw_confirmation :
     return Response({'error' : '비밀번호가 일치하지 않습니다.'}, status=status.HTTP_400_BAD_REQUEST)
   
+  profile = get_object_or_404(ProfileImage, profile_id=request.data.get('profile_id'))
   serializer = UserSerializer(data=request.data)
 
   # 이메일 중복검사
@@ -31,28 +32,36 @@ def signup(request) :
     return Response({'error': '이미 존재하는 Email입니다.'}, status=status.HTTP_400_BAD_REQUEST)
 
   if serializer.is_valid(raise_exception=True) :
-    user = serializer.save()
+    user = serializer.save(profile=profile)
+    # user = serializer.save()
     user.set_password(request.data.get('password'))
     user.save()
+    print(serializer.data)
     return Response(serializer.data, status = status.HTTP_201_CREATED)
   return Response({'error':'회원가입실패'}, status=status.HTTP_400_BAD_REQUEST)
 
 
-@api_view(['GET'])
+@api_view(['POST'])
 @permission_classes([AllowAny])
 def nickname(request) :
   curr_nickname = request.data.get('nickname')
   if get_user_model().objects.filter(nickname=curr_nickname).exists() :
-    return Response({'result' : False}, status=status.HTTP_403_FORBIDDEN)
+    return Response({'result' : False}, status=status.HTTP_200_OK)
   else:
     return Response({'result' : True}, status=status.HTTP_200_OK)
 
 
-@api_view(['GET'])
+@api_view(['POST'])
+@permission_classes([AllowAny])
 def login(request) :
-  user = get_object_or_404(User,email=request.GET.get('email'))
-  serializer = UserSerializer(user)
-  return Response(serializer.data, status=status.HTTP_200_OK)
+  try :
+    user = get_object_or_404(User,email=request.POST.get('email'))
+  except :
+    return Response({'error' : '일치하는 아이디가 없습니다.'}, status=status.HTTP_400_BAD_REQUEST)
+  if check_password(request.POST.get('password'), user.password) :
+    serializer = UserSerializer(user)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+  return Response({'error' : '비밀번호가 일치하지 않습니다.'}, status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['DELETE'])
@@ -70,28 +79,29 @@ def signout(request,user_id) :
 
 # 회원정보 조회
 @api_view(['GET'])
+@permission_classes([AllowAny])
 def profile(request, user_id) :
 
   user = get_object_or_404(User, user_id=user_id)
   serializer = UserInfoSerializer(user)
   return Response(serializer.data, status=status.HTTP_200_OK)
 
+# 프로필 사진 조회
+@api_view(['GET'])
+def ProfileImages(request) :
+  profileImages = get_list_or_404(ProfileImage)
+  serializers = ProfileImageSerializer(profileImages, many=True)
+  return Response(serializers.data, status=status.HTTP_200_OK)
 
 
-# 프로필 사진
-@api_view(['GET','PUT'])
+# 프로필 사진 수정
+@api_view(['PUT'])
 def editProfile(request, user_id) :
-  # 프로필 사진 조회
-  if request.method == 'GET' :
-    profileImages = get_list_or_404(ProfileImage)
-    serializers = ProfileImageSerializer(profileImages, many=True)
-    return Response(serializers.data, status=status.HTTP_200_OK)
-  # 프로필 수정
-  if request.method == 'PUT' :
-    user = get_object_or_404(User, user_id=user_id)
-    user.profile = request.data.get('profile_id')
-    if request.user.id == user_id :
-      user.save()
-      return Response(status=status.HTTP_200_OK)
-    return Response({'error':'본인이 아닙니다.'},status=status.HTTP_401_UNAUTHORIZED)
+
+  user = get_object_or_404(User, user_id=user_id)
+  user.profile = request.data.get('profile_id')
+  if request.user.id == user_id :
+    user.save()
+    return Response(status=status.HTTP_200_OK)
+  return Response({'error':'본인이 아닙니다.'},status=status.HTTP_401_UNAUTHORIZED)
   
