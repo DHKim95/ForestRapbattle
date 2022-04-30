@@ -1,9 +1,9 @@
 import React from "react";
 import { styled, Avatar, Container } from "@mui/material";
-import facebook from "../assests/facebook.png";
-import youtube from "../assests/youtube.png";
-import twitter from "../assests/twitter.png";
-import instagram from "../assests/instagram.png";
+import facebook from "../assets/facebook.png";
+import youtube from "../assets/youtube.png";
+import twitter from "../assets/twitter.png";
+import instagram from "../assets/instagram.png";
 
 function Footer() {
   const RootStyle = styled("div")({

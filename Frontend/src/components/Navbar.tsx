@@ -15,7 +15,7 @@ import "../styles/Navbar.scss";
 import { alpha, styled } from "@mui/material";
 import { grey } from "@mui/material/colors";
 import { Link } from "react-router-dom";
-import myImg from "../assests/sunghyun.jpg";
+import myImg from "../assets/sunghyun.jpg";
 
 const pages = ["게임시작", "로그인", "Sunghyun"];
 
