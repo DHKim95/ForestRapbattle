@@ -1,0 +1,52 @@
+.Main {
+  background-image: url(../assests/back2.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 100vh;
+  display: table;
+
+  .title {
+    display: table-cell;
+    text-align: center;
+    vertical-align:middle;
+
+    p {
+      font-size: 100px;
+      font-weight: bolder;
+      color: rgb(113, 170, 113);
+    }
+  }
+}
+
+.title2 {
+  text-align: center;
+  color: white;
+  padding-top: 100px;
+  padding-bottom: 200px;
+  font-size: 50px;
+  font-weight: 300;
+}
+
+.items {
+  display: flex;
+  align-items: center;
+  padding-bottom: 200px;
+  .rightPic {
+    text-align: end;
+  }
+
+  div {
+    h1 {
+      color: white;
+      font-size: 60px;
+    }
+    p {
+      font-size: 25px;
+      font-weight: bolder;
+    }
+    img {
+      margin-left: auto;
+    }
+  }
+}
