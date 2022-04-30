@@ -5,9 +5,9 @@ import "../styles/Main.scss";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { Container, Grid, Button, styled, createTheme, ThemeProvider } from "@mui/material";
-import fight from "../assests/fight.png";
-import idea from "../assests/idea.png";
-import talk from "../assests/talk.png";
+import fight from "../assets/fight.png";
+import idea from "../assets/idea.png";
+import talk from "../assets/talk.png";
 
 const theme = createTheme({
   palette: {
