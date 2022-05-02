@@ -1,0 +1,11 @@
+version: "3"
+services:
+  frontend:
+    image: frontend
+    build:
+      context: ./Frontend/
+      dockerfile: Dockerfile
+    ports:
+      - '3000:3000' # - 띄어쓰기
+    volumes:
+      - /home/ubuntu/docker-volume/ssl/:var/www/html
