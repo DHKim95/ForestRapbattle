@@ -6,6 +6,18 @@ services:
       context: ./Frontend/
       dockerfile: Dockerfile
     ports:
-      - '3000:3000' # - 띄어쓰기
+      - '80:80' # - 띄어쓰기
+      - '443:443'
     volumes:
-      - /home/ubuntu/docker-volume/ssl/:var/www/html
+      - /home/ubuntu/docker-volume/ssl/:/var/www/html
+    container_name: frontend
+
+  server:
+    image: backend
+    build:
+      context: ./server/
+      dockerfile: Dockerfile
+    ports:
+      - '8443:8433'
+    container_name: backend
+    
