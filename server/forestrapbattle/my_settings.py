@@ -7,10 +7,12 @@ DATABASES = {
         ###################
         # 로컬용
         'USER': 'root',
-        'PASSWORD': 'root',
+        'PASSWORD': 'forest',
+        # 'PASSWORD': 'root',
         #################
         # 서버에 올릴때 변경하기
-        'HOST' : '127.0.0.1',
+        'HOST' : 'k6e204.p.ssafy.io',
+        # 'HOST' : '127.0.0.1',
         'PORT' : '3306',
     }
 }
