@@ -33,7 +33,6 @@ def signup(request) :
 
   if serializer.is_valid(raise_exception=True) :
     user = serializer.save(profile=profile)
-    # user = serializer.save()
     user.set_password(request.data.get('password'))
     user.save()
     print(serializer.data)
@@ -79,7 +78,7 @@ def signout(request,user_id) :
 
 # 회원정보 조회
 @api_view(['GET'])
-@permission_classes([AllowAny])
+# @permission_classes([AllowAny])
 def profile(request, user_id) :
 
   user = get_object_or_404(User, user_id=user_id)
@@ -88,6 +87,7 @@ def profile(request, user_id) :
 
 # 프로필 사진 조회
 @api_view(['GET'])
+# @permission_classes([AllowAny])
 def ProfileImages(request) :
   profileImages = get_list_or_404(ProfileImage)
   serializers = ProfileImageSerializer(profileImages, many=True)
@@ -96,12 +96,15 @@ def ProfileImages(request) :
 
 # 프로필 사진 수정
 @api_view(['PUT'])
-def editProfile(request, user_id) :
+# @permission_classes([AllowAny])
+def editProfile(request, user_id,profile_id) :
 
   user = get_object_or_404(User, user_id=user_id)
-  user.profile = request.data.get('profile_id')
+  user.profile = get_object_or_404(ProfileImage, profile_id=profile_id)
+
   if request.user.id == user_id :
     user.save()
-    return Response(status=status.HTTP_200_OK)
+    serializer = UserSerializer(user)
+    return Response(serializer.data,status=status.HTTP_200_OK)
   return Response({'error':'본인이 아닙니다.'},status=status.HTTP_401_UNAUTHORIZED)
   

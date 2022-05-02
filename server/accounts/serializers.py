@@ -31,9 +31,9 @@ class UserInfoSerializer(serializers.ModelSerializer) :
       model = Match
       fields = ('match_id','date','winner_user_id','loser_user_id')
 
-  records = MatchListSerializer(many=True, read_only = True)
+  user_match = MatchListSerializer(many=True, read_only = True)
   profile = ProfileImageSerializer(read_only = True)
 
   class Meta :
     model = User
-    fields = ('user_id','email','profile','nickname','records')
+    fields = ('user_id','email','profile','nickname','user_match')

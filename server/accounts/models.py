@@ -60,4 +60,4 @@ class User(AbstractUser):
     objects = UserManager()
     
     class Meta :
-      db_table = 'user'
+        db_table = 'user'
