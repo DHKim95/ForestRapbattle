@@ -2,8 +2,13 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'forest_1.0',
-        'USER' : 'forest',
-        'PASSWORD' : 'rapbattle',
+        # 'USER' : 'forest',
+        # 'PASSWORD' : 'rapbattle',
+        ###################
+        # 로컬용
+        'USER': 'root',
+        'PASSWORD': '1234',
+        #################
         # 서버에 올릴때 변경하기
         'HOST' : '127.0.0.1',
         'PORT' : '3306',
