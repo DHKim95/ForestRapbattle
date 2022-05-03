@@ -51,7 +51,7 @@ class User(AbstractUser):
     total_game_cnt = models.IntegerField(default=0)
     win_cnt=models.IntegerField(default=0)
     lose_cnt=models.IntegerField(default=0)
-    win_point=models.BigIntegerField(default=0)
+    win_point=models.BigIntegerField(default=30)
     followers = models.ManyToManyField('self', symmetrical=False,related_name='followings')
 
     USERNAME_FIELD = 'email'
