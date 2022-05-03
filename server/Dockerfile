@@ -11,4 +11,4 @@ COPY . .
 EXPOSE 8433
 
 # CMD ["python3", "manage.py", "makemigrations"]
-CMD ["python3", "manage.py", "runserver", "0.0.0.0:8443"]
+CMD ["python3", "manage.py", "runserver", "0.0.0.0:8443", "--noreload"]
