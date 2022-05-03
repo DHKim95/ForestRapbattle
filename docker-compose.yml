@@ -3,7 +3,7 @@ services:
   frontend:
     image: frontend
     build:
-      context: ./Frontend/
+      context: ./front/
       dockerfile: Dockerfile
     ports:
       - '80:80' # - 띄어쓰기
