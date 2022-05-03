@@ -22,18 +22,18 @@ class UserSerializer(serializers.ModelSerializer) :
     model = User
     fields = ('email','nickname','profile','password')
 
-
 # 유저 프로필 조회
 class UserInfoSerializer(serializers.ModelSerializer) :
-  # 전적 
-  class MatchListSerializer(serializers.ModelSerializer) :
-    class Meta :
-      model = Match
-      fields = ('match_id','date','winner_user_id','loser_user_id')
 
-  user_match = MatchListSerializer(many=True, read_only = True)
   profile = ProfileImageSerializer(read_only = True)
 
   class Meta :
     model = User
-    fields = ('user_id','email','profile','nickname','user_match')
+    fields = ('user_id','email','profile','nickname')
+
+
+class UserMatchResultSerializer(serializers.ModelSerializer) :
+
+  class Meta :
+    model = Match
+    fields = ('match_id','date','winner_user_id','loser_user_id')
