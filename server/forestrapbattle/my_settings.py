@@ -4,15 +4,14 @@ DATABASES = {
         'NAME': 'forest_1.0',
         # 'USER' : 'forest',
         # 'PASSWORD' : 'rapbattle',
+        # 'HOST' : '127.0.0.1',
         ###################
-        # 로컬용
         'USER': 'root',
         'PASSWORD': 'forest',
         # 'PASSWORD': 'root',
         #################
         # 서버에 올릴때 변경하기
         'HOST' : 'k6e204.p.ssafy.io',
-        # 'HOST' : '127.0.0.1',
         'PORT' : '3306',
     }
 }
