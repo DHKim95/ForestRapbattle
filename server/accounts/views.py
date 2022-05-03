@@ -8,8 +8,11 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.hashers import check_password
 
 from .models import User
-from game.models import ProfileImage
-from .serializers import UserSerializer,UserInfoSerializer, ProfileImageSerializer
+from game.models import ProfileImage,Match
+from .serializers import UserSerializer,UserInfoSerializer, ProfileImageSerializer, UserMatchResultSerializer
+
+import copy
+
 # Create your views here.
 
 @api_view(['POST'])
@@ -64,10 +67,10 @@ def login(request) :
 
 
 @api_view(['DELETE'])
-def signout(request,user_id) :
+# @permission_classes([AllowAny])
+def signOut(request,user_id) :
   user_email = request.data.get('email')
   password = request.data.get('password')
-
   user = get_object_or_404(get_user_model(), user_id=user_id)
   if user :
     if user.email == user_email and check_password(password, user.password) :
@@ -78,12 +81,47 @@ def signout(request,user_id) :
 
 # 회원정보 조회
 @api_view(['GET'])
-# @permission_classes([AllowAny])
+@permission_classes([AllowAny])
 def profile(request, user_id) :
 
   user = get_object_or_404(User, user_id=user_id)
-  serializer = UserInfoSerializer(user)
-  return Response(serializer.data, status=status.HTTP_200_OK)
+  user_serializer = UserInfoSerializer(user)
+
+  matches = Match.objects.filter(user_id=user_id)
+  match_serializers = UserMatchResultSerializer(matches, many=True)
+  match_user_serializers = []
+
+  tmp_match = {
+    'match_id':0,
+    'date' : '',
+    'winner_user_id' : 0,
+    'loser_user_id' : 0,
+    'winner_info' : {},
+    'loser_info' : {}
+  }
+
+  for i in range(len(matches)) :
+    tmp_match['match_id'] = match_serializers.data[i]['match_id']
+    tmp_match['date'] = match_serializers.data[i]['date']
+    tmp_match['winner_user_id'] = match_serializers.data[i]['winner_user_id']
+    tmp_match['loser_user_id'] = match_serializers.data[i]['loser_user_id']
+
+    winner = get_object_or_404(User, user_id= match_serializers.data[i]['winner_user_id'])
+    winner_serializer = UserInfoSerializer(winner)
+    tmp_match['winner_info'] = winner_serializer.data
+
+    loser = get_object_or_404(User, user_id= match_serializers.data[i]['loser_user_id'])
+    loser_serializer = UserInfoSerializer(loser)
+    tmp_match['loser_info'] = loser_serializer.data
+
+    match_user_serializers.append(copy.deepcopy(tmp_match))
+
+  serializer = {
+    'user' : user_serializer.data,
+    'match' : match_user_serializers
+  }
+
+  return Response(serializer, status=status.HTTP_200_OK)
 
 # 프로필 사진 조회
 @api_view(['GET'])

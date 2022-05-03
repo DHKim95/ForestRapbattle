@@ -13,10 +13,11 @@ class Words(models.Model) :
 
 class Match(models.Model) :
   match_id = models.AutoField(primary_key=True)
+  user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
   date = models.DateTimeField(auto_now_add=True)
   winner_user_id = models.BigIntegerField()
   loser_user_id = models.BigIntegerField()
-  match_user = models.ManyToManyField(settings.AUTH_USER_MODEL,related_name='user_match')
+  # match_user = models.ManyToManyField(settings.AUTH_USER_MODEL,related_name='user_match')
   
   class Meta:
     db_table = 'match'
