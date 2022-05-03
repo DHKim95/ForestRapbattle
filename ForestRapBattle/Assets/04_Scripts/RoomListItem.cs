@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;//텍스트 메쉬 프로 기능 사용
 using UnityEngine;
 using UnityEngine.UI;
+using Photon.Pun;
 
 public class RoomListItem : MonoBehaviour
 {
@@ -21,8 +22,12 @@ public class RoomListItem : MonoBehaviour
         RoomNameText.text = _info.Name;
         RoomOwnerText.text = (string)_info.CustomProperties["Owner"];
 
+        int playerCount = _info.PlayerCount;
+        Debug.Log(playerCount);
+        Debug.Log(_info.CustomProperties["Owner"]);
+        PlayerCntText.text = playerCount.ToString() + "/" + _info.MaxPlayers.ToString();
+
         Debug.Log("Setting up");
-        Debug.Log(_info.CustomProperties["isSecret"]);
 
         if ((string)_info.CustomProperties["isSecret"] == "True")
         {
@@ -37,6 +42,6 @@ public class RoomListItem : MonoBehaviour
     // Update is called once per frame
     public void OnClick()
     {
-        //Launcher.Instance.JoinRoom(info);//런처스크립트 메서드로 JoinRoom 실행
+        LobbyManager.Instance.JoinRoom(info);//런처스크립트 메서드로 JoinRoom 실행
     }
 }

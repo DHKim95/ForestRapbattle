@@ -1,170 +1,494 @@
 fileFormatVersion: 2
 guid: 7833c62812e2f9046bf2fa1a7c2f0531
 ModelImporter:
-  serializedVersion: 23
-  fileIDToRecycleName:
-    100000: ball_l
-    100002: ball_l_02
-    100004: ball_r
-    100006: ball_r_02
-    100008: Bear_Head
-    100010: calf_l
-    100012: calf_r
-    100014: clavicle_l
-    100016: clavicle_r
-    100018: cup_l
-    100020: cup_r
-    100022: Eye_L
-    100024: Eye_R
-    100026: EyeEnd_L
-    100028: EyeEnd_R
-    100030: foot_l
-    100032: foot_r
-    100034: hand_l
-    100036: hand_r
-    100038: head
-    100040: HeadEnd_M
-    100042: index_01_l
-    100044: index_01_r
-    100046: index_02_l
-    100048: index_02_r
-    100050: index_03_l
-    100052: index_03_r
-    100054: index_04_l
-    100056: index_04_r
-    100058: Jaw_M
-    100060: JawEnd_M
-    100062: lowerarm_l
-    100064: lowerarm_r
-    100066: middle_01_l
-    100068: middle_01_r
-    100070: middle_02_l
-    100072: middle_02_r
-    100074: middle_03_l
-    100076: middle_03_r
-    100078: middle_04_l
-    100080: middle_04_r
-    100082: //RootNode
-    100084: Muscle_Body
-    100086: neck_01
-    100088: pelvis
-    100090: pinky_01_l
-    100092: pinky_01_r
-    100094: pinky_02_l
-    100096: pinky_02_r
-    100098: pinky_03_l
-    100100: pinky_03_r
-    100102: pinky_04_l
-    100104: pinky_04_r
-    100106: ring_01_l
-    100108: ring_01_r
-    100110: ring_02_l
-    100112: ring_02_r
-    100114: ring_03_l
-    100116: ring_03_r
-    100118: ring_04_l
-    100120: ring_04_r
-    100122: root
-    100124: spine_01
-    100126: spine_02
-    100128: spine_03
-    100130: thigh_l
-    100132: thigh_r
-    100134: thumb_01_l
-    100136: thumb_01_r
-    100138: thumb_02_l
-    100140: thumb_02_r
-    100142: thumb_03_l
-    100144: thumb_03_r
-    100146: thumb_04_l
-    100148: thumb_04_r
-    100150: upperarm_l
-    100152: upperarm_r
-    400000: ball_l
-    400002: ball_l_02
-    400004: ball_r
-    400006: ball_r_02
-    400008: Bear_Head
-    400010: calf_l
-    400012: calf_r
-    400014: clavicle_l
-    400016: clavicle_r
-    400018: cup_l
-    400020: cup_r
-    400022: Eye_L
-    400024: Eye_R
-    400026: EyeEnd_L
-    400028: EyeEnd_R
-    400030: foot_l
-    400032: foot_r
-    400034: hand_l
-    400036: hand_r
-    400038: head
-    400040: HeadEnd_M
-    400042: index_01_l
-    400044: index_01_r
-    400046: index_02_l
-    400048: index_02_r
-    400050: index_03_l
-    400052: index_03_r
-    400054: index_04_l
-    400056: index_04_r
-    400058: Jaw_M
-    400060: JawEnd_M
-    400062: lowerarm_l
-    400064: lowerarm_r
-    400066: middle_01_l
-    400068: middle_01_r
-    400070: middle_02_l
-    400072: middle_02_r
-    400074: middle_03_l
-    400076: middle_03_r
-    400078: middle_04_l
-    400080: middle_04_r
-    400082: //RootNode
-    400084: Muscle_Body
-    400086: neck_01
-    400088: pelvis
-    400090: pinky_01_l
-    400092: pinky_01_r
-    400094: pinky_02_l
-    400096: pinky_02_r
-    400098: pinky_03_l
-    400100: pinky_03_r
-    400102: pinky_04_l
-    400104: pinky_04_r
-    400106: ring_01_l
-    400108: ring_01_r
-    400110: ring_02_l
-    400112: ring_02_r
-    400114: ring_03_l
-    400116: ring_03_r
-    400118: ring_04_l
-    400120: ring_04_r
-    400122: root
-    400124: spine_01
-    400126: spine_02
-    400128: spine_03
-    400130: thigh_l
-    400132: thigh_r
-    400134: thumb_01_l
-    400136: thumb_01_r
-    400138: thumb_02_l
-    400140: thumb_02_r
-    400142: thumb_03_l
-    400144: thumb_03_r
-    400146: thumb_04_l
-    400148: thumb_04_r
-    400150: upperarm_l
-    400152: upperarm_r
-    2100000: M_Muscle_Body_02
-    2100002: M_Emo_b00
-    2100004: phong1
-    4300000: Muscle_Body
-    4300002: Bear_Head
-    9500000: //RootNode
-    13700000: Bear_Head
-    13700002: Muscle_Body
+  serializedVersion: 20200
+  internalIDToNameTable:
+  - first:
+      1: 100000
+    second: ball_l
+  - first:
+      1: 100002
+    second: ball_l_02
+  - first:
+      1: 100004
+    second: ball_r
+  - first:
+      1: 100006
+    second: ball_r_02
+  - first:
+      1: 100008
+    second: Bear_Head
+  - first:
+      1: 100010
+    second: calf_l
+  - first:
+      1: 100012
+    second: calf_r
+  - first:
+      1: 100014
+    second: clavicle_l
+  - first:
+      1: 100016
+    second: clavicle_r
+  - first:
+      1: 100018
+    second: cup_l
+  - first:
+      1: 100020
+    second: cup_r
+  - first:
+      1: 100022
+    second: Eye_L
+  - first:
+      1: 100024
+    second: Eye_R
+  - first:
+      1: 100026
+    second: EyeEnd_L
+  - first:
+      1: 100028
+    second: EyeEnd_R
+  - first:
+      1: 100030
+    second: foot_l
+  - first:
+      1: 100032
+    second: foot_r
+  - first:
+      1: 100034
+    second: hand_l
+  - first:
+      1: 100036
+    second: hand_r
+  - first:
+      1: 100038
+    second: head
+  - first:
+      1: 100040
+    second: HeadEnd_M
+  - first:
+      1: 100042
+    second: index_01_l
+  - first:
+      1: 100044
+    second: index_01_r
+  - first:
+      1: 100046
+    second: index_02_l
+  - first:
+      1: 100048
+    second: index_02_r
+  - first:
+      1: 100050
+    second: index_03_l
+  - first:
+      1: 100052
+    second: index_03_r
+  - first:
+      1: 100054
+    second: index_04_l
+  - first:
+      1: 100056
+    second: index_04_r
+  - first:
+      1: 100058
+    second: Jaw_M
+  - first:
+      1: 100060
+    second: JawEnd_M
+  - first:
+      1: 100062
+    second: lowerarm_l
+  - first:
+      1: 100064
+    second: lowerarm_r
+  - first:
+      1: 100066
+    second: middle_01_l
+  - first:
+      1: 100068
+    second: middle_01_r
+  - first:
+      1: 100070
+    second: middle_02_l
+  - first:
+      1: 100072
+    second: middle_02_r
+  - first:
+      1: 100074
+    second: middle_03_l
+  - first:
+      1: 100076
+    second: middle_03_r
+  - first:
+      1: 100078
+    second: middle_04_l
+  - first:
+      1: 100080
+    second: middle_04_r
+  - first:
+      1: 100082
+    second: //RootNode
+  - first:
+      1: 100084
+    second: Muscle_Body
+  - first:
+      1: 100086
+    second: neck_01
+  - first:
+      1: 100088
+    second: pelvis
+  - first:
+      1: 100090
+    second: pinky_01_l
+  - first:
+      1: 100092
+    second: pinky_01_r
+  - first:
+      1: 100094
+    second: pinky_02_l
+  - first:
+      1: 100096
+    second: pinky_02_r
+  - first:
+      1: 100098
+    second: pinky_03_l
+  - first:
+      1: 100100
+    second: pinky_03_r
+  - first:
+      1: 100102
+    second: pinky_04_l
+  - first:
+      1: 100104
+    second: pinky_04_r
+  - first:
+      1: 100106
+    second: ring_01_l
+  - first:
+      1: 100108
+    second: ring_01_r
+  - first:
+      1: 100110
+    second: ring_02_l
+  - first:
+      1: 100112
+    second: ring_02_r
+  - first:
+      1: 100114
+    second: ring_03_l
+  - first:
+      1: 100116
+    second: ring_03_r
+  - first:
+      1: 100118
+    second: ring_04_l
+  - first:
+      1: 100120
+    second: ring_04_r
+  - first:
+      1: 100122
+    second: root
+  - first:
+      1: 100124
+    second: spine_01
+  - first:
+      1: 100126
+    second: spine_02
+  - first:
+      1: 100128
+    second: spine_03
+  - first:
+      1: 100130
+    second: thigh_l
+  - first:
+      1: 100132
+    second: thigh_r
+  - first:
+      1: 100134
+    second: thumb_01_l
+  - first:
+      1: 100136
+    second: thumb_01_r
+  - first:
+      1: 100138
+    second: thumb_02_l
+  - first:
+      1: 100140
+    second: thumb_02_r
+  - first:
+      1: 100142
+    second: thumb_03_l
+  - first:
+      1: 100144
+    second: thumb_03_r
+  - first:
+      1: 100146
+    second: thumb_04_l
+  - first:
+      1: 100148
+    second: thumb_04_r
+  - first:
+      1: 100150
+    second: upperarm_l
+  - first:
+      1: 100152
+    second: upperarm_r
+  - first:
+      4: 400000
+    second: ball_l
+  - first:
+      4: 400002
+    second: ball_l_02
+  - first:
+      4: 400004
+    second: ball_r
+  - first:
+      4: 400006
+    second: ball_r_02
+  - first:
+      4: 400008
+    second: Bear_Head
+  - first:
+      4: 400010
+    second: calf_l
+  - first:
+      4: 400012
+    second: calf_r
+  - first:
+      4: 400014
+    second: clavicle_l
+  - first:
+      4: 400016
+    second: clavicle_r
+  - first:
+      4: 400018
+    second: cup_l
+  - first:
+      4: 400020
+    second: cup_r
+  - first:
+      4: 400022
+    second: Eye_L
+  - first:
+      4: 400024
+    second: Eye_R
+  - first:
+      4: 400026
+    second: EyeEnd_L
+  - first:
+      4: 400028
+    second: EyeEnd_R
+  - first:
+      4: 400030
+    second: foot_l
+  - first:
+      4: 400032
+    second: foot_r
+  - first:
+      4: 400034
+    second: hand_l
+  - first:
+      4: 400036
+    second: hand_r
+  - first:
+      4: 400038
+    second: head
+  - first:
+      4: 400040
+    second: HeadEnd_M
+  - first:
+      4: 400042
+    second: index_01_l
+  - first:
+      4: 400044
+    second: index_01_r
+  - first:
+      4: 400046
+    second: index_02_l
+  - first:
+      4: 400048
+    second: index_02_r
+  - first:
+      4: 400050
+    second: index_03_l
+  - first:
+      4: 400052
+    second: index_03_r
+  - first:
+      4: 400054
+    second: index_04_l
+  - first:
+      4: 400056
+    second: index_04_r
+  - first:
+      4: 400058
+    second: Jaw_M
+  - first:
+      4: 400060
+    second: JawEnd_M
+  - first:
+      4: 400062
+    second: lowerarm_l
+  - first:
+      4: 400064
+    second: lowerarm_r
+  - first:
+      4: 400066
+    second: middle_01_l
+  - first:
+      4: 400068
+    second: middle_01_r
+  - first:
+      4: 400070
+    second: middle_02_l
+  - first:
+      4: 400072
+    second: middle_02_r
+  - first:
+      4: 400074
+    second: middle_03_l
+  - first:
+      4: 400076
+    second: middle_03_r
+  - first:
+      4: 400078
+    second: middle_04_l
+  - first:
+      4: 400080
+    second: middle_04_r
+  - first:
+      4: 400082
+    second: //RootNode
+  - first:
+      4: 400084
+    second: Muscle_Body
+  - first:
+      4: 400086
+    second: neck_01
+  - first:
+      4: 400088
+    second: pelvis
+  - first:
+      4: 400090
+    second: pinky_01_l
+  - first:
+      4: 400092
+    second: pinky_01_r
+  - first:
+      4: 400094
+    second: pinky_02_l
+  - first:
+      4: 400096
+    second: pinky_02_r
+  - first:
+      4: 400098
+    second: pinky_03_l
+  - first:
+      4: 400100
+    second: pinky_03_r
+  - first:
+      4: 400102
+    second: pinky_04_l
+  - first:
+      4: 400104
+    second: pinky_04_r
+  - first:
+      4: 400106
+    second: ring_01_l
+  - first:
+      4: 400108
+    second: ring_01_r
+  - first:
+      4: 400110
+    second: ring_02_l
+  - first:
+      4: 400112
+    second: ring_02_r
+  - first:
+      4: 400114
+    second: ring_03_l
+  - first:
+      4: 400116
+    second: ring_03_r
+  - first:
+      4: 400118
+    second: ring_04_l
+  - first:
+      4: 400120
+    second: ring_04_r
+  - first:
+      4: 400122
+    second: root
+  - first:
+      4: 400124
+    second: spine_01
+  - first:
+      4: 400126
+    second: spine_02
+  - first:
+      4: 400128
+    second: spine_03
+  - first:
+      4: 400130
+    second: thigh_l
+  - first:
+      4: 400132
+    second: thigh_r
+  - first:
+      4: 400134
+    second: thumb_01_l
+  - first:
+      4: 400136
+    second: thumb_01_r
+  - first:
+      4: 400138
+    second: thumb_02_l
+  - first:
+      4: 400140
+    second: thumb_02_r
+  - first:
+      4: 400142
+    second: thumb_03_l
+  - first:
+      4: 400144
+    second: thumb_03_r
+  - first:
+      4: 400146
+    second: thumb_04_l
+  - first:
+      4: 400148
+    second: thumb_04_r
+  - first:
+      4: 400150
+    second: upperarm_l
+  - first:
+      4: 400152
+    second: upperarm_r
+  - first:
+      21: 2100000
+    second: M_Muscle_Body_02
+  - first:
+      21: 2100002
+    second: M_Emo_b00
+  - first:
+      21: 2100004
+    second: phong1
+  - first:
+      43: 4300000
+    second: Muscle_Body
+  - first:
+      43: 4300002
+    second: Bear_Head
+  - first:
+      95: 9500000
+    second: //RootNode
+  - first:
+      137: 13700000
+    second: Bear_Head
+  - first:
+      137: 13700002
+    second: Muscle_Body
   externalObjects:
   - first:
       type: UnityEngine:Material
@@ -182,7 +506,7 @@ ModelImporter:
       name: phong1
     second: {fileID: 2100000, guid: 69afde78f9bc80942b19db278da5dd59, type: 2}
   materials:
-    importMaterials: 1
+    materialImportMode: 1
     materialName: 1
     materialSearch: 2
     materialLocation: 0
@@ -215,25 +539,32 @@ ModelImporter:
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1
     importLights: 1
+    fileIdsGeneration: 1
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
-    optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
+    bakeAxisConversion: 0
     preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
     indexFormat: 0
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 0
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4
     useFileScale: 1
-    previousCalculatedGlobalScale: 0.01
-    hasPreviousCalculatedGlobalScale: 1
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
@@ -242,10 +573,10 @@ ModelImporter:
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
+  referencedClips: []
   importAnimation: 1
-  copyAvatar: 0
   humanDescription:
-    serializedVersion: 2
+    serializedVersion: 3
     human:
     - boneName: pelvis
       humanName: Hips
@@ -399,7 +730,7 @@ ModelImporter:
         value: {x: 0, y: 0, z: 0}
         length: 0
         modified: 0
-    - boneName: ball_l_02
+    - boneName: ball_l
       humanName: LeftToes
       limit:
         min: {x: 0, y: 0, z: 0}
@@ -407,7 +738,7 @@ ModelImporter:
         value: {x: 0, y: 0, z: 0}
         length: 0
         modified: 0
-    - boneName: ball_r_02
+    - boneName: ball_r
       humanName: RightToes
       limit:
         min: {x: 0, y: 0, z: 0}
@@ -1048,13 +1379,17 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
+    globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 1
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 3
   humanoidOversampling: 1
+  avatarSetup: 1
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 0
   additionalBone: 0
   userData: 
   assetBundleName: 
