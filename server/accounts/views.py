@@ -125,7 +125,7 @@ def profile(request, user_id) :
 
 # 프로필 사진 조회
 @api_view(['GET'])
-# @permission_classes([AllowAny])
+@permission_classes([AllowAny])
 def ProfileImages(request) :
   profileImages = get_list_or_404(ProfileImage)
   serializers = ProfileImageSerializer(profileImages, many=True)
