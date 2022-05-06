@@ -68,7 +68,7 @@ MIDDLEWARE = [
 ]
 
 # cors-headers
-CORS_ORIGIN_WHITELIST = [ 'http://localhost:3000','http://127.0.0.1:3000','http://k6e204.p.ssafy.io']
+CORS_ORIGIN_WHITELIST = [ 'http://localhost:3000','http://127.0.0.1:3000','https://k6e204.p.ssafy.io','http://k6e204.p.ssafy.io:8443']
 CORS_ALLOW_CREDENTIALS = True
 
 ROOT_URLCONF = 'forestrapbattle.urls'
