@@ -57,10 +57,10 @@ def nickname(request) :
 @permission_classes([AllowAny])
 def login(request) :
   try :
-    user = get_object_or_404(User,email=request.POST.get('email'))
+    user = get_object_or_404(User,email=request.data.get('email'))
   except :
     return Response({'error' : '일치하는 아이디가 없습니다.'}, status=status.HTTP_400_BAD_REQUEST)
-  if check_password(request.POST.get('password'), user.password) :
+  if check_password(request.data.get('password'), user.password) :
     serializer = UserSerializer(user)
     return Response(serializer.data, status=status.HTTP_200_OK)
   return Response({'error' : '비밀번호가 일치하지 않습니다.'}, status=status.HTTP_400_BAD_REQUEST)
