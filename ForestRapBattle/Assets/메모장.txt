@@ -1,0 +1,1 @@
+Assets/Resources => 모든 플레이어에게 동일하게 Instantiate 할 프리팹들을 Resources 폴더에 모아야 인식 가능

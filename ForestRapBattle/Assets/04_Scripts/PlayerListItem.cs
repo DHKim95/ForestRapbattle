@@ -20,7 +20,7 @@ public class PlayerListItem : MonoBehaviourPunCallbacks//다른 포톤 반응 받아들이
 
     public static bool isReady = false;
 
-    public static PlayerListItem Instance;//Launcher스크립트를 메서드로 사용하기 위해 선언
+    public static PlayerListItem Instance;//스크립트를 메서드로 사용하기 위해 선언
 
     void Awake()
     {

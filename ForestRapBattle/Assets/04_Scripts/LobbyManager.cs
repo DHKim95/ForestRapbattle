@@ -53,6 +53,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks//다른 포톤 반응 받아들이기
     [SerializeField] TMP_Text KickPlayerText;
     [SerializeField] Button proceedKickBtn;
     [SerializeField] Button cancelKickBtn;
+    [SerializeField] TMP_Text notReadyText;
     [Space(5f)]
 
     [Header("Secret Room References")]
@@ -233,14 +234,16 @@ public class LobbyManager : MonoBehaviourPunCallbacks//다른 포톤 반응 받아들이기
             return;//방 이름이 빈값이면 방 안만들어짐
         }
 
-        string[] propertiesListedInLobby = new string[3];
+        string[] propertiesListedInLobby = new string[4];
         propertiesListedInLobby[0] = "Owner";
         propertiesListedInLobby[1] = "isSecret";
         propertiesListedInLobby[2] = "Password";
+        propertiesListedInLobby[3] = "isGaming";
 
         ExitGames.Client.Photon.Hashtable openWith = new ExitGames.Client.Photon.Hashtable();
         openWith.Add("Owner", PhotonNetwork.NickName);
         openWith.Add("isSecret", isSecret.ToString());
+        openWith.Add("isGaming", false);
 
         if (isSecret)
         {
@@ -299,6 +302,15 @@ public class LobbyManager : MonoBehaviourPunCallbacks//다른 포톤 반응 받아들이기
         Debug.Log(PhotonNetwork.IsMasterClient);
         startBtn.gameObject.SetActive(PhotonNetwork.IsMasterClient);
         readyBtn.gameObject.SetActive(!PhotonNetwork.IsMasterClient);
+
+        if (PhotonNetwork.CurrentRoom.PlayerCount == PhotonNetwork.CurrentRoom.MaxPlayers) //인원수 체크
+        {
+            PhotonNetwork.CurrentRoom.IsOpen = false;
+        }
+        else
+        {
+            PhotonNetwork.CurrentRoom.IsOpen = true;
+        }
     }
 
     public override void OnMasterClientSwitched(Player newMasterClient)//다른 플레이어가 나가서 내가 방장이 되었을 때
@@ -307,6 +319,15 @@ public class LobbyManager : MonoBehaviourPunCallbacks//다른 포톤 반응 받아들이기
         startBtn.gameObject.SetActive(newMasterClient.IsMasterClient);
         readyBtn.gameObject.SetActive(!newMasterClient.IsMasterClient);
         PhotonNetwork.CurrentRoom.CustomProperties["Owner"] = newMasterClient.NickName;
+
+        if (PhotonNetwork.CurrentRoom.PlayerCount == PhotonNetwork.CurrentRoom.MaxPlayers) //인원수 체크
+        {
+            PhotonNetwork.CurrentRoom.IsOpen = false;
+        }
+        else
+        {
+            PhotonNetwork.CurrentRoom.IsOpen = true;
+        }
     }
 
 
@@ -319,18 +340,39 @@ public class LobbyManager : MonoBehaviourPunCallbacks//다른 포톤 반응 받아들이기
 
     public void JoinRoom(RoomInfo info) //입장
     {
-        if (info.CustomProperties["Password"] != null) // 비밀방인 경우
+        if (info.IsOpen)
         {
-            ActivatePwModal();
-            targetRoomName = info.Name;
-            targetRoomPw = info.CustomProperties["Password"].ToString();
-            Debug.Log(targetRoomName);
-            Debug.Log(targetRoomPw);
-        }
-        else
-        {
-            PhotonNetwork.JoinRoom(info.Name);
-            MenuManager.Instance.OpenMenu("Room");
+            if (info.CustomProperties["Password"] != null) // 비밀방인 경우
+            {
+                ActivatePwModal();
+                targetRoomName = info.Name;
+                targetRoomPw = info.CustomProperties["Password"].ToString();
+                Debug.Log(targetRoomName);
+                Debug.Log(targetRoomPw);
+
+                if (info.PlayerCount == info.MaxPlayers) //인원수 체크
+                {
+                    PhotonNetwork.CurrentRoom.IsOpen = false;
+                }
+                else
+                {
+                    PhotonNetwork.CurrentRoom.IsOpen = true;
+                }
+            }
+            else
+            {
+                PhotonNetwork.JoinRoom(info.Name);
+                MenuManager.Instance.OpenMenu("Room");
+
+                if (info.PlayerCount == info.MaxPlayers) //인원수 체크
+                {
+                    PhotonNetwork.CurrentRoom.IsOpen = false;
+                }
+                else
+                {
+                    PhotonNetwork.CurrentRoom.IsOpen = true;
+                }
+            }
         }
        
     }
@@ -338,12 +380,31 @@ public class LobbyManager : MonoBehaviourPunCallbacks//다른 포톤 반응 받아들이기
     public override void OnPlayerEnteredRoom(Player newPlayer)//다른 플레이어 입장했을 때
     {
         Instantiate(playerListItemPrefab, playerListContent).GetComponent<PlayerListItem>().SetUp(newPlayer);
+
+        if (PhotonNetwork.CurrentRoom.PlayerCount == PhotonNetwork.CurrentRoom.MaxPlayers) //인원수 체크
+        {
+            PhotonNetwork.CurrentRoom.IsOpen = false;
+        }
+        else
+        {
+            PhotonNetwork.CurrentRoom.IsOpen = true;
+        }
     }
 
-    //public override void OnPlayerLeftRoom(Player otherPlayer)//다른 플레이어 퇴장했을 때
-    //{
-    //    Debug.Log("Other Player Left");
-    //}
+    public override void OnPlayerLeftRoom(Player otherPlayer)//다른 플레이어 퇴장했을 때
+    {
+        Debug.Log("Other Player Left");
+        if (PhotonNetwork.CurrentRoom.PlayerCount == PhotonNetwork.CurrentRoom.MaxPlayers) //인원수 체크
+        {
+            PhotonNetwork.CurrentRoom.IsOpen = false;
+        }
+        else
+        {
+            PhotonNetwork.CurrentRoom.IsOpen = true;
+        }
+
+        
+    }
 
     private void Kick()
     {
@@ -393,17 +454,22 @@ public class LobbyManager : MonoBehaviourPunCallbacks//다른 포톤 반응 받아들이기
                         Debug.Log(PhotonNetwork.CurrentRoom.IsOpen);
                         PlayerListItem.isReady = false;
                         Debug.Log(PlayerListItem.isReady);
+                        notReadyText.gameObject.SetActive(false);
                         PhotonNetwork.LoadLevel("Game_temp");
+
+                        RoomListItem.Instance.GameInProcess(PhotonNetwork.CurrentRoom);
                     }
 
                     else //레디 프로퍼티가 있지만 false값
                     {
+                        notReadyText.gameObject.SetActive(true);
                         Debug.Log("the other player is not ready for game");
                     }
                 }
 
                 else //레디 프로퍼티가 없음
                 {
+                    notReadyText.gameObject.SetActive(true);
                     Debug.Log("the other player is not ready for game");
                 }
             }
