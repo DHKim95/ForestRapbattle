@@ -5,6 +5,7 @@ using UnityEngine.Networking;
 using TMPro;
 
 
+[RequireComponent(typeof(AudioSource))]
 public class Django : MonoBehaviour
 {
     [SerializeField]
