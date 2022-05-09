@@ -28,12 +28,6 @@ def signup(request) :
   profile = get_object_or_404(ProfileImage, profile_id=request.data.get('profile_id'))
   serializer = UserSerializer(data=request.data)
 
-  # 이메일 중복검사
-  user_email = request.data.get('email')
-
-  if get_user_model().objects.filter(email = user_email).exists() :
-    return Response({'error': '이미 존재하는 Email입니다.'}, status=status.HTTP_400_BAD_REQUEST)
-
   if serializer.is_valid(raise_exception=True) :
     user = serializer.save(profile=profile)
     user.set_password(request.data.get('password'))
@@ -41,6 +35,17 @@ def signup(request) :
     print(serializer.data)
     return Response(serializer.data, status = status.HTTP_201_CREATED)
   return Response({'error':'회원가입실패'}, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def email(request) :
+  curr_email = request.data.get('email')
+  if get_user_model().objects.filter(email=curr_email).exists() :
+    return Response({'result' : False}, status=status.HTTP_200_OK)
+  else:
+    return Response({'result' : True}, status=status.HTTP_200_OK)
+
 
 
 @api_view(['POST'])
