@@ -137,6 +137,7 @@ function SignupForm({ errorControl, loadingControl,userLogin, isLogin }: Props) 
   // 닉네임 중복검사요청
   function requsetCheckNickname(): void {
     // 닉네임 재작성
+    const token = localStorage.getItem("accessToken") || "";
     if (sendCheckNickname) {
       setSendCheckNickname(() => false);
       setNicknameConfirmation(() => false);
@@ -147,6 +148,9 @@ function SignupForm({ errorControl, loadingControl,userLogin, isLogin }: Props) 
         method: "post",
         url: `${process.env.REACT_APP_BASE_URL}/api/v1/auth/nickname`,
         data: { nickname: userInfo.nickname },
+        headers: {
+          Authorization: token,
+        },
       })
         .then((res) => {
           setNicknameConfirmation(() => true);
