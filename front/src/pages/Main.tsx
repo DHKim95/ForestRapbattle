@@ -8,6 +8,7 @@ import { Container, Grid, Button, styled, createTheme, ThemeProvider } from "@mu
 import fight from "../assets/fight.png";
 import idea from "../assets/idea.png";
 import talk from "../assets/talk.png";
+import { useSelector } from "react-redux";
 
 const theme = createTheme({
   palette: {
@@ -50,7 +51,8 @@ function Main() {
   useEffect(() => {
     AOS.init();
   });
-
+  const isLogin1 = useSelector((state: any) => state.account.isLogin)
+  console.log(isLogin1)
   return (
     <div>
       <Navbar></Navbar>
