@@ -11,7 +11,6 @@ public class PlayerListItem : MonoBehaviourPunCallbacks//다른 포톤 반응 받아들이
     [SerializeField] TMP_Text text;
 
     Player player;//포톤 리얼타임은 Player를 선언 할 수 있게 해준다.
-    
     [SerializeField] GameObject masterBadge;
     [SerializeField]
     private Button outBtn;
@@ -37,7 +36,9 @@ public class PlayerListItem : MonoBehaviourPunCallbacks//다른 포톤 반응 받아들이
         Debug.Log("Player Entered Room");
         Debug.Log(player.NickName);
         Debug.Log(player.IsMasterClient);
+
         
+
         //방장 표시는 모든 플레이어에게 보이게
         masterBadge.SetActive(player.IsMasterClient);
 

@@ -481,7 +481,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1924704090}
-  - {fileID: 766421941}
+  - {fileID: 664737747}
   m_Father: {fileID: 1406420974}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1108,7 +1108,7 @@ GameObject:
   - component: {fileID: 295478455}
   - component: {fileID: 295478454}
   - component: {fileID: 295478453}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Placeholder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1260,7 +1260,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 295699094}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: SecretRoom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1301,7 +1301,7 @@ GameObject:
   - component: {fileID: 340019273}
   - component: {fileID: 340019272}
   - component: {fileID: 340019271}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: OffBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2085,7 +2085,7 @@ GameObject:
   - component: {fileID: 448910395}
   - component: {fileID: 448910397}
   - component: {fileID: 448910396}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: CreateRoomPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2100,7 +2100,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 448910394}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -60}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1854215424}
@@ -2246,7 +2246,7 @@ GameObject:
   - component: {fileID: 492874337}
   - component: {fileID: 492874336}
   - component: {fileID: 492874339}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: RoomNameInput
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2433,7 +2433,7 @@ GameObject:
   - component: {fileID: 595037426}
   - component: {fileID: 595037428}
   - component: {fileID: 595037427}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2566,7 +2566,7 @@ GameObject:
   m_Component:
   - component: {fileID: 604846493}
   - component: {fileID: 604846494}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Text Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2619,7 +2619,7 @@ GameObject:
   - component: {fileID: 605293261}
   - component: {fileID: 605293263}
   - component: {fileID: 605293262}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: SecretRoomText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2742,6 +2742,68 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 605293260}
   m_CullTransparentMesh: 1
+--- !u!1 &664737746
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 664737747}
+  - component: {fileID: 664737748}
+  m_Layer: 2
+  m_Name: UserCharacter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &664737747
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 664737746}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 52839703}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -572, y: 15}
+  m_SizeDelta: {x: 550.618, y: 664.51}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &664737748
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 664737746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59f8146938fff824cb5fd77236b75775, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 600
+    m_Bottom: 0
+  m_ChildAlignment: 4
+  m_Spacing: 0
+  m_ChildForceExpandWidth: 1
+  m_ChildForceExpandHeight: 1
+  m_ChildControlWidth: 0
+  m_ChildControlHeight: 0
+  m_ChildScaleWidth: 0
+  m_ChildScaleHeight: 0
+  m_ReverseArrangement: 0
 --- !u!1 &685068748
 GameObject:
   m_ObjectHideFlags: 0
@@ -2754,7 +2816,7 @@ GameObject:
   - component: {fileID: 685068752}
   - component: {fileID: 685068751}
   - component: {fileID: 685068750}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: CancelBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2997,107 +3059,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 733631016}
   m_CullTransparentMesh: 1
---- !u!1 &766421940
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 766421941}
-  - component: {fileID: 766421944}
-  - component: {fileID: 766421943}
-  - component: {fileID: 766421942}
-  m_Layer: 5
-  m_Name: UserCharacter
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &766421941
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 766421940}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 300, y: 300, z: 1}
-  m_Children: []
-  m_Father: {fileID: 52839703}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -560, y: -36}
-  m_SizeDelta: {x: 300, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!136 &766421942
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 766421940}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!23 &766421943
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 766421940}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!33 &766421944
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 766421940}
-  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &826504417
 GameObject:
   m_ObjectHideFlags: 0
@@ -3109,7 +3070,7 @@ GameObject:
   - component: {fileID: 826504418}
   - component: {fileID: 826504420}
   - component: {fileID: 826504419}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: EnterPwPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3555,17 +3516,42 @@ MonoBehaviour:
   roomListContent: {fileID: 2410511}
   roomListItemPrefab: {fileID: 6017027975826627675, guid: 876fc002f11a04541950afb883ce94cd, type: 3}
   Username: {fileID: 1924704091}
+  userCharContent: {fileID: 664737747}
+  bearPrefab: {fileID: 8108882117236572543, guid: dbe291f769326e14ea5b454ebc06ed82, type: 3}
+  buffaloPrefab: {fileID: 8313131302810701559, guid: b079fbdf1c0af2c4aa781cd2826f46a2, type: 3}
+  catPrefab: {fileID: 3837993848737575721, guid: 17413f93fdc0f2648b70d731d90133af, type: 3}
+  chickenPrefab: {fileID: 6846233017972439587, guid: 358229733f7ac5c428532d90f29737e2, type: 3}
+  chikPrefab: {fileID: 2899211981289016881, guid: 2ef678688d795aa4c91ec82930962023, type: 3}
+  dogPrefab: {fileID: 1684811134321685135, guid: c08651cadc18bf84ba4719db23ab2f24, type: 3}
+  duckPrefab: {fileID: 2964184229794272908, guid: d79fd46e2b6baab4d81068b9f7494ae0, type: 3}
+  elephantPrefab: {fileID: 5124697538836626472, guid: f8e3faa0c3fa0c14c984329ad989c6cb, type: 3}
+  frogPrefab: {fileID: 6937419498993949870, guid: 4626c5f8b82c5264a9f9a34db9e6b664, type: 3}
+  monkeyPrefab: {fileID: 913614949650820270, guid: ff5e153b270159341be928cbd9bd5ac6, type: 3}
+  pigPrefab: {fileID: 6102831471193882104, guid: 93986a69535dfeb40a7b73adf9e6a972, type: 3}
+  rabbitPrefab: {fileID: 5862014111551591366, guid: 178091dd2e1dbe043b27b77ee841d11d, type: 3}
+  rhinoPrefab: {fileID: 1955360218157566268, guid: e3e9d03fe7f44db428b9024e203d5ac1, type: 3}
   roomNameText: {fileID: 39399707}
   exitBtn: {fileID: 1775033273}
   startBtn: {fileID: 399713433}
   readyBtn: {fileID: 1625483282}
   playerListContent: {fileID: 1374852793}
-  playerListItemPrefab: {fileID: 6976609735191718383, guid: 123869fa0cb685244b81167ed5158670, type: 3}
+  bearinroomPrefab: {fileID: 7087345011631563039, guid: 54c61fff97703fa4390f113393294c5b, type: 3}
+  buffaloinroomPrefab: {fileID: 2933686595911480497, guid: e21a3a95ff0d4264c9907224717c86a8, type: 3}
+  catinroomPrefab: {fileID: 9082909960115432388, guid: 248054ea4608bc348a7acd3ba607082d, type: 3}
+  chickeninroomPrefab: {fileID: 2246343134483530524, guid: ddc1ab18d64adbd409ad63db55f3202c, type: 3}
+  chikinroomPrefab: {fileID: 8793096737237894593, guid: 4ae78006490965943a395c725fda8d1f, type: 3}
+  doginroomPrefab: {fileID: 5955737998493848294, guid: 6f64b4f3bfb67104dac9b29658bf01ec, type: 3}
+  duckinroomPrefab: {fileID: 2264526949815490258, guid: 7723b190e79cdf94a871b66c764d259d, type: 3}
+  elephantinroomPrefab: {fileID: 491509708954508756, guid: c460d52ebdf1d5746af3306bc0719c8b, type: 3}
+  froginroomPrefab: {fileID: 5761579433128949940, guid: 3fdaca60d3dbb614abadb1b8680bfa11, type: 3}
+  monkeyinroomPrefab: {fileID: 5691323658456325081, guid: e1b1bdc9972799248a773a0ca4100cb8, type: 3}
+  piginroomPrefab: {fileID: 5063308182302118438, guid: 90f046af266a5ab44956bf59cd2932aa, type: 3}
+  rabbitinroomPrefab: {fileID: 6516041532613956576, guid: 9008915ec01ae5d42b8c49aca8061f20, type: 3}
+  rhinoinroomPrefab: {fileID: 7351620437323618451, guid: 5d7ddf11cba2edb4fa6d5b5cda0db567, type: 3}
   KickPlayerPanel: {fileID: 1984099340}
   KickPlayerText: {fileID: 1084894051}
   proceedKickBtn: {fileID: 360952215}
   cancelKickBtn: {fileID: 350779455}
-  notReadyText: {fileID: 32023955}
   EnterPwPanel: {fileID: 826504417}
   enterRoomPwInput: {fileID: 1738090487}
   errorText: {fileID: 2032038667}
@@ -3599,7 +3585,7 @@ GameObject:
   - component: {fileID: 881861924}
   - component: {fileID: 881861926}
   - component: {fileID: 881861925}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: RoomPwText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3868,7 +3854,7 @@ GameObject:
   - component: {fileID: 912757587}
   - component: {fileID: 912757586}
   - component: {fileID: 912757585}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: OnBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4026,7 +4012,7 @@ GameObject:
   - component: {fileID: 953018719}
   - component: {fileID: 953018721}
   - component: {fileID: 953018720}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4427,7 +4413,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1025713339}
   - component: {fileID: 1025713340}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Text Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4614,7 +4600,7 @@ GameObject:
   - component: {fileID: 1085778879}
   - component: {fileID: 1085778881}
   - component: {fileID: 1085778880}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4748,7 +4734,7 @@ GameObject:
   - component: {fileID: 1164265529}
   - component: {fileID: 1164265531}
   - component: {fileID: 1164265530}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5161,7 +5147,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1374852792}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -60}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 145958720}
@@ -5185,15 +5171,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: -700
+    m_Left: -600
     m_Right: 0
-    m_Top: 0
+    m_Top: 600
     m_Bottom: 0
   m_ChildAlignment: 3
   m_StartCorner: 0
   m_StartAxis: 0
   m_CellSize: {x: 300, y: 0}
-  m_Spacing: {x: 900, y: 0}
+  m_Spacing: {x: 660, y: 0}
   m_Constraint: 1
   m_ConstraintCount: 2
 --- !u!1 &1379519318
@@ -5394,7 +5380,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1518537980}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: RoomPw
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5552,7 +5538,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1652873179}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: RoomName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6056,7 +6042,7 @@ GameObject:
   - component: {fileID: 1771048145}
   - component: {fileID: 1771048147}
   - component: {fileID: 1771048146}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6377,7 +6363,7 @@ GameObject:
   - component: {fileID: 1845218331}
   - component: {fileID: 1845218333}
   - component: {fileID: 1845218332}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6512,7 +6498,7 @@ GameObject:
   - component: {fileID: 1850036383}
   - component: {fileID: 1850036382}
   - component: {fileID: 1850036381}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Placeholder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6666,7 +6652,7 @@ GameObject:
   - component: {fileID: 1854215424}
   - component: {fileID: 1854215426}
   - component: {fileID: 1854215425}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: CreateRoomModal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6957,7 +6943,7 @@ GameObject:
   - component: {fileID: 1946697961}
   - component: {fileID: 1946697960}
   - component: {fileID: 1946697963}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: RoomPwInput
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7355,7 +7341,7 @@ GameObject:
   - component: {fileID: 2040167689}
   - component: {fileID: 2040167688}
   - component: {fileID: 2040167687}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: CreateBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7487,7 +7473,7 @@ GameObject:
   - component: {fileID: 2048132912}
   - component: {fileID: 2048132914}
   - component: {fileID: 2048132913}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: RoomNameText
   m_TagString: Untagged
   m_Icon: {fileID: 0}

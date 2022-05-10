@@ -40,6 +40,20 @@ public class LobbyManager : MonoBehaviourPunCallbacks//다른 포톤 반응 받아들이기
     [Header("User Info References")]
     [SerializeField]
     private TMP_Text Username;
+    [SerializeField] Transform userCharContent;
+    [SerializeField] GameObject bearPrefab;
+    [SerializeField] GameObject buffaloPrefab;
+    [SerializeField] GameObject catPrefab;
+    [SerializeField] GameObject chickenPrefab;
+    [SerializeField] GameObject chikPrefab;
+    [SerializeField] GameObject dogPrefab;
+    [SerializeField] GameObject duckPrefab;
+    [SerializeField] GameObject elephantPrefab;
+    [SerializeField] GameObject frogPrefab;
+    [SerializeField] GameObject monkeyPrefab;
+    [SerializeField] GameObject pigPrefab;
+    [SerializeField] GameObject rabbitPrefab;
+    [SerializeField] GameObject rhinoPrefab;
     [Space(5f)]
 
     [Header("Game Room References")]
@@ -48,12 +62,23 @@ public class LobbyManager : MonoBehaviourPunCallbacks//다른 포톤 반응 받아들이기
     [SerializeField] Button startBtn;
     [SerializeField] Button readyBtn;
     [SerializeField] Transform playerListContent;
-    [SerializeField] GameObject playerListItemPrefab;
+    [SerializeField] GameObject bearinroomPrefab;
+    [SerializeField] GameObject buffaloinroomPrefab;
+    [SerializeField] GameObject catinroomPrefab;
+    [SerializeField] GameObject chickeninroomPrefab;
+    [SerializeField] GameObject chikinroomPrefab;
+    [SerializeField] GameObject doginroomPrefab;
+    [SerializeField] GameObject duckinroomPrefab;
+    [SerializeField] GameObject elephantinroomPrefab;
+    [SerializeField] GameObject froginroomPrefab;
+    [SerializeField] GameObject monkeyinroomPrefab;
+    [SerializeField] GameObject piginroomPrefab;
+    [SerializeField] GameObject rabbitinroomPrefab;
+    [SerializeField] GameObject rhinoinroomPrefab;
     [SerializeField] GameObject KickPlayerPanel;
     [SerializeField] TMP_Text KickPlayerText;
     [SerializeField] Button proceedKickBtn;
     [SerializeField] Button cancelKickBtn;
-    [SerializeField] TMP_Text notReadyText;
     [Space(5f)]
 
     [Header("Secret Room References")]
@@ -64,6 +89,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks//다른 포톤 반응 받아들이기
     [SerializeField] Button cancelPwBtn;
     [Space(5f)]
 
+    public static int charInt = 0;
 
     bool isSecret = false;
 
@@ -75,7 +101,6 @@ public class LobbyManager : MonoBehaviourPunCallbacks//다른 포톤 반응 받아들이기
     private string targetRoomPw = "";
     private string targetRoomName = "";
 
-    
 
     void Awake()
     {
@@ -124,13 +149,74 @@ public class LobbyManager : MonoBehaviourPunCallbacks//다른 포톤 반응 받아들이기
 
         string[] playerNames = new string[] { "물이차노", "교주와 신도", "곧싸탈예정인최명재", "꼬물이엄마", "합체왕도킹", "나는야조은누리" };
         string[] tiers = new string[] { "Iron", "Bronze", "Silver", "Gold", "Platinum", "Diamond" };
+        //string[] characters = new string[] { "bear", "buffalo", "cat", "chicken", "chik", "dog", "duck", "elephant", "frog", "monkey", "pig", "rabbit", "rhino" };
 
         int randomPlayer = UnityEngine.Random.Range(0, 6);
         int randomTier = UnityEngine.Random.Range(0, 6);
+        int randomChar = UnityEngine.Random.Range(0, 13);
 
         PhotonNetwork.NickName = playerNames[randomPlayer] + "(" + tiers[randomTier] + ")";
-        Debug.Log(PhotonNetwork.NickName);
-        //들어온사람 이름 랜덤으로 숫자붙여서 정해주기
+        Debug.Log(PhotonNetwork.NickName); //들어온사람 이름 랜덤으로 숫자붙여서 정해주기
+
+        charInt = randomChar;
+
+        if (charInt == 0)
+        {
+            Instantiate(bearPrefab, userCharContent);
+        }
+        else if (charInt == 1)
+        {
+            Instantiate(buffaloPrefab, userCharContent);
+        }
+        else if (charInt == 2)
+        {
+            Instantiate(catPrefab, userCharContent);
+        }
+        else if (charInt == 3)
+        {
+            Instantiate(chickenPrefab, userCharContent);
+        }
+        else if (charInt == 4)
+        {
+            Instantiate(chikPrefab, userCharContent);
+        }
+        else if (charInt == 5)
+        {
+            Instantiate(dogPrefab, userCharContent);
+        }
+        else if (charInt == 6)
+        {
+            Instantiate(duckPrefab, userCharContent);
+        }
+        else if (charInt == 7)
+        {
+            Instantiate(elephantPrefab, userCharContent);
+        }
+        else if (charInt == 8)
+        {
+            Instantiate(frogPrefab, userCharContent);
+        }
+        else if (charInt == 9)
+        {
+            Instantiate(monkeyPrefab, userCharContent);
+        }
+        else if (charInt == 10)
+        {
+            Instantiate(pigPrefab, userCharContent);
+        }
+        else if (charInt == 11)
+        {
+            Instantiate(rabbitPrefab, userCharContent);
+        }
+        else if (charInt == 12)
+        {
+            Instantiate(rhinoPrefab, userCharContent);
+        }
+
+        //플레이어 캐릭터 정보를 포톤 네트워크에 저장
+        ExitGames.Client.Photon.Hashtable playerChar = new ExitGames.Client.Photon.Hashtable();
+        playerChar.Add("charInt", (int)LobbyManager.charInt);
+        PhotonNetwork.SetPlayerCustomProperties(playerChar);
     }
 
     public override void OnConnectedToMaster()//마스터서버에 연결시 작동됨
@@ -234,16 +320,14 @@ public class LobbyManager : MonoBehaviourPunCallbacks//다른 포톤 반응 받아들이기
             return;//방 이름이 빈값이면 방 안만들어짐
         }
 
-        string[] propertiesListedInLobby = new string[4];
+        string[] propertiesListedInLobby = new string[3];
         propertiesListedInLobby[0] = "Owner";
         propertiesListedInLobby[1] = "isSecret";
         propertiesListedInLobby[2] = "Password";
-        propertiesListedInLobby[3] = "isGaming";
 
         ExitGames.Client.Photon.Hashtable openWith = new ExitGames.Client.Photon.Hashtable();
         openWith.Add("Owner", PhotonNetwork.NickName);
         openWith.Add("isSecret", isSecret.ToString());
-        openWith.Add("isGaming", false);
 
         if (isSecret)
         {
@@ -297,20 +381,62 @@ public class LobbyManager : MonoBehaviourPunCallbacks//다른 포톤 반응 받아들이기
         }
         for (int i = 0; i < players.Count(); i++)
         {
-            Instantiate(playerListItemPrefab, playerListContent).GetComponent<PlayerListItem>().SetUp(players[i]);
+            if (((int)players[i].CustomProperties["charInt"] == 0))
+            {
+                Instantiate(bearinroomPrefab, playerListContent).GetComponent<PlayerListItem>().SetUp(players[i]);
+            }
+            else if (((int)players[i].CustomProperties["charInt"] == 1))
+            {
+                Instantiate(buffaloinroomPrefab, playerListContent).GetComponent<PlayerListItem>().SetUp(players[i]); ;
+            }
+            else if (((int)players[i].CustomProperties["charInt"] == 2))
+            {
+                Instantiate(catinroomPrefab, playerListContent).GetComponent<PlayerListItem>().SetUp(players[i]); ;
+            }
+            else if (((int)players[i].CustomProperties["charInt"] == 3))
+            {
+                Instantiate(chickeninroomPrefab, playerListContent).GetComponent<PlayerListItem>().SetUp(players[i]); ;
+            }
+            else if (((int)players[i].CustomProperties["charInt"] == 4))
+            {
+                Instantiate(chikinroomPrefab, playerListContent).GetComponent<PlayerListItem>().SetUp(players[i]); ;
+            }
+            else if (((int)players[i].CustomProperties["charInt"] == 5))
+            {
+                Instantiate(doginroomPrefab, playerListContent).GetComponent<PlayerListItem>().SetUp(players[i]); ;
+            }
+            else if (((int)players[i].CustomProperties["charInt"] == 6))
+            {
+                Instantiate(duckinroomPrefab, playerListContent).GetComponent<PlayerListItem>().SetUp(players[i]); ;
+            }
+            else if (((int)players[i].CustomProperties["charInt"] == 7))
+            {
+                Instantiate(elephantinroomPrefab, playerListContent).GetComponent<PlayerListItem>().SetUp(players[i]); ;
+            }
+            else if (((int)players[i].CustomProperties["charInt"] == 8))
+            {
+                Instantiate(froginroomPrefab, playerListContent).GetComponent<PlayerListItem>().SetUp(players[i]); ;
+            }
+            else if (((int)players[i].CustomProperties["charInt"] == 9))
+            {
+                Instantiate(monkeyinroomPrefab, playerListContent).GetComponent<PlayerListItem>().SetUp(players[i]); ;
+            }
+            else if (((int)players[i].CustomProperties["charInt"] == 10))
+            {
+                Instantiate(piginroomPrefab, playerListContent).GetComponent<PlayerListItem>().SetUp(players[i]); ;
+            }
+            else if (((int)players[i].CustomProperties["charInt"] == 11))
+            {
+                Instantiate(rabbitinroomPrefab, playerListContent).GetComponent<PlayerListItem>().SetUp(players[i]); ;
+            }
+            else if (((int)players[i].CustomProperties["charInt"] == 12))
+            {
+                Instantiate(rhinoinroomPrefab, playerListContent).GetComponent<PlayerListItem>().SetUp(players[i]); ;
+            }
         }
         Debug.Log(PhotonNetwork.IsMasterClient);
         startBtn.gameObject.SetActive(PhotonNetwork.IsMasterClient);
         readyBtn.gameObject.SetActive(!PhotonNetwork.IsMasterClient);
-
-        if (PhotonNetwork.CurrentRoom.PlayerCount == PhotonNetwork.CurrentRoom.MaxPlayers) //인원수 체크
-        {
-            PhotonNetwork.CurrentRoom.IsOpen = false;
-        }
-        else
-        {
-            PhotonNetwork.CurrentRoom.IsOpen = true;
-        }
     }
 
     public override void OnMasterClientSwitched(Player newMasterClient)//다른 플레이어가 나가서 내가 방장이 되었을 때
@@ -319,15 +445,6 @@ public class LobbyManager : MonoBehaviourPunCallbacks//다른 포톤 반응 받아들이기
         startBtn.gameObject.SetActive(newMasterClient.IsMasterClient);
         readyBtn.gameObject.SetActive(!newMasterClient.IsMasterClient);
         PhotonNetwork.CurrentRoom.CustomProperties["Owner"] = newMasterClient.NickName;
-
-        if (PhotonNetwork.CurrentRoom.PlayerCount == PhotonNetwork.CurrentRoom.MaxPlayers) //인원수 체크
-        {
-            PhotonNetwork.CurrentRoom.IsOpen = false;
-        }
-        else
-        {
-            PhotonNetwork.CurrentRoom.IsOpen = true;
-        }
     }
 
 
@@ -340,71 +457,82 @@ public class LobbyManager : MonoBehaviourPunCallbacks//다른 포톤 반응 받아들이기
 
     public void JoinRoom(RoomInfo info) //입장
     {
-        if (info.IsOpen)
+        if (info.CustomProperties["Password"] != null) // 비밀방인 경우
         {
-            if (info.CustomProperties["Password"] != null) // 비밀방인 경우
-            {
-                ActivatePwModal();
-                targetRoomName = info.Name;
-                targetRoomPw = info.CustomProperties["Password"].ToString();
-                Debug.Log(targetRoomName);
-                Debug.Log(targetRoomPw);
-
-                if (info.PlayerCount == info.MaxPlayers) //인원수 체크
-                {
-                    PhotonNetwork.CurrentRoom.IsOpen = false;
-                }
-                else
-                {
-                    PhotonNetwork.CurrentRoom.IsOpen = true;
-                }
-            }
-            else
-            {
-                PhotonNetwork.JoinRoom(info.Name);
-                MenuManager.Instance.OpenMenu("Room");
-
-                if (info.PlayerCount == info.MaxPlayers) //인원수 체크
-                {
-                    PhotonNetwork.CurrentRoom.IsOpen = false;
-                }
-                else
-                {
-                    PhotonNetwork.CurrentRoom.IsOpen = true;
-                }
-            }
+            ActivatePwModal();
+            targetRoomName = info.Name;
+            targetRoomPw = info.CustomProperties["Password"].ToString();
+            Debug.Log(targetRoomName);
+            Debug.Log(targetRoomPw);
+        }
+        else
+        {
+            PhotonNetwork.JoinRoom(info.Name);
+            MenuManager.Instance.OpenMenu("Room");
         }
        
     }
 
     public override void OnPlayerEnteredRoom(Player newPlayer)//다른 플레이어 입장했을 때
     {
-        Instantiate(playerListItemPrefab, playerListContent).GetComponent<PlayerListItem>().SetUp(newPlayer);
-
-        if (PhotonNetwork.CurrentRoom.PlayerCount == PhotonNetwork.CurrentRoom.MaxPlayers) //인원수 체크
+        if ((int)newPlayer.CustomProperties["charInt"] == 0)
         {
-            PhotonNetwork.CurrentRoom.IsOpen = false;
+            Instantiate(bearinroomPrefab, playerListContent).GetComponent<PlayerListItem>().SetUp(newPlayer);
         }
-        else
+        else if ((int)newPlayer.CustomProperties["charInt"] == 1)
         {
-            PhotonNetwork.CurrentRoom.IsOpen = true;
+            Instantiate(buffaloinroomPrefab, playerListContent).GetComponent<PlayerListItem>().SetUp(newPlayer);
+        }
+        else if ((int)newPlayer.CustomProperties["charInt"] == 2)
+        {
+            Instantiate(catinroomPrefab, playerListContent).GetComponent<PlayerListItem>().SetUp(newPlayer);
+        }
+        else if ((int)newPlayer.CustomProperties["charInt"] == 3)
+        {
+            Instantiate(chickeninroomPrefab, playerListContent).GetComponent<PlayerListItem>().SetUp(newPlayer);
+        }
+        else if ((int)newPlayer.CustomProperties["charInt"] == 4)
+        {
+            Instantiate(chikinroomPrefab, playerListContent).GetComponent<PlayerListItem>().SetUp(newPlayer);
+        }
+        else if ((int)newPlayer.CustomProperties["charInt"] == 5)
+        {
+            Instantiate(doginroomPrefab, playerListContent).GetComponent<PlayerListItem>().SetUp(newPlayer);
+        }
+        else if ((int)newPlayer.CustomProperties["charInt"] == 6)
+        {
+            Instantiate(duckinroomPrefab, playerListContent).GetComponent<PlayerListItem>().SetUp(newPlayer);
+        }
+        else if ((int)newPlayer.CustomProperties["charInt"] == 7)
+        {
+            Instantiate(elephantinroomPrefab, playerListContent).GetComponent<PlayerListItem>().SetUp(newPlayer);
+        }
+        else if ((int)newPlayer.CustomProperties["charInt"] == 8)
+        {
+            Instantiate(froginroomPrefab, playerListContent).GetComponent<PlayerListItem>().SetUp(newPlayer);
+        }
+        else if ((int)newPlayer.CustomProperties["charInt"] == 9)
+        {
+            Instantiate(monkeyinroomPrefab, playerListContent).GetComponent<PlayerListItem>().SetUp(newPlayer);
+        }
+        else if ((int)newPlayer.CustomProperties["charInt"] == 10)
+        {
+            Instantiate(piginroomPrefab, playerListContent).GetComponent<PlayerListItem>().SetUp(newPlayer);
+        }
+        else if ((int)newPlayer.CustomProperties["charInt"] == 11)
+        {
+            Instantiate(rabbitinroomPrefab, playerListContent).GetComponent<PlayerListItem>().SetUp(newPlayer);
+        }
+        else if ((int)newPlayer.CustomProperties["charInt"] == 12)
+        {
+            Instantiate(rhinoinroomPrefab, playerListContent).GetComponent<PlayerListItem>().SetUp(newPlayer);
         }
     }
 
-    public override void OnPlayerLeftRoom(Player otherPlayer)//다른 플레이어 퇴장했을 때
-    {
-        Debug.Log("Other Player Left");
-        if (PhotonNetwork.CurrentRoom.PlayerCount == PhotonNetwork.CurrentRoom.MaxPlayers) //인원수 체크
-        {
-            PhotonNetwork.CurrentRoom.IsOpen = false;
-        }
-        else
-        {
-            PhotonNetwork.CurrentRoom.IsOpen = true;
-        }
-
-        
-    }
+    //public override void OnPlayerLeftRoom(Player otherPlayer)//다른 플레이어 퇴장했을 때
+    //{
+    //    Debug.Log("Other Player Left");
+    //}
 
     private void Kick()
     {
@@ -454,22 +582,18 @@ public class LobbyManager : MonoBehaviourPunCallbacks//다른 포톤 반응 받아들이기
                         Debug.Log(PhotonNetwork.CurrentRoom.IsOpen);
                         PlayerListItem.isReady = false;
                         Debug.Log(PlayerListItem.isReady);
-                        notReadyText.gameObject.SetActive(false);
-                        PhotonNetwork.LoadLevel("Game_temp");
-
-                        RoomListItem.Instance.GameInProcess(PhotonNetwork.CurrentRoom);
+                        //PhotonNetwork.LoadLevel("Game_temp");
+                        PhotonNetwork.LoadLevel("PhotonTest");
                     }
 
                     else //레디 프로퍼티가 있지만 false값
                     {
-                        notReadyText.gameObject.SetActive(true);
                         Debug.Log("the other player is not ready for game");
                     }
                 }
 
                 else //레디 프로퍼티가 없음
                 {
-                    notReadyText.gameObject.SetActive(true);
                     Debug.Log("the other player is not ready for game");
                 }
             }
