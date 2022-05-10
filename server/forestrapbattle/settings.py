@@ -70,7 +70,8 @@ MIDDLEWARE = [
 # cors-headers
 CORS_ALLOW_ALL_ORIGINS = True
 # CORS_ORIGIN_WHITELIST = [ 'http://localhost:3000','http://127.0.0.1:3000','https://k6e204.p.ssafy.io','http://k6e204.p.ssafy.io:8443','http://localhost:58814']
-# CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_CREDENTIALS = True
+CSRF_TRUSTED_ORIGINS = ['https://k6e204.p.ssafy.io']
 
 ROOT_URLCONF = 'forestrapbattle.urls'
 
