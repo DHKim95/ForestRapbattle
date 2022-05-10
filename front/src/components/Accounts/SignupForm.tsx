@@ -144,6 +144,7 @@ function SignupForm({ errorControl, loadingControl,userLogin, isLogin }: Props) 
     } else {
       // 닉네임 인증
       setSendCheckNickname(() => true);
+      console.log(token)
       axios({
         method: "post",
         url: `${process.env.REACT_APP_BASE_URL}/api/v1/auth/nickname`,
@@ -153,9 +154,11 @@ function SignupForm({ errorControl, loadingControl,userLogin, isLogin }: Props) 
         },
       })
         .then((res) => {
+          console.log(res,'성고고고공')
           setNicknameConfirmation(() => true);
         })
         .catch((err) => {
+          console.log(err,'에러러러')
           setSendCheckNickname(() => false);
         });
     }
