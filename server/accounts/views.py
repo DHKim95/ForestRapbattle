@@ -48,10 +48,10 @@ def email(request) :
 
 
 
-@api_view(['POST'])
+@api_view(['GET'])
 @permission_classes([AllowAny])
-def nickname(request) :
-  curr_nickname = request.data.get('nickname')
+def nickname(request,nickname) :
+  curr_nickname = nickname
   if get_user_model().objects.filter(nickname=curr_nickname).exists() :
     return Response({'result' : False}, status=status.HTTP_200_OK)
   else:
