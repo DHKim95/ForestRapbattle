@@ -146,9 +146,8 @@ function SignupForm({ errorControl, loadingControl,userLogin, isLogin }: Props) 
       setSendCheckNickname(() => true);
       console.log(token,'토큰 찍히나')
       customAxios({
-        method: "get",
-        url: `${process.env.REACT_APP_BASE_URL}/api/v1/auth/nickname`,
-        data: { nickname: userInfo.nickname },
+        method: "post",
+        url: `${process.env.REACT_APP_BASE_URL}/api/v1/auth/${userInfo.nickname}/nickname`,
         // headers: {
         //   Authorization: token,
         // },
