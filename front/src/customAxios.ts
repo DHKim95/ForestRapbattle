@@ -5,7 +5,7 @@ const token = localStorage.getItem("token") || "";
 
 export const customAxios: AxiosInstance = axios.create({
   // baseURL이 작성되어있으므로 뒷부분만 작성해서 사용하면 됨
-  baseURL: `${process.env.REACT_APP_BASE_URL}/api/v1`,
+  baseURL: `${process.env.REACT_APP_BASE_URL}`,
   headers: {
     Authorization: token,
   },
