@@ -72,7 +72,7 @@ export const userLogin = (userInfo: LoginUserInfo) => {
         "accessToken",
         `JWT ${res.data.token}`
       );
-      const res1 = await axios({
+      const res1 = await customAxios({
         method: "post",
         url: `${process.env.REACT_APP_BASE_URL}/api/v1/auth/login`,
         data: data,
