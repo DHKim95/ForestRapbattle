@@ -7,6 +7,8 @@ import { connect } from "react-redux";
 import { userLogin } from "../../redux/account/actions";
 import { LoginUserInfo } from "../../types/account";
 import { AccountReducer } from "../../redux/rootReducer";
+import { styled } from "@mui/material";
+import "../../styles/Login.scss";
 
 //footbar
 function Copyright() {
@@ -61,14 +63,15 @@ function LoginForm({ userLogin, isLogin }: Props) {
         width: "100%",
       }}
     >
-      <Container component="main" maxWidth="xs">
+      <Container component="main" maxWidth="xs" className="LoginContainer">
         <div>
-          <Typography component="h1" variant="h5">
+          <Typography component="h1" variant="h5" className="mytitle">
             로그인
           </Typography>
           <div>
-            <TextField value={email} variant="outlined" margin="normal" fullWidth id="email" label="이메일" name="email" autoComplete="email" autoFocus onChange={onEmailHandler} />
+            <TextField value={email} variant="outlined" margin="normal" fullWidth id="email" label="이메일" name="email" autoComplete="email" autoFocus onChange={onEmailHandler} className="myemail" />
             <TextField
+              className="mypassword"
               value={password}
               variant="outlined"
               margin="normal"
@@ -81,23 +84,12 @@ function LoginForm({ userLogin, isLogin }: Props) {
               onChange={onPasswordHandler}
               onKeyPress={onKeyPress}
             />
-            {/* <Grid container>
-              <Grid item xs>
-                <RouterLink to="/signup">회원가입</RouterLink>
-              </Grid>
-              <Grid item xs>
-                |
-              </Grid>
-              <Grid item xs>
-                <RouterLink to="/findPw">비밀번호찾기</RouterLink>
-              </Grid>
-            </Grid> */}
-            <Button type="submit" fullWidth variant="contained" color="primary" onClick={login}>
+            <Button type="submit" fullWidth variant="contained" color="primary" onClick={login} className="mybutton">
               로그인
             </Button>
           </div>
         </div>
-        <Box mt={8}>
+        <Box mt={8} className="copyright">
           <Copyright />
         </Box>
       </Container>

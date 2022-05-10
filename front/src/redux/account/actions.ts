@@ -68,7 +68,6 @@ export const userLogin = (userInfo: LoginUserInfo) => {
         data: data,
       });
       console.log(res)
-      // localStorage.setItem("isLogin", "true");
       localStorage.setItem(
         "accessToken",
         `JWT ${res.data.token}`
@@ -78,16 +77,13 @@ export const userLogin = (userInfo: LoginUserInfo) => {
         url: `${process.env.REACT_APP_BASE_URL}/api/v1/auth/login`,
         data: data,
       });
-      console.log(res1.data.profile["profile_img"])
-      // localStorage.setItem("isLogin", "true");
       const newUserInfo = {
         nickname: res1.data.nickname,
-        userId: res1.data.userId,
+        userId: res1.data.user_id,
         profileImg:
           res1.data.profile["profile_img"] ||
           "https://cdn.newspenguin.com/news/photo/202002/1208_2870_473.jpg",
       };
-
       dispatch(userLoginSuccess(newUserInfo));
 
       // 로그인 성공시 메인페이지로 이동
@@ -98,12 +94,3 @@ export const userLogin = (userInfo: LoginUserInfo) => {
     loadingControl(dispatch, false);
   };
 };
-
-// export const userLogout = () => {
-//   return async (dispatch: Dispatch) => {
-//     console.log("야호")
-//     localStorage.clear();
-//     dispatch(resetUserInfo());
-//     // dispatch(resetFullCourse());
-//   };
-// };

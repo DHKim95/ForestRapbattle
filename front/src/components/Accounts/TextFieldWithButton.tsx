@@ -15,7 +15,7 @@ interface TextFieldWithButtonProps {
 function TextFieldWithButton({ id, onChange, onClickButton, autoComplete = "", buttonText, label, helperText = "", disabled, value = "" }: TextFieldWithButtonProps) {
 
   return (
-    <FormControl variant="outlined" error={!!helperText}>
+    <FormControl variant="outlined" error={!!helperText} className="mynick">
       <InputLabel htmlFor={id}>{label}</InputLabel>
       <OutlinedInput
         label={label}
@@ -30,7 +30,7 @@ function TextFieldWithButton({ id, onChange, onClickButton, autoComplete = "", b
         defaultValue={value}
         endAdornment={
           <InputAdornment position="end">
-            <Button onClick={onClickButton} color="primary" variant="contained" disabled={!!helperText}>
+            <Button onClick={onClickButton} color="primary" variant="contained" disabled={!!helperText} className="mynickbutton">
               {disabled ? `${label} 재작성` : buttonText}
             </Button>
           </InputAdornment>

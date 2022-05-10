@@ -1,0 +1,33 @@
+.profile {
+  .title {
+    // position: relative;
+    // top: 80px;
+    margin-top: 140px;
+    text-align: center;
+    font-size: 80px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    .myavatar {
+      margin-right: 80px;
+      // display: flex;
+      // flex-direction: row;
+      // justify-content: center;
+      img {
+        position: relative;
+      }
+      .fdfd {
+        overflow: visible;
+      }
+      .btn {
+        position: absolute;
+        bottom:-5px;
+        right:-5px;
+      }
+    }
+  }
+  .horizion {
+    margin: 50px 0px;
+  }
+}

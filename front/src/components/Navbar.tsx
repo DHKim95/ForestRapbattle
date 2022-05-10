@@ -15,8 +15,7 @@ import "../styles/Navbar.scss";
 import { alpha, styled } from "@mui/material";
 import { grey } from "@mui/material/colors";
 import { Link } from "react-router-dom";
-import myImg from "../assets/sunghyun.jpg";
-import { useSelector, connect, useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { resetUserInfo } from "../redux/account/actions";
 import { useNavigate } from "react-router-dom";
 
@@ -27,6 +26,7 @@ const RootStyle = styled(AppBar)(() => ({
   backdropFilter: "blur(6px)",
   WebkitBackdropFilter: "blur(6px)",
   backgroundColor: alpha(grey[900], 0.72),
+  // backgroundColor: "rgb(125, 174, 136)",
   // [theme.breakpoints.down("sm")]: {},
 }));
 
@@ -36,30 +36,6 @@ const ToolbarStyle = styled(Toolbar)({
   letterSpacing: "0px",
   width: "100%",
 });
-
-// function LoginOrOut({ userLogout }: Props) {
-//   const navigate = useNavigate();
-//   const isLogin = useSelector((state: any) => state.account.isLogin);
-//   const onClickHandler = async () => {
-//     try {
-//       await userLogout();
-//       navigate("/");
-//     } catch (e) {}
-//   };
-//   if (isLogin) {
-//     return (
-//       <Button onClick={onClickHandler} sx={{ my: 2, color: "white", display: "block" }}>
-//         로그아웃
-//       </Button>
-//     );
-//   }
-//   return (
-//     <Button sx={{ my: 2, color: "white", display: "block" }}>
-//       <Link to="/login">로그인</Link>
-//     </Button>
-//   );
-// }
-
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -132,34 +108,49 @@ const Navbar = () => {
             <Button onClick={handleCloseNavMenu} sx={{ my: 2, color: "white", display: "block" }}>
               게임시작
             </Button>
+            <Button onClick={handleCloseNavMenu} sx={{ my: 2, color: "white", display: "block" }}>
+              <Link to="/rank">랭킹</Link>
+            </Button>
             {isLogin || (
               <Button onClick={handleCloseNavMenu} sx={{ my: 2, color: "white", display: "block" }}>
                 <Link to="/login">로그인</Link>
               </Button>
             )}
             {!isLogin || (
-              <Button onClick={() => { handleCloseNavMenu(); onClickHandler() }} sx={{ my: 2, color: "white", display: "block" }}>
+              <Button
+                onClick={() => {
+                  handleCloseNavMenu();
+                  onClickHandler();
+                }}
+                sx={{ my: 2, color: "white", display: "block" }}
+              >
                 <Link to="/login">로그아웃</Link>
               </Button>
             )}
-            {isLogin || (<Button onClick={handleCloseNavMenu} sx={{ my: 2, color: "white", display: "block" }}>
-              <Link to="/signup">회원가입</Link>
-            </Button>
+            {isLogin || (
+              <Button onClick={handleCloseNavMenu} sx={{ my: 2, color: "white", display: "block" }}>
+                <Link to="/signup">회원가입</Link>
+              </Button>
             )}
             <Button onClick={handleCloseNavMenu} sx={{ my: 2, color: "white", display: "block" }}>
-              {nickname}
+              <Link to={`/profile/${nickname}`}>
+                {nickname}
+              </Link>
             </Button>
           </Box>
 
-          {!isLogin || (<Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp">
-                  <img src={profileImg} alt="dd" style={{ width: "100%" }} />
-                </Avatar>
-              </IconButton>
-            </Tooltip>
-          </Box>
+          {!isLogin || (
+            <Box sx={{ flexGrow: 0 }}>
+              <Tooltip title="Open settings">
+                <IconButton sx={{ p: 0 }}>
+                  <Avatar alt="Remy Sharp">
+                    <Link to={`/profile/${nickname}`}>
+                      <img src={profileImg} alt="dd" style={{ width: "100%" }} />
+                    </Link>
+                  </Avatar>
+                </IconButton>
+              </Tooltip>
+            </Box>
           )}
         </ToolbarStyle>
       </Container>

@@ -34,12 +34,12 @@
 // export default Signup;
 
 import SignupForm from "../components/Accounts/SignupForm";
-// import FixedMainBackground from "../../components/Main/FixedMainBackground";
+import BackgroundImage from "../components/BackgroundImage";
 
 function Signup() {
   return (
     <>
-      {/* <FixedMainBackground></FixedMainBackground> */}
+      <BackgroundImage></BackgroundImage>
       <SignupForm />
     </>
   );
