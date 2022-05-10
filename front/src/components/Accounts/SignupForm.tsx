@@ -143,7 +143,7 @@ function SignupForm({ errorControl, loadingControl,userLogin, isLogin }: Props) 
     } else {
       // 닉네임 인증
       setSendCheckNickname(() => true);
-      const res=customAxios({
+      const res = customAxios({
         method: "post",
         url: `${process.env.REACT_APP_BASE_URL}/api/v1/auth/nickname`,
         data: { nickname: userInfo.nickname },
@@ -156,6 +156,7 @@ function SignupForm({ errorControl, loadingControl,userLogin, isLogin }: Props) 
           console.log(err,'에러러러')
           setSendCheckNickname(() => false);
         });
+      console.log(res)
     }
   }
 
