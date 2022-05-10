@@ -6,6 +6,7 @@ from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from django.contrib.auth import get_user_model
 from django.contrib.auth.hashers import check_password
+from django.views.decorators.csrf import csrf_exempt
 
 from .models import User
 from game.models import ProfileImage,Match
@@ -14,7 +15,7 @@ from .serializers import UserSerializer,UserInfoSerializer, ProfileImageSerializ
 import copy
 
 # Create your views here.
-
+@csrf_exempt
 @api_view(['POST'])
 @permission_classes([AllowAny])
 def signup(request) :
