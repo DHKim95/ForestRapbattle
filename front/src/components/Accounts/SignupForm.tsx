@@ -144,8 +144,8 @@ function SignupForm({ errorControl, loadingControl,userLogin, isLogin }: Props) 
       // 닉네임 인증
       setSendCheckNickname(() => true);
       axios({
-        method: "post",
-        url: `${process.env.REACT_APP_BASE_URL}/api/v1/auth/nickname`,
+        method: "get",
+        url: `${process.env.REACT_APP_BASE_URL}/api/v1/auth/${userInfo.nickname}/nickname`,
         data: { nickname: userInfo.nickname },
       })
         .then((res) => {
