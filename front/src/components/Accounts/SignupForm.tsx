@@ -97,22 +97,17 @@ function SignupForm({ errorControl, loadingControl,userLogin, isLogin }: Props) 
     loadingControl(true);
 
     try {
-      const res = await axios.post(
-        `${process.env.REACT_APP_BASE_URL}/api/v1/auth/signup`,
-        {
+      const res = await customAxios({
+        method: "post",
+        url: `${process.env.REACT_APP_BASE_URL}/api/v1/auth/signup`,
+        data: {
           email: userInfo.username,
           password: userInfo.password,
           password2: userInfo.passwordConfirmation,
           nickname: userInfo.nickname,
           profile_id: userInfo.profileId,
         },
-        {
-          headers: {
-            "Content-type": "application/json",
-            Accept: "*/*",
-          },
-        }
-      );
+      });
       if (res.status !== 200) {
         throw new Error("SinupFailed");
       }
@@ -142,20 +137,16 @@ function SignupForm({ errorControl, loadingControl,userLogin, isLogin }: Props) 
   // 닉네임 중복검사요청
   function requsetCheckNickname(): void {
     // 닉네임 재작성
-    const token = localStorage.getItem("accessToken") || "";
     if (sendCheckNickname) {
       setSendCheckNickname(() => false);
       setNicknameConfirmation(() => false);
     } else {
       // 닉네임 인증
       setSendCheckNickname(() => true);
-      console.log(token,'토큰 찍히나')
-      customAxios({
+      axios({
         method: "get",
         url: `${process.env.REACT_APP_BASE_URL}/api/v1/auth/${userInfo.nickname}/nickname`,
-        // headers: {
-        //   Authorization: token,
-        // },
+        data: { nickname: userInfo.nickname },
       })
         .then((res) => {
           setNicknameConfirmation(() => true);
