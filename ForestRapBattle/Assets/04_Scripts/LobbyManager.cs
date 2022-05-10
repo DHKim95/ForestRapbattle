@@ -41,19 +41,19 @@ public class LobbyManager : MonoBehaviourPunCallbacks//다른 포톤 반응 받아들이기
     [SerializeField]
     private TMP_Text Username;
     [SerializeField] Transform userCharContent;
-    [SerializeField] GameObject bearPrefab;
-    [SerializeField] GameObject buffaloPrefab;
-    [SerializeField] GameObject catPrefab;
-    [SerializeField] GameObject chickenPrefab;
-    [SerializeField] GameObject chikPrefab;
-    [SerializeField] GameObject dogPrefab;
-    [SerializeField] GameObject duckPrefab;
-    [SerializeField] GameObject elephantPrefab;
-    [SerializeField] GameObject frogPrefab;
-    [SerializeField] GameObject monkeyPrefab;
-    [SerializeField] GameObject pigPrefab;
-    [SerializeField] GameObject rabbitPrefab;
-    [SerializeField] GameObject rhinoPrefab;
+    [SerializeField] public GameObject bearPrefab;
+    [SerializeField] public GameObject buffaloPrefab;
+    [SerializeField] public GameObject catPrefab;
+    [SerializeField] public GameObject chickenPrefab;
+    [SerializeField] public GameObject chikPrefab;
+    [SerializeField] public GameObject dogPrefab;
+    [SerializeField] public GameObject duckPrefab;
+    [SerializeField] public GameObject elephantPrefab;
+    [SerializeField] public GameObject frogPrefab;
+    [SerializeField] public GameObject monkeyPrefab;
+    [SerializeField] public GameObject pigPrefab;
+    [SerializeField] public GameObject rabbitPrefab;
+    [SerializeField] public GameObject rhinoPrefab;
     [Space(5f)]
 
     [Header("Game Room References")]
@@ -89,6 +89,27 @@ public class LobbyManager : MonoBehaviourPunCallbacks//다른 포톤 반응 받아들이기
     [SerializeField] Button cancelPwBtn;
     [Space(5f)]
 
+    [Header("Change Character References")]
+    [SerializeField]
+    private Button ChangeCharBtn;
+    [SerializeField] GameObject ChangeCharPanel;
+    [SerializeField] Button bearBtn;
+    [SerializeField] Button buffaloBtn;
+    [SerializeField] Button catBtn;
+    [SerializeField] Button chikBtn;
+    [SerializeField] Button chickenBtn;
+    [SerializeField] Button dogBtn;
+    [SerializeField] Button duckBtn;
+    [SerializeField] Button elephantBtn;
+    [SerializeField] Button frogBtn;
+    [SerializeField] Button monkeyBtn;
+    [SerializeField] Button pigBtn;
+    [SerializeField] Button rabbitBtn;
+    [SerializeField] Button rhinoBtn;
+    [SerializeField] Button confirmChangeBtn;
+    [SerializeField] Button cancelChangePwBtn;
+    [Space(5f)]
+
     public static int charInt = 0;
 
     bool isSecret = false;
@@ -100,6 +121,8 @@ public class LobbyManager : MonoBehaviourPunCallbacks//다른 포톤 반응 받아들이기
 
     private string targetRoomPw = "";
     private string targetRoomName = "";
+
+    public string selectedChar = ""; // 캐릭터 변경할 때
 
 
     void Awake()
@@ -137,6 +160,30 @@ public class LobbyManager : MonoBehaviourPunCallbacks//다른 포톤 반응 받아들이기
 
         startBtn.onClick.RemoveAllListeners();
         startBtn.onClick.AddListener(StartGame);
+
+        ChangeCharBtn.onClick.RemoveAllListeners();
+        ChangeCharBtn.onClick.AddListener(StartChange);
+
+        confirmChangeBtn.onClick.RemoveAllListeners();
+        confirmChangeBtn.onClick.AddListener(ChangeCharacter);
+
+        cancelChangePwBtn.onClick.RemoveAllListeners();
+        cancelChangePwBtn.onClick.AddListener(DeactivateChangeModal);
+
+        //여기서부터 캐릭터 변경
+        bearBtn.onClick.AddListener(Bear);
+        buffaloBtn.onClick.AddListener(Buffalo);
+        catBtn.onClick.AddListener(Cat);
+        chikBtn.onClick.AddListener(Chik);
+        chickenBtn.onClick.AddListener(Chicken);
+        dogBtn.onClick.AddListener(Dog);
+        duckBtn.onClick.AddListener(Duck);
+        elephantBtn.onClick.AddListener(Elephant);
+        frogBtn.onClick.AddListener(Frog);
+        monkeyBtn.onClick.AddListener(Monkey);
+        pigBtn.onClick.AddListener(Pig);
+        rabbitBtn.onClick.AddListener(Rabbit);
+        rhinoBtn.onClick.AddListener(Rhino);
     }
 
     void Start()
@@ -270,6 +317,186 @@ public class LobbyManager : MonoBehaviourPunCallbacks//다른 포톤 반응 받아들이기
         enterRoomPwInput.text = "";
         EnterPwPanel.SetActive(false);
         errorText.text = "";
+    }
+
+    public void StartChange()
+    {
+        ChangeCharPanel.SetActive(true);
+    }
+
+    private void DeactivateChangeModal()
+    {
+        selectedChar = "";
+        ChangeCharPanel.SetActive(false);
+    }
+
+    public void ChangeCharacter()
+    {
+        if (selectedChar == "bear")
+        {
+            charInt = 0;
+            string[] _removeProperties = new string[1]; //이미 있던 프로퍼티를 삭제하고 다시 넣어야함
+            _removeProperties[0] = "charInt";
+            PhotonNetwork.RemovePlayerCustomProperties(_removeProperties);
+
+            //변경된 플레이어 캐릭터 정보를 포톤 네트워크에 저장
+            ExitGames.Client.Photon.Hashtable playerChar = new ExitGames.Client.Photon.Hashtable();
+            playerChar.Add("charInt", charInt);
+            PhotonNetwork.SetPlayerCustomProperties(playerChar);
+        }
+        else if (selectedChar == "buffalo")
+        {
+            charInt = 1;
+            string[] _removeProperties = new string[1]; //이미 있던 프로퍼티를 삭제하고 다시 넣어야함
+            _removeProperties[0] = "charInt";
+            PhotonNetwork.RemovePlayerCustomProperties(_removeProperties);
+
+            //변경된 플레이어 캐릭터 정보를 포톤 네트워크에 저장
+            ExitGames.Client.Photon.Hashtable playerChar = new ExitGames.Client.Photon.Hashtable();
+            playerChar.Add("charInt", charInt);
+            PhotonNetwork.SetPlayerCustomProperties(playerChar);
+        }
+        else if (selectedChar == "cat")
+        {
+            charInt = 2;
+            string[] _removeProperties = new string[1]; //이미 있던 프로퍼티를 삭제하고 다시 넣어야함
+            _removeProperties[0] = "charInt";
+            PhotonNetwork.RemovePlayerCustomProperties(_removeProperties);
+
+            //변경된 플레이어 캐릭터 정보를 포톤 네트워크에 저장
+            ExitGames.Client.Photon.Hashtable playerChar = new ExitGames.Client.Photon.Hashtable();
+            playerChar.Add("charInt", charInt);
+            PhotonNetwork.SetPlayerCustomProperties(playerChar);
+        }
+        else if (selectedChar == "chicken")
+        {
+            charInt = 3;
+            string[] _removeProperties = new string[1]; //이미 있던 프로퍼티를 삭제하고 다시 넣어야함
+            _removeProperties[0] = "charInt";
+            PhotonNetwork.RemovePlayerCustomProperties(_removeProperties);
+
+            //변경된 플레이어 캐릭터 정보를 포톤 네트워크에 저장
+            ExitGames.Client.Photon.Hashtable playerChar = new ExitGames.Client.Photon.Hashtable();
+            playerChar.Add("charInt", charInt);
+            PhotonNetwork.SetPlayerCustomProperties(playerChar);
+        }
+        else if (selectedChar == "chik")
+        {
+            charInt = 4;
+            string[] _removeProperties = new string[1]; //이미 있던 프로퍼티를 삭제하고 다시 넣어야함
+            _removeProperties[0] = "charInt";
+            PhotonNetwork.RemovePlayerCustomProperties(_removeProperties);
+
+            //변경된 플레이어 캐릭터 정보를 포톤 네트워크에 저장
+            ExitGames.Client.Photon.Hashtable playerChar = new ExitGames.Client.Photon.Hashtable();
+            playerChar.Add("charInt", charInt);
+            PhotonNetwork.SetPlayerCustomProperties(playerChar);
+        }
+        else if (selectedChar == "dog")
+        {
+            charInt = 5;
+            string[] _removeProperties = new string[1]; //이미 있던 프로퍼티를 삭제하고 다시 넣어야함
+            _removeProperties[0] = "charInt";
+            PhotonNetwork.RemovePlayerCustomProperties(_removeProperties);
+
+            //변경된 플레이어 캐릭터 정보를 포톤 네트워크에 저장
+            ExitGames.Client.Photon.Hashtable playerChar = new ExitGames.Client.Photon.Hashtable();
+            playerChar.Add("charInt", charInt);
+            PhotonNetwork.SetPlayerCustomProperties(playerChar);
+        }
+        else if (selectedChar == "duck")
+        {
+            charInt = 6;
+            string[] _removeProperties = new string[1]; //이미 있던 프로퍼티를 삭제하고 다시 넣어야함
+            _removeProperties[0] = "charInt";
+            PhotonNetwork.RemovePlayerCustomProperties(_removeProperties);
+
+            //변경된 플레이어 캐릭터 정보를 포톤 네트워크에 저장
+            ExitGames.Client.Photon.Hashtable playerChar = new ExitGames.Client.Photon.Hashtable();
+            playerChar.Add("charInt", charInt);
+            PhotonNetwork.SetPlayerCustomProperties(playerChar);
+        }
+        else if (selectedChar == "elephant")
+        {
+            charInt = 7;
+            string[] _removeProperties = new string[1]; //이미 있던 프로퍼티를 삭제하고 다시 넣어야함
+            _removeProperties[0] = "charInt";
+            PhotonNetwork.RemovePlayerCustomProperties(_removeProperties);
+
+            //변경된 플레이어 캐릭터 정보를 포톤 네트워크에 저장
+            ExitGames.Client.Photon.Hashtable playerChar = new ExitGames.Client.Photon.Hashtable();
+            playerChar.Add("charInt", charInt);
+            PhotonNetwork.SetPlayerCustomProperties(playerChar);
+        }
+        else if (selectedChar == "frog")
+        {
+            charInt = 8;
+            string[] _removeProperties = new string[1]; //이미 있던 프로퍼티를 삭제하고 다시 넣어야함
+            _removeProperties[0] = "charInt";
+            PhotonNetwork.RemovePlayerCustomProperties(_removeProperties);
+
+            //변경된 플레이어 캐릭터 정보를 포톤 네트워크에 저장
+            ExitGames.Client.Photon.Hashtable playerChar = new ExitGames.Client.Photon.Hashtable();
+            playerChar.Add("charInt", charInt);
+            PhotonNetwork.SetPlayerCustomProperties(playerChar);
+        }
+        else if (selectedChar == "monkey")
+        {
+            charInt = 9;
+            string[] _removeProperties = new string[1]; //이미 있던 프로퍼티를 삭제하고 다시 넣어야함
+            _removeProperties[0] = "charInt";
+            PhotonNetwork.RemovePlayerCustomProperties(_removeProperties);
+
+            //변경된 플레이어 캐릭터 정보를 포톤 네트워크에 저장
+            ExitGames.Client.Photon.Hashtable playerChar = new ExitGames.Client.Photon.Hashtable();
+            playerChar.Add("charInt", charInt);
+            PhotonNetwork.SetPlayerCustomProperties(playerChar);
+        }
+        else if (selectedChar == "pig")
+        {
+            charInt = 10;
+            string[] _removeProperties = new string[1]; //이미 있던 프로퍼티를 삭제하고 다시 넣어야함
+            _removeProperties[0] = "charInt";
+            PhotonNetwork.RemovePlayerCustomProperties(_removeProperties);
+
+            //변경된 플레이어 캐릭터 정보를 포톤 네트워크에 저장
+            ExitGames.Client.Photon.Hashtable playerChar = new ExitGames.Client.Photon.Hashtable();
+            playerChar.Add("charInt", charInt);
+            PhotonNetwork.SetPlayerCustomProperties(playerChar);
+        }
+        else if (selectedChar == "rabbit")
+        {
+            charInt = 11;
+            string[] _removeProperties = new string[1]; //이미 있던 프로퍼티를 삭제하고 다시 넣어야함
+            _removeProperties[0] = "charInt";
+            PhotonNetwork.RemovePlayerCustomProperties(_removeProperties);
+
+            //변경된 플레이어 캐릭터 정보를 포톤 네트워크에 저장
+            ExitGames.Client.Photon.Hashtable playerChar = new ExitGames.Client.Photon.Hashtable();
+            playerChar.Add("charInt", charInt);
+            PhotonNetwork.SetPlayerCustomProperties(playerChar);
+        }
+        else if (selectedChar == "rhino")
+        {
+            charInt = 12;
+            string[] _removeProperties = new string[1]; //이미 있던 프로퍼티를 삭제하고 다시 넣어야함
+            _removeProperties[0] = "charInt";
+            PhotonNetwork.RemovePlayerCustomProperties(_removeProperties);
+
+            //변경된 플레이어 캐릭터 정보를 포톤 네트워크에 저장
+            ExitGames.Client.Photon.Hashtable playerChar = new ExitGames.Client.Photon.Hashtable();
+            playerChar.Add("charInt", charInt);
+            PhotonNetwork.SetPlayerCustomProperties(playerChar);
+        }
+
+        DeactivateChangeModal();
+
+        foreach (Transform trans in userCharContent)//존재하는 모든 roomListContent
+        {
+            Destroy(trans.gameObject);//룸리스트 업데이트가 될때마다 싹지우기
+        }
+
+        changePrefab();
     }
 
     private void SecretOn()
@@ -597,6 +824,144 @@ public class LobbyManager : MonoBehaviourPunCallbacks//다른 포톤 반응 받아들이기
                     Debug.Log("the other player is not ready for game");
                 }
             }
+        }
+    }
+
+    public void Bear()
+    {
+        selectedChar = "bear";
+        charInt = 0;
+        Debug.Log(charInt);
+    }
+    public void Buffalo()
+    {
+        selectedChar = "buffalo";
+        charInt = 1;
+        Debug.Log(charInt);
+    }
+    public void Cat()
+    {
+        selectedChar = "cat";
+        charInt = 2;
+        Debug.Log(charInt);
+    }
+    public void Chik()
+    {
+        selectedChar = "chik";
+        charInt = 3;
+        Debug.Log(charInt);
+    }
+    public void Chicken()
+    {
+        selectedChar = "chicken";
+        charInt = 4;
+        Debug.Log(charInt);
+    }
+    public void Dog()
+    {
+        selectedChar = "dog";
+        charInt = 5;
+        Debug.Log(charInt);
+    }
+    public void Duck()
+    {
+        selectedChar = "duck";
+        charInt = 6;
+        Debug.Log(charInt);
+    }
+    public void Elephant()
+    {
+        selectedChar = "elephant";
+        charInt = 7;
+        Debug.Log(charInt);
+    }
+    public void Frog()
+    {
+        selectedChar = "frog";
+        charInt = 8;
+        Debug.Log(charInt);
+    }
+    public void Monkey()
+    {
+        selectedChar = "monkey";
+        charInt = 9;
+        Debug.Log(charInt);
+    }
+    public void Pig()
+    {
+        selectedChar = "pig";
+        charInt = 10;
+        Debug.Log(charInt);
+    }
+    public void Rabbit()
+    {
+        selectedChar = "rabbit";
+        charInt = 11;
+        Debug.Log(charInt);
+    }
+    public void Rhino()
+    {
+        selectedChar = "rhino";
+        charInt = 12;
+        Debug.Log(charInt);
+    }
+
+    public void changePrefab()
+    {
+        Debug.Log("changing character into " + charInt.ToString());
+
+
+        if (charInt == 0)
+        {
+            Instantiate(bearPrefab, userCharContent);
+        }
+        else if (charInt == 1)
+        {
+            Instantiate(buffaloPrefab, userCharContent);
+        }
+        else if (charInt == 2)
+        {
+            Instantiate(catPrefab, userCharContent);
+        }
+        else if (charInt == 3)
+        {
+            Instantiate(chickenPrefab, userCharContent);
+        }
+        else if (charInt == 4)
+        {
+            Instantiate(chikPrefab, userCharContent);
+        }
+        else if (charInt == 5)
+        {
+            Instantiate(dogPrefab, userCharContent);
+        }
+        else if (charInt == 6)
+        {
+            Instantiate(duckPrefab, userCharContent);
+        }
+        else if (charInt == 7)
+        {
+            Instantiate(elephantPrefab, userCharContent);
+        }
+        else if (charInt == 8)
+        {
+            Instantiate(frogPrefab, userCharContent);
+        }
+        else if (charInt == 9)
+        {
+            Instantiate(monkeyPrefab, userCharContent);
+        }
+        else if (charInt == 10)
+        {
+            Instantiate(pigPrefab, userCharContent);
+        }
+        else if (charInt == 11)
+        {
+            Instantiate(rabbitPrefab, userCharContent);
+        }
+        else if (charInt == 12)
+        {
+            Instantiate(rhinoPrefab, userCharContent);
         }
     }
 
