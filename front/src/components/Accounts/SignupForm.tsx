@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import TextFieldWithButton from "./TextFieldWithButton";
-import { Button, Container, TextField, Typography } from "@mui/material";
+import { Button, Container, TextField, Typography, Avatar} from "@mui/material";
 // import { makeStyles } from "@mui/styles";
 import { useNavigate } from "react-router-dom";
 import { SignupUserInfo } from "../../types/account";
@@ -11,6 +11,8 @@ import { connect } from "react-redux";
 import { userLogin } from "../../redux/account/actions";
 import { LoginUserInfo } from "../../types/account";
 import { AccountReducer } from "../../redux/rootReducer";
+import "../../styles/Signup.scss"
+
 
 
 function SignupForm({ errorControl, loadingControl,userLogin, isLogin }: Props) {
@@ -62,19 +64,21 @@ function SignupForm({ errorControl, loadingControl,userLogin, isLogin }: Props) 
     for (let index = 0; index < profileImages.length; index++) {
       let bbb = profileImages[index];
       aaa.push(
-        <div key={bbb.profile_id}>
-          <img
-            src={bbb.profile_img}
-            alt="profile"
-            onClick={(event) => {
-              Selected(bbb.profile_id);
-            }}
-            style={{ width: "50px" }}
-          ></img>
+        <div className="profileItem">
+          <Avatar key={bbb.profile_id} className={bbb.profile_id === userInfo.profileId ? "selectedMyavatar" : "myavatar"}>
+            <img
+              className="profileImage"
+              src={bbb.profile_img}
+              alt="profile"
+              onClick={(event) => {
+                Selected(bbb.profile_id);
+              }}
+            />
+          </Avatar>
         </div>
       );
     }
-    return <div>{aaa}</div>;
+    return <div className="profileContainer">{aaa}</div>;
   }
   useEffect(() => {
     const getProfileImage = async () => {
@@ -217,14 +221,15 @@ function SignupForm({ errorControl, loadingControl,userLogin, isLogin }: Props) 
       }}
     >
       {page === 2 || (
-        <Container component="main" maxWidth="sm">
+        <Container component="main" maxWidth="sm" className="SignupContainer">
           <div>
-            <Typography component="h1" variant="h5">
+            <Typography component="h1" variant="h5" className="mytitle">
               회원가입
             </Typography>
             <form noValidate>
-              <TextField label="이메일" id="username" autoComplete="email" fullWidth onChange={changeUserInfo} helperText={emailMessage}></TextField>
+              <TextField label="이메일" id="username" autoComplete="email" fullWidth onChange={changeUserInfo} helperText={emailMessage} className="myemail" />
               <TextField
+                className="mypassword"
                 error={!!passwordMessage}
                 helperText={passwordMessage}
                 variant="outlined"
@@ -238,6 +243,7 @@ function SignupForm({ errorControl, loadingControl,userLogin, isLogin }: Props) 
                 onChange={changeUserInfo}
               />
               <TextField
+                className="mypasswordc"
                 error={!!passwordConfirmMessage}
                 helperText={passwordConfirmMessage}
                 variant="outlined"
@@ -257,9 +263,9 @@ function SignupForm({ errorControl, loadingControl,userLogin, isLogin }: Props) 
                 buttonText="닉네임중복확인"
                 disabled={sendCheckNickname}
                 helperText={nickNameMessage}
-              ></TextFieldWithButton>
-
+              />
               <Button
+                className="mybutton"
                 fullWidth
                 variant="contained"
                 color="primary"
@@ -280,13 +286,14 @@ function SignupForm({ errorControl, loadingControl,userLogin, isLogin }: Props) 
         </Container>
       )}
       {page === 1 || (
-        <Container component="main" maxWidth="sm">
-          <Typography component="h1" variant="h5">
+        <Container component="main" maxWidth="sm" className="Profile">
+          <Typography component="h1" variant="h5" className="mytitle">
             프로필 선택
           </Typography>
-          <ProfileSelector></ProfileSelector>
+          <ProfileSelector />
           <div>{userInfo.profileId}</div>
           <Button
+            className="mybutton"
             fullWidth
             variant="contained"
             color="primary"

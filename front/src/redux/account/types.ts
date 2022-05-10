@@ -6,4 +6,5 @@ export const SET_PROFILE_IMG = "SET_PROFILE_IMG";
 export const SET_USER_INFO = "SET_USER_INFO";
 export const RESET_USER_INFO = "RESET_USER_INFO";
 
+
 export type AccountAction = ReturnType<typeof userLogin>;

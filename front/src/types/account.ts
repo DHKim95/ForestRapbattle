@@ -1,4 +1,5 @@
 export interface UserInfo {
+  userId: number;
   username: string;
   nickname: string;
   profileImg?: string | null | undefined;
@@ -24,6 +25,7 @@ export interface SetPasswordInfo {
 }
 
 export interface SetUserInfo {
+  userId: number;
   username: string;
   nickname: string;
   [key: string]: any;

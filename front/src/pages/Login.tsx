@@ -21,13 +21,14 @@
 //     </div>
 //   );
 // }
-
 // export default Login;
 import LoginForm from "../components/Accounts/LoginFrom";
+import BackgroundImage from "../components/BackgroundImage";
 
 function Login() {
   return (
     <>
+      <BackgroundImage></BackgroundImage>
       <LoginForm></LoginForm>
     </>
   );
