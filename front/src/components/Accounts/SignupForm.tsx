@@ -137,21 +137,16 @@ function SignupForm({ errorControl, loadingControl,userLogin, isLogin }: Props) 
   // 닉네임 중복검사요청
   function requsetCheckNickname(): void {
     // 닉네임 재작성
-    const token = localStorage.getItem("accessToken") || "";
     if (sendCheckNickname) {
       setSendCheckNickname(() => false);
       setNicknameConfirmation(() => false);
     } else {
       // 닉네임 인증
       setSendCheckNickname(() => true);
-      console.log(token)
-      axios({
+      const res=customAxios({
         method: "post",
         url: `${process.env.REACT_APP_BASE_URL}/api/v1/auth/nickname`,
         data: { nickname: userInfo.nickname },
-        headers: {
-          Authorization: token,
-        },
       })
         .then((res) => {
           console.log(res,'성고고고공')
