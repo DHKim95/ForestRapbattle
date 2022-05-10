@@ -97,17 +97,22 @@ function SignupForm({ errorControl, loadingControl,userLogin, isLogin }: Props) 
     loadingControl(true);
 
     try {
-      const res = await customAxios({
-        method: "post",
-        url: `${process.env.REACT_APP_BASE_URL}/api/v1/auth/signup`,
-        data: {
+      const res = await axios.post(
+        `${process.env.REACT_APP_BASE_URL}/api/v1/auth/signup`,
+        {
           email: userInfo.username,
           password: userInfo.password,
           password2: userInfo.passwordConfirmation,
           nickname: userInfo.nickname,
           profile_id: userInfo.profileId,
         },
-      });
+        {
+          headers: {
+            "Content-type": "application/json",
+            Accept: "*/*",
+          },
+        }
+      );
       if (res.status !== 200) {
         throw new Error("SinupFailed");
       }
