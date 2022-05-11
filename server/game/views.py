@@ -5,7 +5,7 @@ from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 
 from accounts.models import User
-from game.models import Match, Words
+from game.models import Match, Words, Rank
 
 from .serializers import MatchResultSerializer
 import random
@@ -119,3 +119,15 @@ def gameResult(request) :
     serializer.save(user=user)
     return Response({'created' : True}, status=status.HTTP_201_CREATED)
   return Response({'created' : False}, status=status.HTTP_404_NOT_FOUND)
+
+# 랭킹 갱신
+def ranking_save() :
+  
+  Rank.objects.all().delete()
+  users = User.objects.all().order_by('-win_point')
+  print(users)
+
+  objs = [ Rank(rank=rank ,user_id=user) for rank,user in zip(range(1,len(users)+1),users)]
+  print(objs)
+  Rank.objects.bulk_create(objs)
+  
