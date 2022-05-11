@@ -13,9 +13,10 @@ import { useNavigate } from "react-router-dom";
 function Profile() {
   const navigate = useNavigate();
   const params = useParams();
-  const nickname = params["nickname"];
+  // const nickname = params["nickname"];
   const userId = Number(params["userId"]);
   const profileImg = useSelector((state: any) => state.account.profileImg);
+  const [nickname,setNickname] = useState<string>("")
   // const [profileImages, setProfileImages] = useState<ProfileImage[]>([{ profile_id: 0, profile_img: "" }]);  
   type Gameresult = {
     date: string;
@@ -61,7 +62,7 @@ function Profile() {
           <div>{historyItem.date}</div>
           <div>{win ? historyItem.loser_info.nickname : historyItem.winner_info.nickname}</div>
           <img src={win ? historyItem.loser_info.profile.profile_img : historyItem.winner_info.profile.profile_img} alt="" onClick={() => {
-            navigate(win ? `/profile/${historyItem.loser_info.nickname}/${historyItem.loser_user_id}` : `/profile/${historyItem.winner_info.nickname}/${historyItem.winner_user_id}`);
+            navigate(win ? `/profile/${historyItem.loser_user_id}` : `/profile/${historyItem.winner_user_id}`);
           }} />
           <hr />
         </div>
@@ -78,6 +79,7 @@ function Profile() {
       });
       console.log(gameRes.data.match);
       setGameresults(gameRes.data.match);
+      setNickname(gameRes.data.user.nickname);
     };
     getGameResults();
   }, []);
