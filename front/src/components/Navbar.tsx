@@ -138,7 +138,7 @@ const Navbar = ({color}:NavbarProps) => {
               </Button>
             )}
             <Button onClick={handleCloseNavMenu} sx={{ my: 2, color: "white", display: "block" }}>
-              <Link to={`/profile/${nickname}`}>
+              <Link to={`/profile/${userId}`}>
                 {nickname}
               </Link>
             </Button>
@@ -149,7 +149,7 @@ const Navbar = ({color}:NavbarProps) => {
               <Tooltip title="Open settings">
                 <IconButton sx={{ p: 0 }}>
                   <Avatar alt="Remy Sharp">
-                    <Link to={`/profile/${nickname}/${userId}`}>
+                    <Link to={`/profile/${userId}`}>
                       <img src={profileImg} alt="dd" style={{ width: "100%" }} />
                     </Link>
                   </Avatar>
