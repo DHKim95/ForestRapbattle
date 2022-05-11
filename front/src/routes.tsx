@@ -25,7 +25,7 @@ function Router() {
       element: <Game />
     },
     {
-      path: "profile/:nickname",
+      path: "profile/:nickname/:userId",
       element: <Profile />
     },
     {
