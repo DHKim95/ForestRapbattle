@@ -6,7 +6,7 @@ from rest_framework_jwt.views import obtain_jwt_token
 urlpatterns = [
   path('signup', views.signup),
   path('login', views.login),
-  path('nickname', views.nickname), # 닉네임 중복검사용
+  path('<str:nickname>/nickname', views.nickname), # 닉네임 중복검사용
   path('email', views.email), # 메일 중복검사용
   path('<int:user_id>/signOut', views.signOut),
   path('profileImages',views.ProfileImages), # 프로필이미지 제공
