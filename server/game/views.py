@@ -306,10 +306,15 @@ def ranking(request) :
 # 랭킹 갱신
 def ranking_save() :
   
-  Rank.objects.all().delete()
-  users = User.objects.all().order_by('-win_point')
-  print(users)
+  instances = []
+  instances.append(Words(word_id = 10, word_level = 10, word = 'sav e'))
+  Words.objects.bulk_create(instances)
 
-  objs = [ Rank(rank=rank ,user_id=user) for rank,user in zip(range(1,len(users)+1),users)]
-  print(objs)
-  Rank.objects.bulk_create(objs)
+
+  # Rank.objects.all().delete()
+  # users = User.objects.all().order_by('-win_point')
+  # print(users)
+
+  # objs = [ Rank(rank=rank ,user_id=user) for rank,user in zip(range(1,len(users)+1),users)]
+  # print(objs)
+  # Rank.objects.bulk_create(objs)
