@@ -179,5 +179,5 @@ LOGIN_REDIRECT_URL = '/' # 로그인 후, 호출되는 url
 
 # 1분 마다
 CRONJOBS = [
-    ('*/1 * * * *', 'cron.reset_ranking', '>> /cron/log/ranking.log')
+    ('*/1 * * * *', 'forestrapbattle.cron.reset_ranking', '>> forestrapbattle/cron/log/ranking.log')
 ]
