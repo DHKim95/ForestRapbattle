@@ -5,4 +5,5 @@ urlpatterns = [
   path('AI', views.AI),
   path('gameResult', views.gameResult),
   path('words',views.words),
+  # path('test',views.ranking_save),
 ]

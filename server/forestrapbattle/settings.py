@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'accounts',
     'game',
     #3rd
+    'django_crontab',
     'rest_framework',
     'corsheaders',
     #native
@@ -175,3 +176,8 @@ AUTHENTICATION_BACKENDS = (
 
 SITE_ID = 1
 LOGIN_REDIRECT_URL = '/' # 로그인 후, 호출되는 url
+
+# 1분 마다
+CRONJOBS = [
+    ('*/1 * * * *', 'game.cron.reset_ranking', '>> /cron/log/ranking.log')
+]
