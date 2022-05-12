@@ -1,5 +1,5 @@
-from game.views import ranking_save
-from game.models import Words
+from .views import ranking_save
+from .models import Words
 
 def reset_ranking() :
   print('crontab 실행해줘~')
