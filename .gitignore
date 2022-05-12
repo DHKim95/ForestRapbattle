@@ -3,7 +3,7 @@
 # Edit at https://www.toptal.com/developers/gitignore?templates=django,venv,python,visualstudiocode,windows,react,unity
 
 ### Django ###
-*.log
+# *.log
 *.pot
 *.pyc
 __pycache__/
