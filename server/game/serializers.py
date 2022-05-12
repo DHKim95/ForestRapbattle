@@ -1,10 +1,10 @@
 from dataclasses import field
-from pickletools import read_long1
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
-from accounts.serializers import UserInfoSerializer
+from accounts.serializers import UserInfoSerializer,ProfileImageSerializer
 from game.models import Rank,Match
 
+User = get_user_model()
 
 # 전체 랭킹 조회
 class RankListSerializer(serializers.ModelSerializer) : 
@@ -23,3 +23,7 @@ class MatchResultSerializer(serializers.ModelSerializer) :
     model = Match
     fields = '__all__'
 
+class RankSerializer(serializers.ModelSerializer) :
+  class Meta :
+    model = Rank
+    fields = '__all__'

@@ -29,7 +29,7 @@ class UserInfoSerializer(serializers.ModelSerializer) :
 
   class Meta :
     model = User
-    fields = ('user_id','email','profile','nickname')
+    fields = ('user_id','email','profile','nickname','win_point')
 
 
 class UserMatchResultSerializer(serializers.ModelSerializer) :
