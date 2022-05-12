@@ -5,16 +5,17 @@ from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 
 from accounts.models import User
-from game.models import Match
+from game.models import Match, Words, Rank
 
 from .serializers import MatchResultSerializer
-
+import random
+import copy
 # Create your views here.
 
 @api_view(['POST'])
 @permission_classes([AllowAny])
 def AI(request) :
-  audio_data = request.FILES.get('data') # 음성파일
+  audio_data = request.FILES.get('file') # 음성파일
   print(type(audio_data))
   print(audio_data.size)
 
@@ -26,7 +27,55 @@ def AI(request) :
   serializer = {
     'similarity' : 100 # 유사도
   }
-  return Response(serializer.data, status=status.HTTP_200_OK )
+  return Response(serializer.get('similarity'), status=status.HTTP_200_OK )
+
+
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def words(request) :
+  random_words_level = []
+  all_words = Words.objects.all() # 모든단어들고오기
+  
+  words_serializers = []
+  words = {
+    'word_level' : 0,
+    'word' :''
+  }
+
+  choice_method = random.randint(1,2)
+
+  # 레벨 겹치지 않는 방법
+  if choice_method == 1 : 
+
+    idx = [(1,30),(31,60),(61,90),(91,120),(121,150)]
+    tmp_idx_list =[]
+
+    for i in range(5) : # 레벨별 랜덤 단어 1개
+      tmp = random.randint(idx[i][0],idx[i][1])
+      tmp_idx_list.append(tmp)
+    idx_list = random.sample(tmp_idx_list,3)
+    
+    for j in idx_list : # 레벨 5개 중 3개 랜덤으로 고르기
+      tmp_word = all_words.get(word_id=j)
+      words['word_level'] = tmp_word.word_level
+      words['word'] = tmp_word.word
+      words_serializers.append(copy.deepcopy(words))
+
+    return Response(words_serializers, status=status.HTTP_200_OK)
+
+  # 그냥 랜덤
+  else : 
+
+    idx_list = random.sample(range(1,150), 3)
+
+    for idx in idx_list :
+      tmp_word = all_words.get(word_id=idx)
+      words['word_level'] = tmp_word.word_level
+      words['word'] = tmp_word.word
+      words_serializers.append(copy.deepcopy(words))
+    
+    return Response(words_serializers, status=status.HTTP_200_OK)
+
 
 
 
@@ -70,3 +119,15 @@ def gameResult(request) :
     serializer.save(user=user)
     return Response({'created' : True}, status=status.HTTP_201_CREATED)
   return Response({'created' : False}, status=status.HTTP_404_NOT_FOUND)
+
+# 랭킹 갱신
+def ranking_save() :
+  
+  Rank.objects.all().delete()
+  users = User.objects.all().order_by('-win_point')
+  print(users)
+
+  objs = [ Rank(rank=rank ,user_id=user) for rank,user in zip(range(1,len(users)+1),users)]
+  print(objs)
+  Rank.objects.bulk_create(objs)
+  
