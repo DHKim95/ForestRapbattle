@@ -273,8 +273,8 @@ def ranking(request) :
     page = int(page)
     page_size = 15
     limit = (int(page_size*page))
-    offset = int(limit-page_size)+4
-    ranking_uids = Rank.objects.all().order_by('rank')[offset:limit+4]
+    offset = int(limit-page_size)+3
+    ranking_uids = Rank.objects.all().order_by('rank')[offset:limit+3]
     # print(offset,limit+4)
   
   ranking_serializers = RankSerializer(ranking_uids, many=True)
@@ -307,7 +307,7 @@ def ranking(request) :
 def ranking_save() :
   
   instances = []
-  instances.append(Words(word_id = 10, word_level = 10, word = 'sav e'))
+  instances.append(Words(word_id = 10, word_level = 10, word = 'save'))
   Words.objects.bulk_create(instances)
 
 
