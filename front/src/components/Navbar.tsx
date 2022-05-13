@@ -65,7 +65,7 @@ const Navbar = ({color}:NavbarProps) => {
       } catch (e) {}
     };
   return (
-    <RootStyle sx={{backgroundColor: !!color ? color : ""}}>
+    <RootStyle sx={{ backgroundColor: !!color ? color : "" }}>
       <Container maxWidth="xl">
         <ToolbarStyle disableGutters>
           <Typography variant="h6" noWrap component="div" sx={{ mr: 2, display: { xs: "none", md: "flex" }, flexGrow: 1 }} className="aaa">
@@ -111,7 +111,7 @@ const Navbar = ({color}:NavbarProps) => {
               </Button>
             ))} */}
             <Button onClick={handleCloseNavMenu} sx={{ my: 2, color: "white", display: "block" }}>
-              게임시작
+              <Link to="/game">게임시작</Link>
             </Button>
             <Button onClick={handleCloseNavMenu} sx={{ my: 2, color: "white", display: "block" }}>
               <Link to="/rank">랭킹</Link>
@@ -138,9 +138,7 @@ const Navbar = ({color}:NavbarProps) => {
               </Button>
             )}
             <Button onClick={handleCloseNavMenu} sx={{ my: 2, color: "white", display: "block" }}>
-              <Link to={`/profile/${userId}`}>
-                {nickname}
-              </Link>
+              <Link to={`/profile/${userId}`}>{nickname}</Link>
             </Button>
           </Box>
 
