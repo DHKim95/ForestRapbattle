@@ -37,7 +37,9 @@ function SignupForm({ errorControl, loadingControl,userLogin, isLogin }: Props) 
 
   // 인증관련 state
   const [nicknameConfirmation, setNicknameConfirmation] = useState<boolean>(false);
+  const [emailConfirmation, setEmailConfirmation] = useState<boolean>(false);
   const [sendCheckNickname, setSendCheckNickname] = useState<boolean>(false);
+  const [sendCheckEmail, setSendCheckEmail] = useState<boolean>(false);
 
   // 유효성 검사 처리
   const [emailMessage, setEmailMessage] = useState<string>("");
@@ -103,7 +105,7 @@ function SignupForm({ errorControl, loadingControl,userLogin, isLogin }: Props) 
           email: userInfo.username,
           password: userInfo.password,
           password2: userInfo.passwordConfirmation,
-          nickname: userInfo.nickname,
+          nickname: userInfo.username,
           profile_id: userInfo.profileId,
         },
         {
@@ -140,6 +142,33 @@ function SignupForm({ errorControl, loadingControl,userLogin, isLogin }: Props) 
   }
 
   // 닉네임 중복검사요청
+  function requsetCheckEmail(): void {
+    // 닉네임 재작성
+    if (sendCheckEmail) {
+      setSendCheckEmail(() => false);
+      setEmailConfirmation(() => false);
+    } else {
+      // 닉네임 인증
+      setSendCheckEmail(() => true);
+      axios({
+        method: "get",
+        url: `${process.env.REACT_APP_BASE_URL}/api/v1/auth/${userInfo.username}/email`,
+        data: { email: userInfo.username },
+      })
+        .then((res) => {
+          if (res.data.result === true) {
+            setEmailConfirmation(() => true);
+          } else {
+            alert("이미 존재하는 닉네임 입니다.");
+            setSendCheckEmail(() => false);
+            setEmailMessage("");
+          }
+        })
+        .catch((err) => {
+          setSendCheckEmail(() => false);
+        });
+    }
+  }
   function requsetCheckNickname(): void {
     // 닉네임 재작성
     if (sendCheckNickname) {
@@ -154,7 +183,14 @@ function SignupForm({ errorControl, loadingControl,userLogin, isLogin }: Props) 
         data: { nickname: userInfo.nickname },
       })
         .then((res) => {
-          setNicknameConfirmation(() => true);
+          if (res.data.result === true) {
+            setNicknameConfirmation(() => true);
+          }
+          else {
+            alert("이미 존재하는 닉네임 입니다.")
+            setSendCheckNickname(() => false)
+            setNickNameMessage("")
+          }
         })
         .catch((err) => {
           setSendCheckNickname(() => false);
@@ -232,7 +268,16 @@ function SignupForm({ errorControl, loadingControl,userLogin, isLogin }: Props) 
               회원가입
             </Typography>
             <form noValidate>
-              <TextField label="이메일" id="username" autoComplete="email" fullWidth onChange={changeUserInfo} helperText={emailMessage} className="myemail" />
+              <TextFieldWithButton
+                label="이메일"
+                id="username"
+                autoComplete="email"
+                onChange={changeUserInfo}
+                onClickButton={requsetCheckEmail}
+                buttonText="이메일중복확인"
+                disabled={sendCheckEmail}
+                helperText={emailMessage}
+              />
               <TextField
                 className="mypassword"
                 error={!!passwordMessage}
@@ -281,7 +326,8 @@ function SignupForm({ errorControl, loadingControl,userLogin, isLogin }: Props) 
                   userInfo.password === "" ||
                   userInfo.passwordConfirmation === "" ||
                   userInfo.nickname === "" ||
-                  nicknameConfirmation === false
+                  nicknameConfirmation === false ||
+                  emailConfirmation === false
                 }
               >
                 회원가입
@@ -309,7 +355,8 @@ function SignupForm({ errorControl, loadingControl,userLogin, isLogin }: Props) 
               userInfo.password === "" ||
               userInfo.passwordConfirmation === "" ||
               userInfo.nickname === "" ||
-              nicknameConfirmation === false
+              nicknameConfirmation === false ||
+              emailConfirmation === false
             }
           >
             회원가입
