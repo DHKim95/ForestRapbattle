@@ -14,8 +14,9 @@ function Game() {
   const profileId = localStorage.getItem("profileId") || "";
   const nickname = useSelector((state: any) => state.account.nickname);
   const user_id = useSelector((state: any) => state.account.userId);
+  const win_point = useSelector((state: any) => state.accountwin_point);
   function spawnEnemies() {
-    unityContext.send("ReactController", "FromReact", `${nickname},${user_id},${profileId},0`);
+    unityContext.send("ReactController", "FromReact", `${nickname},${user_id},${profileId},${win_point}`);
   }
   useEffect(() => {
     unityContext.on("GameStart", function () {
