@@ -36,14 +36,19 @@ const ToolbarStyle = styled(Toolbar)({
   letterSpacing: "0px",
   width: "100%",
 });
+interface NavbarProps {
+  color?: string,
+}
 
-const Navbar = () => {
+
+const Navbar = ({color}:NavbarProps) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const isLogin = useSelector((state: any) => state.account.isLogin);
   const profileImg = useSelector((state: any) => state.account.profileImg);
   const nickname = useSelector((state: any) => state.account.nickname);
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
+  const userId = useSelector((state: any) => state.account.userId);
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -60,7 +65,7 @@ const Navbar = () => {
       } catch (e) {}
     };
   return (
-    <RootStyle>
+    <RootStyle sx={{ backgroundColor: !!color ? color : "" }}>
       <Container maxWidth="xl">
         <ToolbarStyle disableGutters>
           <Typography variant="h6" noWrap component="div" sx={{ mr: 2, display: { xs: "none", md: "flex" }, flexGrow: 1 }} className="aaa">
@@ -106,7 +111,7 @@ const Navbar = () => {
               </Button>
             ))} */}
             <Button onClick={handleCloseNavMenu} sx={{ my: 2, color: "white", display: "block" }}>
-              게임시작
+              <Link to="/game">게임시작</Link>
             </Button>
             <Button onClick={handleCloseNavMenu} sx={{ my: 2, color: "white", display: "block" }}>
               <Link to="/rank">랭킹</Link>
@@ -133,9 +138,7 @@ const Navbar = () => {
               </Button>
             )}
             <Button onClick={handleCloseNavMenu} sx={{ my: 2, color: "white", display: "block" }}>
-              <Link to={`/profile/${nickname}`}>
-                {nickname}
-              </Link>
+              <Link to={`/profile/${userId}`}>{nickname}</Link>
             </Button>
           </Box>
 
@@ -144,7 +147,7 @@ const Navbar = () => {
               <Tooltip title="Open settings">
                 <IconButton sx={{ p: 0 }}>
                   <Avatar alt="Remy Sharp">
-                    <Link to={`/profile/${nickname}`}>
+                    <Link to={`/profile/${userId}`}>
                       <img src={profileImg} alt="dd" style={{ width: "100%" }} />
                     </Link>
                   </Avatar>

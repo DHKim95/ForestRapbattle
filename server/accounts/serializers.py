@@ -20,7 +20,7 @@ class UserSerializer(serializers.ModelSerializer) :
 
   class Meta :
     model = User
-    fields = ('user_id','email','nickname','profile','password')
+    fields = ('user_id','email','nickname','profile','password','win_point')
 
 # 유저 프로필 조회
 class UserInfoSerializer(serializers.ModelSerializer) :
@@ -29,7 +29,7 @@ class UserInfoSerializer(serializers.ModelSerializer) :
 
   class Meta :
     model = User
-    fields = ('user_id','email','profile','nickname')
+    fields = ('user_id','email','profile','nickname','win_point')
 
 
 class UserMatchResultSerializer(serializers.ModelSerializer) :

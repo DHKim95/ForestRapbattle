@@ -9,6 +9,7 @@ import fight from "../assets/fight.png";
 import idea from "../assets/idea.png";
 import talk from "../assets/talk.png";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const theme = createTheme({
   palette: {
@@ -55,13 +56,13 @@ function Main() {
   console.log(isLogin1)
   return (
     <div>
-      <Navbar></Navbar>
+      <Navbar />
       <div className="Main">
         <div className="title">
           <p>숲바람 랩배틀</p>
           <ThemeProvider theme={theme}>
             <MyButton color="neutral" variant="contained" size="large">
-              게임 플레이하기
+              <Link to="/game">게임 플레이하기</Link>
             </MyButton>
           </ThemeProvider>
         </div>
@@ -110,7 +111,7 @@ function Main() {
           </Grid>
         </Container>
       </div>
-      <Footer></Footer>
+      <Footer />
     </div>
   );
 }

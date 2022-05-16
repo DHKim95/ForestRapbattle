@@ -84,6 +84,7 @@ export const userLogin = (userInfo: LoginUserInfo) => {
           res1.data.profile["profile_img"] ||
           "https://cdn.newspenguin.com/news/photo/202002/1208_2870_473.jpg",
       };
+      localStorage.setItem("profileId",res1.data.profile["profile_id"]);
       dispatch(userLoginSuccess(newUserInfo));
 
       // 로그인 성공시 메인페이지로 이동
