@@ -78,7 +78,6 @@ export const userLogin = (userInfo: LoginUserInfo) => {
         url: `${process.env.REACT_APP_BASE_URL}/api/v1/auth/login`,
         data: data,
       });
-      console.log(res1.data)
       const newUserInfo = {
         nickname: res1.data.nickname,
         userId: res1.data.user_id,
