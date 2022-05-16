@@ -31,3 +31,34 @@
     margin: 50px 0px;
   }
 }
+
+.profileChange {
+    .profileContainer {
+        display: grid;
+        // flex-wrap: wrap;
+        // justify-content: center;
+        grid-template-columns: repeat(5, 1fr);
+      }
+    
+      .profileItem {
+        flex: 0 0 20%;
+        text-align: center;
+        padding: 10px 10px;
+      }
+    
+      .profileImage {
+        width: 100%;
+      }
+    
+      .myavatar {
+        border: 3px solid white;
+        width: 90%;
+        height: 90%;
+      }
+    
+      .selectedMyavatar {
+        border: 3px solid rgb(110, 110, 167);
+        width: 90%;
+        height: 90%;
+      }
+}

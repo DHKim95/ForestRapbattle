@@ -3,12 +3,14 @@ export interface UserInfo {
   username: string;
   nickname: string;
   profileImg?: string | null | undefined;
+  win_point: number;
 }
 
 export interface NavUserInfo {
   userId: number;
   nickname: string;
   profileImg?: string | null | undefined;
+  win_point: number;
 }
 
 export interface LoginUserInfo {
