@@ -69,7 +69,7 @@ const Navbar = ({color}:NavbarProps) => {
       <Container maxWidth="xl">
         <ToolbarStyle disableGutters>
           <Typography variant="h6" noWrap component="div" sx={{ mr: 2, display: { xs: "none", md: "flex" }, flexGrow: 1 }} className="aaa">
-            <Link to="/">Forest Rap Battle</Link>
+            <Link to="/" className="cookie">Forest Rap Battle</Link>
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -111,7 +111,7 @@ const Navbar = ({color}:NavbarProps) => {
               </Button>
             ))} */}
             <Button onClick={handleCloseNavMenu} sx={{ my: 2, color: "white", display: "block" }}>
-              <Link to="/game">게임시작</Link>
+              <Link to={isLogin ? "/game" : "/login"}>게임시작</Link>
             </Button>
             <Button onClick={handleCloseNavMenu} sx={{ my: 2, color: "white", display: "block" }}>
               <Link to="/rank">랭킹</Link>

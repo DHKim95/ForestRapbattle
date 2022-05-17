@@ -1,6 +1,9 @@
 import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux';
 import Unity, { UnityContext } from "react-unity-webgl";
+import Navbar from "../components/Navbar";
+import "../styles/Game.scss";
+import { Container } from "@mui/material";
 
 const unityContext = new UnityContext({
   loaderUrl: "Build/Builds.loader.js",
@@ -26,16 +29,19 @@ function Game() {
   }, []);
   
   return (
-    <div>
-      <div>Game</div>
+    <div className="game">
+      <Navbar />
+      <div className="mytitle">Game</div>
       {/* <button onClick={spawnEnemies}>button</button> */}
-      <Unity
-        unityContext={unityContext}
-        style={{
-          height: "550px",
-          width: "900px"
-        }}
-      />
+      <Container>
+        <Unity
+          unityContext={unityContext}
+          style={{
+            height: "550px",
+            width: "900px",
+          }}
+          />
+      </Container>
     </div>
   );
 }

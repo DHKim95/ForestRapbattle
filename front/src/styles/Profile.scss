@@ -30,6 +30,53 @@
   .horizion {
     margin: 50px 0px;
   }
+  .history {
+    .historyItem {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      height: 300px;
+      margin: 25px 0px;
+      .three {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        .info {
+          margin: auto 10px;
+          .infoNickname {
+            font-size: 50px;
+          }
+          .infoTier {
+            display: flex;
+            flex-direction: row;
+            .infoPoint {
+              margin: auto 5px;
+              font-size: 20px;
+            }
+          }
+        }
+        .versus {
+          margin: auto 20px;
+        }
+        .tier {
+          margin: auto 0px;
+        }
+        .profileImg {
+          width: 150px;
+          height: 150px;
+          margin: auto 20px;
+        }
+      }
+      .one {
+        position: relative;
+        .date {
+          position: absolute;
+          top:80%;
+        }
+      }
+    }
+  }
+
 }
 
 .profileChange {
