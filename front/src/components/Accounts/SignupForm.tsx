@@ -105,7 +105,7 @@ function SignupForm({ errorControl, loadingControl,userLogin, isLogin }: Props) 
           email: userInfo.username,
           password: userInfo.password,
           password2: userInfo.passwordConfirmation,
-          nickname: userInfo.username,
+          nickname: userInfo.nickname,
           profile_id: userInfo.profileId,
         },
         {

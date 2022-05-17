@@ -24,11 +24,13 @@
 // export default Login;
 import LoginForm from "../components/Accounts/LoginFrom";
 import BackgroundImage from "../components/BackgroundImage";
+import Navbar from "../components/Navbar";
 
 function Login() {
   return (
     <>
       <BackgroundImage></BackgroundImage>
+      <Navbar></Navbar>
       <LoginForm></LoginForm>
     </>
   );
