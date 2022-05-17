@@ -224,23 +224,23 @@ def gameResult(request) :
     if win == 'true' :
       data = { 'winner_user_id' : player1 , 'loser_user_id' : player2}
       user.win_cnt += 1
-      user.win_point += 3
+      user.win_point += 30
     else :
       data = { 'winner_user_id' : player2 , 'loser_user_id' : player1}
       user.lose_cnt += 1
-      if user.win_point > 0 :
-        user.win_point -= 1
+      if user.win_point >= 20 :
+        user.win_point -= 20
 
   elif request.data.get('user_id') == player2:
     if win == 'true' :
       data = { 'winner_user_id' : player2 , 'loser_user_id' : player1}
       user.win_cnt += 1
-      user.win_point += 3
+      user.win_point += 30
     else :
       data = { 'winner_user_id' : player1 , 'loser_user_id' : player2}
       user.lose_cnt += 1
-      if user.win_point > 0 :
-        user.win_point -= 1
+      if user.win_point >= 20 :
+        user.win_point -= 20
   
   user.save()
   
@@ -256,7 +256,8 @@ def gameResult(request) :
 @permission_classes([AllowAny])
 def ranking(request) :
   page = request.GET.get('page')
-  print(page)
+  rank_cnt = Rank.objects.all().count()
+  # print(rank_cnt)
   if page == None or page=='1' :
     page = 1
     page_size = 18
@@ -268,12 +269,12 @@ def ranking(request) :
     page = int(page)
     page_size = 15
     limit = (int(page_size*page))
-    offset = int(limit-page_size)+4
-    ranking_uids = Rank.objects.all().order_by('rank')[offset:limit+4]
+    offset = int(limit-page_size)+3
+    ranking_uids = Rank.objects.all().order_by('rank')[offset:limit+3]
     # print(offset,limit+4)
   
   ranking_serializers = RankSerializer(ranking_uids, many=True)
-  
+
   data = []
   rank_user_info = {
     'rank' : 0,
@@ -297,12 +298,17 @@ def ranking(request) :
     rank_user_info['profile'] = profile_serializer.data
 
     data.append(copy.deepcopy(rank_user_info))
-  return Response(data, status=status.HTTP_200_OK)
+  serializer = {
+    'rank_total_cnt' : rank_cnt,
+    'data' : data
+  }
+  return Response(serializer, status=status.HTTP_200_OK)
+
 # 랭킹 갱신
 def ranking_save() :
   
   instances = []
-  instances.append(Words(word_id = 10, word_level = 10, word = 'sav e'))
+  instances.append(Words(word_id = 10, word_level = 10, word = 'save'))
   Words.objects.bulk_create(instances)
 
 
