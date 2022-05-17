@@ -5,10 +5,16 @@ import youtube from "../assets/youtube.png";
 import twitter from "../assets/twitter.png";
 import instagram from "../assets/instagram.png";
 
-function Footer() {
+interface FooterProps {
+  bgcolor?: string,
+  fontcolor?: string,
+}
+
+function Footer({ bgcolor, fontcolor }: FooterProps) {
   const RootStyle = styled("div")({
     height: "500px",
-    backgroundColor: "black",
+    backgroundColor: bgcolor ? bgcolor: "black",
+    color: fontcolor ? fontcolor: "white",
   });
   const RowAlign = styled("div")({
     display: "flex",
@@ -25,6 +31,7 @@ function Footer() {
     fontSize: "60px",
     fontWeight: "bolder",
     marginTop: "75px",
+    fontFamily: "CookieRun",
   });
 
   return (
@@ -45,9 +52,12 @@ function Footer() {
           </MyAvatar>
         </RowAlign>
         <div style={{ color: "white", textAlign: "center" }}>
-          <div>서울특별시 강남구 도산대로 327</div>
-          <div>전화: 02-2148-0750 팩스: 02-2148-0629</div>
-          <div>© 2022 Devsisters Corp. All Rights Reserved.</div>
+          <div>부산광역시 강서구 녹산산업중로 333</div>
+          {/* <div>전화: 02-2148-0750 팩스: 02-2148-0629</div> */}
+          <br />
+          <div>(현) 팀장 : 윤찬호 / (구) 팀장 : 최명재 / 팀원 : 김도훈 김태현 조성현 조은누리</div>
+          <br />
+          <div>© 2022 SSAFY 6th.부울경 E204. 부산 없는 부산 팀 All Rights Reserved.</div>
           <FooterTitle>Forest Rap Battle</FooterTitle>
         </div>
       </Container>
