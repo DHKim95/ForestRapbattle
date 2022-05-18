@@ -220,8 +220,8 @@ def words(request) :
     'word' :''
   }
 
-  # choice_method = random.randint(1,2)
-  choice_method = 2
+  choice_method = random.randint(1,2)
+
   # 레벨 겹치지 않는 방법
   if choice_method == 1 : 
 
