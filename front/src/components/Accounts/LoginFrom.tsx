@@ -14,11 +14,8 @@ import "../../styles/Login.scss";
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
-      <Link color="inherit" href="/">
-        Forest Rap Battle
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
+      <Link color="inherit" href="/" style={{textDecoration:"none"}}>Forest Rap Battle</Link> {" | "}
+      <Link color="inherit" href="/signup" style={{textDecoration:"none"}}> 회원이 아니신가요</Link>
     </Typography>
   );
 }
@@ -69,7 +66,19 @@ function LoginForm({ userLogin, isLogin }: Props) {
             로그인
           </Typography>
           <div>
-            <TextField value={email} variant="outlined" margin="normal" fullWidth id="email" label="이메일" name="email" autoComplete="email" autoFocus onChange={onEmailHandler} className="myemail" />
+            <TextField
+              value={email}
+              variant="outlined"
+              margin="normal"
+              fullWidth
+              id="email"
+              label="이메일"
+              name="email"
+              autoComplete="email"
+              autoFocus
+              onChange={onEmailHandler}
+              className="myemail"
+            />
             <TextField
               className="mypassword"
               value={password}

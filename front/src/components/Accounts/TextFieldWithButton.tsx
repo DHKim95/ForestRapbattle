@@ -30,7 +30,7 @@ function TextFieldWithButton({ id, onChange, onClickButton, autoComplete = "", b
         defaultValue={value}
         endAdornment={
           <InputAdornment position="end">
-            <Button onClick={onClickButton} color="primary" variant="contained" disabled={!!helperText} className="mynickbutton">
+            <Button onClick={onClickButton} color="primary" variant="contained" disabled={!!helperText} className="mynickbutton" style={{ fontFamily: "'GmarketSansMedium', sans-serif" }}>
               {disabled ? `${label} 재작성` : buttonText}
             </Button>
           </InputAdornment>

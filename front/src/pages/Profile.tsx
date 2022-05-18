@@ -5,12 +5,16 @@ import "../styles/Profile.scss";
 import { Container, styled, Avatar, Modal, Typography, Box, Button } from "@mui/material";
 import { useSelector } from "react-redux";
 import LoopIcon from "@mui/icons-material/Loop";
+import DragIndicatorIcon from '@mui/icons-material/DragIndicator';
+import ColorizeIcon from '@mui/icons-material/Colorize';
 import { grey } from "@mui/material/colors";
 import { customAxios } from "../customAxios";
 import { useNavigate } from "react-router-dom";
 import { connect } from "react-redux";
 import { setProfileImg } from "../redux/account/actions";
 import Footer from '../components/Footer'
+import { ClassNames } from "@emotion/react";
+import settings from "../assets/settings.png"
 
 interface svgProps {
   color ?: string;
@@ -42,7 +46,7 @@ function Tier({color = '#cdcdcd', width = 20, height = 25, className="", tier="i
         fill={color}
         stroke="black"
       />
-      <path d="M20 2L22.4697 9.25532H30.4616L23.996 13.7394L26.4656 20.9947L20 16.5106L13.5344 20.9947L16.004 13.7394L9.53838 9.25532H17.5303L20 2Z" fill={tier==="diamond" ? "#FFE600": "none"} />
+      <path d="M20 2L22.4697 9.25532H30.4616L23.996 13.7394L26.4656 20.9947L20 16.5106L13.5344 20.9947L16.004 13.7394L9.53838 9.25532H17.5303L20 2Z" fill={tier==="Diamond" ? "#FFE600": "none"} />
     </svg>
   );
 }
@@ -54,7 +58,7 @@ function scoreToTier(win_point:number) {
     return { tier: "Bronze", color: "#784100" };
   }
   else if (win_point >= 900 && win_point < 1100) {
-    return { tier: "Siver", color: "#CAC8D3" };
+    return { tier: "Silver", color: "#CAC8D3" };
   }
   else if (win_point >= 1100 && win_point < 1300) {
     return { tier: "Gold", color: "#F1B457" };
@@ -67,17 +71,36 @@ function scoreToTier(win_point:number) {
   }
 }
 
+function humanize(date: string) {
 
-
+  let ReplynewTime = Number(new Date(date));
+  var ReplynowTime = Number(new Date());
+  const milliSeconds = ReplynowTime - ReplynewTime;
+  const seconds = milliSeconds / 1000;
+  if (seconds < 60) return `몇 초전`;
+  const minutes = seconds / 60;
+  if (minutes < 60) return `${Math.floor(minutes)}분 전`;
+  const hours = minutes / 60;
+  if (hours < 24) return `${Math.floor(hours)}시간 전`;
+  const days = hours / 24;
+  if (days < 7) return `${Math.floor(days)}일 전`;
+  const weeks = days / 7;
+  if (weeks < 5) return `${Math.floor(weeks)}주 전`;
+  const months = days / 30;
+  if (months < 12) return `${Math.floor(months)}개월 전`;
+  const years = days / 365;
+  return `${Math.floor(years)}년 전`;
+}
 
 function Profile({ setProfileImg }: Props) {
   const navigate = useNavigate();
   const params = useParams();
-  // const nickname = params["nickname"];
   const userId = Number(params["userId"]);
   const profileImg = useSelector((state: any) => state.account.profileImg);
   const myUserId = useSelector((state: any) => state.account.userId);
   const [nickname, setNickname] = useState<string>("");
+  const [myProfileImage, setMyProfileImage] = useState<string>("");
+  const [winpoint, setWinpoint] = useState<number>(0);
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -86,14 +109,12 @@ function Profile({ setProfileImg }: Props) {
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
-    // width: "50%",
     width: "400",
     bgcolor: "background.paper",
     border: "2px solid #000",
     boxShadow: 24,
     p: 4,
   };
-  // const [profileImages, setProfileImages] = useState<ProfileImage[]>([{ profile_id: 0, profile_img: "" }]);
   type Gameresult = {
     date: string;
     loser_info: any;
@@ -110,9 +131,12 @@ function Profile({ setProfileImg }: Props) {
       let historyItem = gameresults[index];
       let win = userId === historyItem.winner_user_id ? true : false;
       const tier = scoreToTier(win ? historyItem.loser_info.win_point : historyItem.winner_info.win_point)
-      console.log(tier)
       historyList.push(
         <div className="historyItem" style={win ? { backgroundColor: "#CFCEF1" } : { backgroundColor: "#EBCCCC" }} key={historyItem.match_id}>
+          <div className={win ? "resultW" : "resultL"}>
+          </div>
+          <span className="Win">{win ? "승" : "패"}</span>
+          {/* <div className="resultW"></div> */}
           <div className="three">
             <Versus color={win ? "#5A4BB9" : "#B94B4B"} width="75px" height="75px" className="versus"/>
             <img
@@ -124,15 +148,20 @@ function Profile({ setProfileImg }: Props) {
               }}
             />
             <div className="info">
-              <div className="infoNickname cookie">{win ? historyItem.loser_info.nickname : historyItem.winner_info.nickname}</div>
+              <div className="infoNickname cookie"
+                onClick={() => {
+                  navigate(win ? `/profile/${historyItem.loser_user_id}` : `/profile/${historyItem.winner_user_id}`);
+                }} 
+              >{win ? historyItem.loser_info.nickname : historyItem.winner_info.nickname}</div>
               <div className="infoTier">
-                <Tier color={tier?.color} width="30px" height="30px" className="tier"/>
-                <div className="infoPoint">{tier?.tier}({win ? historyItem.loser_info.win_point : historyItem.winner_info.win_point})</div>
+                <Tier color={tier?.color} width="30px" height="30px" className="tier" tier={tier?.tier}/>
+                <div className="infoPoint">{tier?.tier} {win ? historyItem.loser_info.win_point : historyItem.winner_info.win_point} points</div>
               </div>
             </div>
           </div>
           <div className="one">
-            <div className="date">{historyItem.date}</div>
+            {/* <div className="result"> {win ? "Win" : "Lose"}</div> */}
+            <div className="date">{humanize(historyItem.date)}</div>
           </div>
         </div>
       );
@@ -145,7 +174,7 @@ function Profile({ setProfileImg }: Props) {
   };
   const [profileImages, setProfileImages] = useState<ProfileImage[]>([{ profile_id: 0, profile_img: "" }]);
   const originId = localStorage.getItem("profileId");
-  const [selectedImage, setSelectedImage] = useState<ProfileImage>({ profile_id: Number(originId), profile_img: profileImg });
+  const [selectedImage, setSelectedImage] = useState<ProfileImage>({ profile_id: Number(originId), profile_img: myProfileImage });
   function ProfileSelector() {
     function Selected(ccc: number, ddd: string): void {
       setSelectedImage({ profile_id: ccc, profile_img: ddd });
@@ -172,16 +201,15 @@ function Profile({ setProfileImg }: Props) {
   }
   function setNewProfile(profileImg: string, profileId: number) {
     const ChangeNewProfile = async () => {
-      console.log("2222222222");
       const changeRes = await customAxios({
         method: "put",
         url: `${process.env.REACT_APP_BASE_URL}/api/v1/auth/${userId}/${profileId}/editProfile`,
       });
-      console.log(changeRes.data, "오나요 ?");
       localStorage.setItem("profileId", changeRes.data.profile.profile_id);
     };
     ChangeNewProfile();
     setProfileImg(profileImg);
+    setMyProfileImage(profileImg);
     handleClose();
   }
   useEffect(() => {
@@ -191,6 +219,8 @@ function Profile({ setProfileImg }: Props) {
         url: `${process.env.REACT_APP_BASE_URL}/api/v1/auth/${userId}/profile`,
       });
       console.log(gameRes.data, '3333');
+      setMyProfileImage(gameRes.data.user.profile.profile_img)
+      setWinpoint(gameRes.data.user.win_point)
       setGameresults(gameRes.data.match);
       setNickname(gameRes.data.user.nickname);
     };
@@ -200,7 +230,6 @@ function Profile({ setProfileImg }: Props) {
         method: "get",
         url: `${process.env.REACT_APP_BASE_URL}/api/v1/auth/profileImages`,
       });
-      console.log(profileRes.data, '2222');
       setProfileImages(profileRes.data);
     };
     getProfileImage();
@@ -212,36 +241,44 @@ function Profile({ setProfileImg }: Props) {
       <Container maxWidth="xl">
         <div className="title">
           <div className="myavatar">
-            <Avatar sx={{ width: 100, height: 100 }} className="fdfd">
-              <img src={profileImg} alt="profileImg" style={{ width: "100%" }} />
+            <Avatar sx={{ width: 200, height: 200, border: `8px solid ${scoreToTier(winpoint)?.color}` }} className="fdfd" onClick={handleOpen}>
+              <img src={myProfileImage} alt="profileImg" style={{ width: "100%" }} />
               {userId !== myUserId || (
-                <button className="btn" onClick={handleOpen}>
-                  <LoopIcon sx={{ color: grey[900], fontSize: 30 }} />
+                <button className="btn">
+                  {/* <ColorizeIcon sx={{ color: grey[900], fontSize: 100 }} /> */}
+                  <img src={settings} alt="setting" />
                 </button>
               )}
             </Avatar>
           </div>
-          <div className="cookie">
-            {nickname}
+          <div className="userInfo">
+            <div className="cookie">
+              {nickname}
+            </div>
+            <div className="winPoint">
+              <Tier width="60px" height="60px" color={scoreToTier(winpoint)?.color} tier={scoreToTier(winpoint)?.tier} className="myTier"></Tier>
+              <div>
+                <span>{scoreToTier(winpoint)?.tier}</span>
+              </div>
+            </div>
           </div>
         </div>
         <hr className="horizion" />
-        {/* <div>{gameresults[0]?.date}</div>
-        <div>{gameresults[0]?.winner_user_id}</div>
-        <div>{gameresults[0]?.loser_info.profile.profile_img}</div>
-        <div>{gameresults[0]?.winner_info.profile.profile_id}</div> */}
-        <Container maxWidth="lg">
+        <Container maxWidth="md">
           <History />
         </Container>
       </Container>
       <Container>
         <Modal open={open} onClose={handleClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description" className="profileChange">
-          <Box sx={style}>
-            <Typography id="modal-modal-title" variant="h6" component="h2">
+          <Box sx={style} className="myModal">
+            <Typography id="modal-modal-title" className="modaltitle" variant="h6" component="h2">
               프로필 변경
             </Typography>
             <ProfileSelector />
-            <Button onClick={() => setNewProfile(selectedImage.profile_img, selectedImage.profile_id)}>확인</Button>
+            <div className="mybtn">
+              <Button onClick={handleClose} variant="contained" color="error">뒤로가기</Button>
+              <Button onClick={() => setNewProfile(selectedImage.profile_img, selectedImage.profile_id)} variant="contained" color="primary">변경하기</Button>
+            </div>
           </Box>
         </Modal>
       </Container>
