@@ -14,50 +14,69 @@ from .serializers import MatchResultSerializer,RankSerializer
 import random
 import copy
 import kospeech_latest.asr_metrics as metrics
-import Levenshtein as Lev
 # from kospeech_latest.bin import inference
+from jamo import h2j, j2hcj
+import Levenshtein as Lev
+from pydub import AudioSegment
+import json
 # Create your views here.
 
 # cer, wer 함수
-def wer(ref, hyp ,debug=False):
-    r = ref.split()
-    h = hyp.split()
-    #costs will holds the costs, like in the Levenshtein distance algorithm
-    costs = [[0 for inner in range(len(h)+1)] for outer in range(len(r)+1)]
-    # backtrace will hold the operations we've done.
-    # so we could later backtrace, like the WER algorithm requires us to.
-    backtrace = [[0 for inner in range(len(h)+1)] for outer in range(len(r)+1)]
+def wer(hyp, ref):
+    ref = j2hcj(h2j(ref))
+    hyp = j2hcj(h2j(hyp))
+
+    print("단어", ref)
+    hyp = ''.join(hyp)[2:-3]
+    print("두번째 단어", hyp)
+
+    r = []
+    h = []
+    if len(ref) < len(hyp):
+      for i in ref:
+        h.append(i)
+      for i in hyp:
+        r.append(i)
+    else:
+      for i in ref:
+        r.append(i)
+      for i in hyp:
+        h.append(i)
+
+    print("리스트 보기")
+    print(r)
+    print(h)
+    print("리스트보기 끝")
+
+    costs = [[0 for _ in range(len(h)+1)] for _ in range(len(r)+1)]
+    backtrace = [[0 for _ in range(len(h)+1)] for _ in range(len(r)+1)]
 
     OP_OK = 0
     OP_SUB = 1
     OP_INS = 2
     OP_DEL = 3
 
-    DEL_PENALTY=1 # Tact
-    INS_PENALTY=1 # Tact
-    SUB_PENALTY=1 # Tact
-    # First column represents the case where we achieve zero
-    # hypothesis words by deleting all reference words.
+    DEL_PENALTY=1
+    INS_PENALTY=1
+    SUB_PENALTY=1
+
     for i in range(1, len(r)+1):
         costs[i][0] = DEL_PENALTY*i
         backtrace[i][0] = OP_DEL
 
-    # First row represents the case where we achieve the hypothesis
-    # by inserting all hypothesis words into a zero-length reference.
     for j in range(1, len(h) + 1):
         costs[0][j] = INS_PENALTY * j
         backtrace[0][j] = OP_INS
 
-    # computation
     for i in range(1, len(r)+1):
         for j in range(1, len(h)+1):
             if r[i-1] == h[j-1]:
                 costs[i][j] = costs[i-1][j-1]
                 backtrace[i][j] = OP_OK
             else:
-                substitutionCost = costs[i-1][j-1] + SUB_PENALTY # penalty is always 1
-                insertionCost    = costs[i][j-1] + INS_PENALTY   # penalty is always 1
-                deletionCost     = costs[i-1][j] + DEL_PENALTY   # penalty is always 1
+                substitutionCost = costs[i-1][j-1] + SUB_PENALTY
+                insertionCost    = costs[i][j-1] + INS_PENALTY 
+                deletionCost     = costs[i-1][j] + DEL_PENALTY 
 
                 costs[i][j] = min(substitutionCost, insertionCost, deletionCost)
                 if costs[i][j] == substitutionCost:
@@ -67,48 +86,28 @@ def wer(ref, hyp ,debug=False):
                 else:
                     backtrace[i][j] = OP_DEL
 
-    # back trace though the best route:
     i = len(r)
     j = len(h)
     numSub = 0
     numDel = 0
     numIns = 0
     numCor = 0
-    if debug:
-        print("OP\tREF\tHYP")
-        lines = []
     while i > 0 or j > 0:
         if backtrace[i][j] == OP_OK:
             numCor += 1
             i-=1
             j-=1
-            if debug:
-                lines.append("OK\t" + r[i]+"\t"+h[j])
         elif backtrace[i][j] == OP_SUB:
             numSub +=1
             i-=1
             j-=1
-            if debug:
-                lines.append("SUB\t" + r[i]+"\t"+h[j])
         elif backtrace[i][j] == OP_INS:
             numIns += 1
             j-=1
-            if debug:
-                lines.append("INS\t" + "****" + "\t" + h[j])
         elif backtrace[i][j] == OP_DEL:
             numDel += 1
             i-=1
-            if debug:
-                lines.append("DEL\t" + r[i]+"\t"+"****")
-    if debug:
-        lines = reversed(lines)
-        for line in lines:
-            print(line)
-        print("Ncor " + str(numCor))
-        print("Nsub " + str(numSub))
-        print("Ndel " + str(numDel))
-        print("Nins " + str(numIns))
-    return numCor, numSub, numDel, numIns, (numSub + numDel + numIns) / (float) (len(r))
+    return ((numSub + numDel + numIns) / (float) (len(r)))
     
 
 def cer(ref, hyp):
@@ -121,48 +120,89 @@ def cer(ref, hyp):
 ############################################
 
 # Create your views here.
+import os
 
 @api_view(['POST'])
 @permission_classes([AllowAny])
 def AI(request) :
-
   audio_data = request.FILES.get('file') # 음성파일
-  print(type(audio_data))
-  print(audio_data.size)
-  
+  # print(type(audio_data))
+  # print(audio_data.size)
   words = request.POST.get('text') # 단어
-  print(type(words))
-  print(words)
+  # print(type(words))
+  # print(words)
+
+  # print("현재 경로는", os.getcwd())
+  # os.chdir(r'C:\Users\SSAFY\Desktop\SSAFY\자율\S06P31E204\server')
+  os.chdir(r'/home/ubuntu/docker-volume/jenkins/workspace/forestrapbattle/server/')
+
+  # print("경로바꾸기끝")
+  # print("사운드 저장시작")
+  sound = AudioSegment.from_wav(audio_data)
+  sound = sound.set_channels(1)
+  sound.export("game/wave/sample.wav", format="wav")
+  # print("사운드 저장 끝")
   # AI 분석 코드 함수 
-  # w = wave.open('../kospeech_latest/audio_tmp_data/audio_data.wav', 'w')
-  # w.close
-  # input_text = inference.py에서 나오는 결과
+  print("출발?")
+  # os.system('dir')
+  print(os.getcwd())
+  # os.chdir(r'C:\Users\SSAFY\Desktop\SSAFY\자율\S06P31E204\server\kospeech_latest')
+  os.chdir(r'/home/ubuntu/docker-volume/jenkins/workspace/forestrapbattle/server/kospeech_latest')
+  print(os.getcwd())
+  print(os.listdir())
+  # input_text = os.popen('python ./bin/inference.py --model_path "C:/Users/SSAFY/Desktop/SSAFY/자율/S06P31E204/server/kospeech_latest/outputs/train_model/10-37-48/model.pt" --audio_path "C:/Users/SSAFY/Desktop/SSAFY/자율/S06P31E204/server/game/wave/sample.wav" --device "cpu"')
+  input_text = os.popen('python ./bin/inference.py --model_path "/home/ubuntu/docker-volume/jenkins/workspace/forestrapbattle/server/kospeech_latest/outputs/train_model/10-37-48/model.pt" --audio_path "/home/ubuntu/docker-volume/jenkins/workspace/forestrapbattle/server/game/wave/sample.wav" --device "cpu"')
+  voice_text = input_text.read()
+  print("입력된 함수", voice_text)
+  # input_text = '경찰청창살'
+  
+  score_lst = []
+  words = json.loads(words)
+  for word in words:
+    level = word['word_level']
+    print("주어진 단어", word['word'])
+    # a = wer(voice_text, word['word'])
+    # print("이건", a)
+    # 단어 길이 비교
+
+    score = 1 - wer(voice_text, word['word'])
+    print(score)
+
+    score_lst.append((level, score))
+  score_lst.sort(key=lambda x: (x[1], x[0]), reverse=True)
+  print("리스트", score_lst)
+  ans = score_lst[0][1]
+  print("가장높은점수",ans)
+    
   # [cer1, substitutions, deletions, insertions] = metrics.get_cer(word, input_text)
   # [wer1, substitutions, deletions, insertions] = metrics.get_wer(word, input_text)
   # ans = 1 -cer1
-  # if ans >= 0.8:
-  #     print('성공')
-    # serializer = {
-    #   'similarity' : 100 # 유사도
-    # }
-  # elif ans >=0.6:
-  #     print('실패')
-  # serializer = {
-  #   'similarity' : 80 # 유사도
-  # }
-  # elif ans >= 0.4:
-  #   serializer = {
-  #   'similarity' : 50 # 유사도
-  # }
-  # else:
-  #   serializer = {
-  #     'similarity' : 0 # 유사도
-  #   }
+    
+  if ans >= 0.75:
+      serializer = {
+        'level': score_lst[0][0],
+        'similarity' : 100 # 유사도
+      }
+  elif ans >=0.55:
+      serializer = {
+        'level': score_lst[0][0],
+        'similarity' : 80 # 유사도
+      }
+  elif ans >= 0.35:
+      serializer = {
+        'level': score_lst[0][0],
+        'similarity' : 50 # 유사도
+      }
+  else:
+      serializer = {
+        'level': score_lst[0][0],
+        'similarity' : 10 # 유사도
+      }
   # print(inference)
+  print("최종", serializer)
 
-  serializer = {
-    'similarity' : 100 # 유사도
-  }
+  print("삭제시작?")
+
   return Response(serializer)
   # return Response(serializer.data, status=status.HTTP_200_OK )
 
