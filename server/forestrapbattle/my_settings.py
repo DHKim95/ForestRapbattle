@@ -3,8 +3,8 @@ DATABASES = {
                 'ENGINE': 'django.db.backends.mysql',
                 'NAME': 'forest_1.0',
                 # 로컬용
-                # 'USER' : 'forest',
-                # 'PASSWORD' : 'rapbattle',
+                # 'USER' : 'root',
+                # 'PASSWORD' : 'donuts',
                 # 'HOST' : '127.0.0.1',
                 # 'PORT' : '3306',
                 # 서버용
