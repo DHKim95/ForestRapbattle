@@ -6,6 +6,7 @@ import { Container, Stack, Typography, Pagination, Table, TableBody, TableContai
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import { customAxios } from "../customAxios";
 import Footer from '../components/Footer'
+import { useNavigate } from "react-router-dom";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -43,7 +44,7 @@ function Tier({color = '#cdcdcd', width = 20, height = 25, className="", tier="i
         fill={color}
         stroke="black"
       />
-      <path d="M20 2L22.4697 9.25532H30.4616L23.996 13.7394L26.4656 20.9947L20 16.5106L13.5344 20.9947L16.004 13.7394L9.53838 9.25532H17.5303L20 2Z" fill={tier==="diamond" ? "#FFE600": "none"} />
+      <path d="M20 2L22.4697 9.25532H30.4616L23.996 13.7394L26.4656 20.9947L20 16.5106L13.5344 20.9947L16.004 13.7394L9.53838 9.25532H17.5303L20 2Z" fill={tier==="Diamond" ? "#FFE600": "none"} />
     </svg>
   );
 }
@@ -55,7 +56,7 @@ function scoreToTier(win_point:number) {
     return { tier: "Bronze", color: "#784100" };
   }
   else if (win_point >= 900 && win_point < 1100) {
-    return { tier: "Siver", color: "#CAC8D3" };
+    return { tier: "Silver", color: "#CAC8D3" };
   }
   else if (win_point >= 1100 && win_point < 1300) {
     return { tier: "Gold", color: "#F1B457" };
@@ -69,6 +70,7 @@ function scoreToTier(win_point:number) {
 }
 
 function Rank() {
+  const navigate = useNavigate();
   const [total, setTotal] = useState<number>(1)
   const [page, setPage] = useState<number>(1)
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
@@ -120,21 +122,26 @@ function Rank() {
     <div className="rank">
       <Navbar color="rgb(125, 174, 136)"/>
       <Container maxWidth="lg">
-        <div className="mytitle cookie cookie">Ranking</div>
+        <div className="mytitle cookie">Ranking</div>
         <div className="top1">
           <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" className="svg">
             <path d="M33.5449 26.6129C33.1097 26.5724 32.673 26.5501 32.2359 26.5459C23.5679 26.5459 16.5449 33.5819 16.5449 42.2639C16.5449 44.8539 17.1819 47.2889 18.2889 49.4419C17.7117 47.6897 17.417 45.8568 17.4159 44.0119C17.4159 34.8069 24.5269 27.2829 33.5449 26.6129ZM38.5329 55.1389C37.0006 56.1652 35.3178 56.9466 33.5449 57.4549C36.0212 57.1501 38.391 56.2669 40.4629 54.8769C47.6659 50.0349 49.6209 40.3769 44.8299 33.2989C44.5855 32.9455 44.3263 32.6025 44.0529 32.2709C48.4799 40.0039 46.1679 50.0059 38.5329 55.1389Z" fill="#F1B457"/>
             <path d="M44.656 26.519V17.821C44.656 17.457 44.457 17.151 44.176 16.961L54 2H35.164L32 6.746L28.836 2H10L19.822 16.96C19.541 17.15 19.342 17.457 19.342 17.821V26.519C14.861 30.187 12 35.758 12 42C12 53.045 20.955 62 32 62C32.682 62 33.354 61.965 34.018 61.898C44.115 60.887 52 52.365 52 42C52 35.758 49.137 30.187 44.656 26.519ZM40.826 3H47.154L38.328 16.239L35.164 11.493L40.826 3ZM41.492 20.985L42.465 19.527C42.518 19.652 42.547 19.788 42.547 19.931V24.15C42.5461 24.2805 42.5194 24.4095 42.4684 24.5297C42.4174 24.6498 42.3432 24.7587 42.25 24.85C39.25 23.052 35.752 22 32 22C28.387 22.0006 24.8426 22.9863 21.748 24.851C21.5604 24.6656 21.4537 24.4137 21.451 24.15V19.931C21.451 19.788 21.482 19.651 21.533 19.527L22.506 20.986H41.492V20.985ZM16.846 3H23.174L34.498 19.985H28.17L16.846 3ZM32 59C22.611 59 15 51.389 15 42C15 32.612 22.611 25 32 25C41.387 25 49 32.612 49 42C49 51.389 41.387 59 32 59Z" fill="#F1B457"/>
             <path d="M34.234 49.207V31H30.39C30.3901 31.3985 30.3117 31.7932 30.1593 32.1614C30.0069 32.5296 29.7834 32.8642 29.5017 33.146C29.2199 33.4278 28.8854 33.6514 28.5172 33.804C28.1491 33.9565 27.7545 34.035 27.356 34.035V37.828C27.63 37.828 29.701 37.672 30.39 37.396V49.207H27.356V53H37.268V49.207H34.234Z" fill="#F1B457"/>
           </svg>
-          <img src={topRanker[0]?.profile.profile_img} alt="rankImage"/>
+          <img
+            src={topRanker[0]?.profile.profile_img} alt="rankImage"
+            onClick={() => {
+              navigate(`/profile/${topRanker[0]?.user_id}`);
+            }} 
+          />
           <div className="nickname cookie">{topRanker[0]?.nickname}</div>
           <div className="tier">
-            <Tier color={scoreToTier(topRanker[0]?.win_point)?.color} className="tierLogo"></Tier>
+            <Tier color={scoreToTier(topRanker[0]?.win_point)?.color} className="tierLogo" tier={scoreToTier(topRanker[0]?.win_point)?.tier}></Tier>
             <div>{scoreToTier(topRanker[0]?.win_point)?.tier} {topRanker[0]?.win_point} points </div>
           </div>
           <div className="progressbar">
-            <progress id="progress" value="50" max="100"></progress>
+            <progress id="progress" value={topRanker[0]?.win_cnt} max={topRanker[0]?.win_cnt + topRanker[0]?.lose_cnt}></progress>
             <div className="winrate">
               <span className="winp">{topRanker[0]?.win_cnt}승</span>
               <span className="losep">{topRanker[0]?.lose_cnt}패</span>
@@ -149,14 +156,19 @@ function Rank() {
               <path d="M32.2359 26.546C23.5699 26.546 16.5449 33.582 16.5449 42.264C16.5449 44.854 17.1819 47.289 18.2889 49.442C17.713 47.6888 17.419 45.8554 17.4179 44.01C17.4179 34.807 24.5269 27.285 33.5449 26.613C33.1097 26.5725 32.673 26.5501 32.2359 26.546ZM38.5329 55.139C37.0008 56.1657 35.3179 56.9471 33.5449 57.455C36.0212 57.1502 38.391 56.2671 40.4629 54.877C47.6659 50.035 49.6209 40.377 44.8299 33.301C44.5859 32.941 44.3219 32.603 44.0529 32.27C48.4799 40.006 46.1699 50.006 38.5329 55.139Z" fill="#5A4BB9"/>
               <path d="M38.4478 49.207H29.3438V46.932C29.344 46.1273 29.6638 45.3556 30.2327 44.7866C30.8015 44.2175 31.5731 43.8975 32.3778 43.897C33.1748 43.8972 33.964 43.7405 34.7004 43.4356C35.4367 43.1308 36.1058 42.6839 36.6694 42.1203C37.233 41.5568 37.6801 40.8878 37.9851 40.1515C38.29 39.4152 38.4469 38.626 38.4468 37.829C38.4468 34.872 36.9468 31.001 31.6198 31.001C28.0708 31.001 25.5508 33.696 25.5508 37.829H29.3438C29.3438 36.268 30.5208 34.827 32.0458 34.827C33.8618 34.827 34.6538 36.022 34.6538 37.071C34.6535 37.8755 34.3337 38.6469 33.7648 39.2157C33.1958 39.7845 32.4243 40.104 31.6198 40.104C30.8227 40.104 30.0334 40.261 29.297 40.566C28.5607 40.8711 27.8916 41.3182 27.328 41.8819C26.7644 42.4456 26.3174 43.1147 26.0125 43.8512C25.7075 44.5876 25.5506 45.3769 25.5508 46.174V53H38.4468V49.207H38.4478Z" fill="#5A4BB9"/>
             </svg>
-            <img src={topRanker[1]?.profile.profile_img} alt="rankImage"/>
+            <img
+              src={topRanker[1]?.profile.profile_img} alt="rankImage"
+              onClick={() => {
+                navigate(`/profile/${topRanker[1]?.user_id}`);
+              }} 
+            />
             <div className="nickname cookie">{topRanker[1]?.nickname}</div>
             <div className="tier">
-              <Tier color={scoreToTier(topRanker[1]?.win_point)?.color} className="tierLogo"></Tier>
+              <Tier color={scoreToTier(topRanker[1]?.win_point)?.color} className="tierLogo" tier={scoreToTier(topRanker[1]?.win_point)?.tier}></Tier>
               <div>{scoreToTier(topRanker[1]?.win_point)?.tier} {topRanker[1]?.win_point} points </div>
             </div>
             <div className="progressbar">
-              <progress id="progress" value="50" max="100"></progress>
+              <progress id="progress" value={topRanker[1]?.win_cnt} max={topRanker[1]?.win_cnt + topRanker[1]?.lose_cnt}></progress>
               <div className="winrate">
                 <span className="winp">{topRanker[1]?.win_cnt}승</span>
                 <span className="losep">{topRanker[1]?.lose_cnt}패</span>
@@ -170,14 +182,19 @@ function Rank() {
               <path d="M32.2359 26.548C23.5699 26.548 16.5449 33.585 16.5449 42.265C16.5449 44.855 17.1819 47.29 18.2889 49.445C17.7132 47.6911 17.4192 45.857 17.4179 44.011C17.4179 34.808 24.5269 27.286 33.5449 26.615C33.1097 26.5744 32.673 26.552 32.2359 26.548ZM38.5329 55.14C37.0017 56.1682 35.3185 56.9498 33.5449 57.456C36.0217 57.153 38.3919 56.2697 40.4629 54.878C47.6659 50.036 49.6209 40.378 44.8319 33.302C44.5864 32.9484 44.3272 32.6045 44.0549 32.271C48.4799 40.007 46.1679 50.007 38.5329 55.14Z" fill="#654141"/>
               <path d="M38.875 46.1691C38.875 44.864 38.52 43.7531 37.81 42.8321C37.099 41.9111 36.151 41.3181 34.965 41.0541C36.95 39.9271 37.944 38.4181 37.944 36.5281C37.944 35.1951 37.459 34.0021 36.49 32.9431C35.314 31.6481 33.751 31.0031 31.803 31.0031C30.664 31.0031 29.636 31.2261 28.719 31.6721C27.8 32.1171 27.085 32.7301 26.573 33.5091C26.06 34.2871 25.677 35.3281 25.423 36.6321L29.078 37.2781C29.182 36.3371 29.474 35.6231 29.954 35.1321C30.1767 34.896 30.446 34.7089 30.7448 34.5825C31.0437 34.4562 31.3656 34.3933 31.69 34.3981C32.377 34.3981 32.928 34.614 33.342 35.045C33.756 35.475 33.963 36.0531 33.963 36.7781C33.963 37.6311 33.68 38.3141 33.115 38.8281C32.551 39.3431 31.731 39.5861 30.658 39.5571L30.22 42.9221C30.926 42.7161 31.533 42.6131 32.042 42.6131C32.813 42.6131 33.467 42.916 34.004 43.524C34.541 44.13 34.81 44.9541 34.81 45.9921C34.81 47.0911 34.53 47.9621 33.969 48.6091C33.408 49.2551 32.719 49.5791 31.901 49.5791C31.138 49.5791 30.489 49.3081 29.953 48.7701C29.417 48.2321 29.088 47.4521 28.965 46.4321L25.125 46.9181C25.323 48.7301 26.038 50.1961 27.271 51.3191C28.504 52.4401 30.057 53.0021 31.93 53.0021C33.906 53.0021 35.557 52.3351 36.885 51.003C38.212 49.671 38.875 48.0601 38.875 46.1691Z" fill="#654141"/>
             </svg>
-            <img src={topRanker[2]?.profile.profile_img} alt="rankImage" />
+            <img
+              src={topRanker[2]?.profile.profile_img} alt="rankImage"
+              onClick={() => {
+                navigate(`/profile/${topRanker[2]?.user_id}`);
+              }} 
+            />
             <div className="nickname cookie">{topRanker[2]?.nickname}</div>
             <div className="tier">
-              <Tier color={scoreToTier(topRanker[2]?.win_point)?.color} className="tierLogo"></Tier>
+              <Tier color={scoreToTier(topRanker[2]?.win_point)?.color} className="tierLogo" tier={scoreToTier(topRanker[2]?.win_point)?.tier}></Tier>
               <div>{scoreToTier(topRanker[2]?.win_point)?.tier} {topRanker[2]?.win_point} points </div>
             </div>
             <div className="progressbar">
-              <progress id="progress" value="50" max="100"></progress>
+              <progress id="progress" value={topRanker[2]?.win_cnt} max={topRanker[2]?.win_cnt + topRanker[2]?.lose_cnt}></progress>
               <div className="winrate">
                 <span className="winp">{topRanker[2]?.win_cnt}승</span>
                 <span className="losep">{topRanker[2]?.lose_cnt}패</span>
@@ -204,7 +221,11 @@ function Rank() {
                   {row.rank}
                 </StyledTableCell>
                 <StyledTableCell>
-                  <div className="userInfo">
+                  <div className="userInfo"
+                    onClick={() => {
+                      navigate(`/profile/${row.user_id}`);
+                    }} 
+                  >
                     <img src={row.profile.profile_img} alt="profile" className="rankingprofile"/>
                     <div className="nickname">{row.nickname}</div>
                   </div>
