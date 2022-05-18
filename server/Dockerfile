@@ -1,11 +1,19 @@
 FROM python:3.7.9 
 
+RUN apt-get update
+RUN apt-get -y install cron
+
+RUN touch /var/log/cron.log
+
 WORKDIR /usr/src/app
 
 COPY requirements.txt ./
 
 RUN pip3 install -r requirements.txt
 
+RUN service cron start
+RUN service cron status
+RUN python manage.py crontab add
 COPY . .
 
 EXPOSE 8433
