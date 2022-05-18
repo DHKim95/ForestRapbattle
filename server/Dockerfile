@@ -1,10 +1,5 @@
 FROM python:3.7.9 
 
-RUN apt-get update
-RUN apt-get -y install cron
-
-RUN touch /var/log/cron.log
-
 WORKDIR /usr/src/app
 
 COPY requirements.txt ./
@@ -12,8 +7,6 @@ COPY requirements.txt ./
 RUN pip3 install -r requirements.txt
 
 COPY . .
-RUN service cron start
-RUN python manage.py crontab add
 
 EXPOSE 8443
 
