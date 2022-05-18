@@ -18,15 +18,36 @@ import kospeech_latest.asr_metrics as metrics
 from jamo import h2j, j2hcj
 import Levenshtein as Lev
 from pydub import AudioSegment
+import json
 # Create your views here.
 
 # cer, wer 함수
-def wer(ref, hyp):
+def wer(hyp, ref):
     ref = j2hcj(h2j(ref))
     hyp = j2hcj(h2j(hyp))
 
-    r = ref.split()
-    h = hyp.split()
+    print("단어", ref)
+    hyp = ''.join(hyp)[2:-3]
+    print("두번째 단어", hyp)
+
+    r = []
+    h = []
+    if len(ref) < len(hyp):
+      for i in ref:
+        h.append(i)
+      for i in hyp:
+        r.append(i)
+    else:
+      for i in ref:
+        r.append(i)
+      for i in hyp:
+        h.append(i)
+
+    print("리스트 보기")
+    print(r)
+    print(h)
+    print("리스트보기 끝")
+
     costs = [[0 for _ in range(len(h)+1)] for _ in range(len(r)+1)]
     backtrace = [[0 for _ in range(len(h)+1)] for _ in range(len(r)+1)]
 
@@ -86,7 +107,7 @@ def wer(ref, hyp):
         elif backtrace[i][j] == OP_DEL:
             numDel += 1
             i-=1
-    return (numSub + numDel + numIns) / (float) (len(r))
+    return ((numSub + numDel + numIns) / (float) (len(r)))
     
 
 def cer(ref, hyp):
@@ -99,55 +120,75 @@ def cer(ref, hyp):
 ############################################
 
 # Create your views here.
+import os
 
 @api_view(['POST'])
 @permission_classes([AllowAny])
 def AI(request) :
   audio_data = request.FILES.get('file') # 음성파일
-  print("여기")
-  print(type(audio_data))
-  print(audio_data.size)
-  print("저기")
+  # print(type(audio_data))
+  # print(audio_data.size)
   words = request.POST.get('text') # 단어
-  print(type(words))
-  print(words)
+  # print(type(words))
+  # print(words)
 
+  # print("현재 경로는", os.getcwd())
+  # os.chdir(r'C:\Users\SSAFY\Desktop\SSAFY\자율\S06P31E204\server')
+  os.chdir(r'/home/ubuntu/docker-volume/jenkins/workspace/forestrapbattle/server/')
+
+  # print("경로바꾸기끝")
+  # print("사운드 저장시작")
   sound = AudioSegment.from_wav(audio_data)
   sound = sound.set_channels(1)
   sound.export("game/wave/sample.wav", format="wav")
-  print("보이나?")
-  # words = [{"word_level":1,"word":"고양이"},{"word_level":3,"word":"뽕잎쌈생채"},{"word_level":4,"word":"스위스 산새들 속삭이는 산림 숲속"}]
+  # print("사운드 저장 끝")
   # AI 분석 코드 함수 
-  # w = wave.open('../kospeech_latest/audio_tmp_data/audio_data.wav', 'w')
-  # w.close
-  #inference.py에서 나오는 결과
-  input_text = 1
+  print("출발?")
+  # os.system('dir')
+  print(os.getcwd())
+  # os.chdir(r'C:\Users\SSAFY\Desktop\SSAFY\자율\S06P31E204\server\kospeech_latest')
+  os.chdir(r'/home/ubuntu/docker-volume/jenkins/workspace/forestrapbattle/server/kospeech_latest')
+  print(os.getcwd())
+  print(os.listdir())
+  # input_text = os.popen('python ./bin/inference.py --model_path "C:/Users/SSAFY/Desktop/SSAFY/자율/S06P31E204/server/kospeech_latest/outputs/train_model/10-37-48/model.pt" --audio_path "C:/Users/SSAFY/Desktop/SSAFY/자율/S06P31E204/server/game/wave/sample.wav" --device "cpu"')
+  input_text = os.popen('python ./bin/inference.py --model_path "/home/ubuntu/docker-volume/jenkins/workspace/forestrapbattle/server/kospeech_latest/outputs/train_model/10-37-48/model.pt" --audio_path "/home/ubuntu/docker-volume/jenkins/workspace/forestrapbattle/server/game/wave/sample.wav" --device "cpu"')
+  voice_text = input_text.read()
+  print("입력된 함수", voice_text)
+  # input_text = '경찰청창살'
   
   score_lst = []
+  words = json.loads(words)
   for word in words:
     level = word['word_level']
-    # 오디오 데이터 어떻게 들어오려나
-    score = 1 - wer(input_text, word['word'])
+    print("주어진 단어", word['word'])
+    # a = wer(voice_text, word['word'])
+    # print("이건", a)
+    # 단어 길이 비교
+
+    score = 1 - wer(voice_text, word['word'])
+    print(score)
 
     score_lst.append((level, score))
   score_lst.sort(key=lambda x: (x[1], x[0]), reverse=True)
+  print("리스트", score_lst)
   ans = score_lst[0][1]
+  print("가장높은점수",ans)
     
   # [cer1, substitutions, deletions, insertions] = metrics.get_cer(word, input_text)
   # [wer1, substitutions, deletions, insertions] = metrics.get_wer(word, input_text)
   # ans = 1 -cer1
     
-  if ans >= 0.8:
+  if ans >= 0.75:
       serializer = {
         'level': score_lst[0][0],
         'similarity' : 100 # 유사도
       }
-  elif ans >=0.6:
+  elif ans >=0.55:
       serializer = {
         'level': score_lst[0][0],
         'similarity' : 80 # 유사도
       }
-  elif ans >= 0.4:
+  elif ans >= 0.35:
       serializer = {
         'level': score_lst[0][0],
         'similarity' : 50 # 유사도
@@ -158,6 +199,10 @@ def AI(request) :
         'similarity' : 10 # 유사도
       }
   # print(inference)
+  print("최종", serializer)
+
+  print("삭제시작?")
+
   return Response(serializer)
   # return Response(serializer.data, status=status.HTTP_200_OK )
 
