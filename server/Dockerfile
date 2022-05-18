@@ -11,10 +11,10 @@ COPY requirements.txt ./
 
 RUN pip3 install -r requirements.txt
 
+COPY . .
 RUN service cron start
 RUN service cron status
 RUN python manage.py crontab add
-COPY . .
 
 EXPOSE 8433
 
