@@ -13,7 +13,6 @@ RUN pip3 install -r requirements.txt
 
 COPY . .
 RUN service cron start
-RUN service cron status
 RUN python manage.py crontab add
 
 EXPOSE 8443
