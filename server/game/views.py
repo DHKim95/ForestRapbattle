@@ -180,8 +180,8 @@ def words(request) :
     'word' :''
   }
 
-  choice_method = random.randint(1,2)
-
+  # choice_method = random.randint(1,2)
+  choice_method = 2
   # 레벨 겹치지 않는 방법
   if choice_method == 1 : 
 
@@ -192,6 +192,7 @@ def words(request) :
       tmp = random.randint(idx[i][0],idx[i][1])
       tmp_idx_list.append(tmp)
     idx_list = random.sample(tmp_idx_list,3)
+    idx_list.sort()
     
     for j in idx_list : # 레벨 5개 중 3개 랜덤으로 고르기
       tmp_word = all_words.get(word_id=j)
@@ -205,7 +206,7 @@ def words(request) :
   else : 
 
     idx_list = random.sample(range(1,150), 3)
-
+    idx_list.sort()
     for idx in idx_list :
       tmp_word = all_words.get(word_id=idx)
       words['word_level'] = tmp_word.word_level
@@ -221,9 +222,9 @@ def gameResult(request) :
   player1 = request.data.get('player1')
   player2 = request.data.get('player2')
   win = request.data.get('win')
-  print(win)
+  # print(win)
   user = get_object_or_404(User, user_id=user_id)
-  print(user.total_game_cnt)
+  # print(user.total_game_cnt)
   user.total_game_cnt += 1
   if user_id == player1 :
     if win == 'true' :
