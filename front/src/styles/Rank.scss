@@ -27,9 +27,11 @@
       height: 80px
     }
     img {
+      cursor: pointer;
       width: 130px;
     }
     .nickname {
+      cursor: pointer;
       font-size: 30px;
     }
     .tier {
@@ -49,6 +51,7 @@
     background-color: "#7DAE88";
   }
   .userInfo {
+    cursor: pointer;
     display: flex;
     flex-direction: row;
     align-items: center;

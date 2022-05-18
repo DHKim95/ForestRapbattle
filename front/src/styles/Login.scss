@@ -1,7 +1,9 @@
 .LoginContainer {
+  font-family: 'GmarketSansMedium', sans-serif;
   background-color: white;
   // border-radius: 5%;
   .mytitle {
+    font-family: 'GmarketSansMedium', sans-serif;
     font-weight: 900;
     text-align: center;
     padding: 50px;
@@ -11,5 +13,8 @@
   }
   .copyright {
     padding-bottom: 40px;
+  }
+  .mybutton {
+    font-family: 'GmarketSansMedium', sans-serif;
   }
 }

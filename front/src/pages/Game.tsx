@@ -4,6 +4,8 @@ import Unity, { UnityContext } from "react-unity-webgl";
 import Navbar from "../components/Navbar";
 import "../styles/Game.scss";
 import { Container } from "@mui/material";
+import { width } from '@mui/system';
+import { useNavigate } from "react-router-dom";
 
 const unityContext = new UnityContext({
   loaderUrl: "Build/Builds.loader.js",
@@ -18,30 +20,38 @@ function Game() {
   const nickname = useSelector((state: any) => state.account.nickname);
   const user_id = useSelector((state: any) => state.account.userId);
   const win_point = useSelector((state: any) => state.account.win_point);
+  const navigate = useNavigate();
   console.log(win_point, '들어오나~~~~')
   function spawnEnemies() {
     unityContext.send("ReactController", "FromReact", `${nickname},${user_id},${profileId},${win_point}`);
+  }
+  function goToHome() {
+    navigate("/")
   }
   useEffect(() => {
     unityContext.on("GameStart", function () {
         spawnEnemies();
       })
+    unityContext.on("ExitUnity", function () {
+        goToHome();
+      })
   }, []);
-  
+
+  function handleOnClickFullscreen() {
+    unityContext.setFullscreen(true);
+  }
   return (
-    <div className="game">
-      <Navbar />
-      <div className="mytitle">Game</div>
-      {/* <button onClick={spawnEnemies}>button</button> */}
-      <Container>
+    <div className="game" style={{width:"85%"}}>
+      {/* <button onClick={handleOnClickFullscreen}>Fullscreen</button> */}
         <Unity
           unityContext={unityContext}
-          style={{
-            height: "550px",
-            width: "900px",
+        style={{
+            width: "100%",
+            height:"100%",
+            justifySelf: "center",
+            alignSelf: "center"
           }}
-          />
-      </Container>
+        />
     </div>
   );
 }

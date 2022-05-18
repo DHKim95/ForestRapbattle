@@ -11,6 +11,7 @@ import { connect } from "react-redux";
 import { userLogin } from "../../redux/account/actions";
 import { LoginUserInfo } from "../../types/account";
 import { AccountReducer } from "../../redux/rootReducer";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import "../../styles/Signup.scss"
 
 
@@ -138,6 +139,8 @@ function SignupForm({ errorControl, loadingControl,userLogin, isLogin }: Props) 
   function goToProfile(): void {
     if (page === 1) {
       setPage(2);
+    } else if (page === 2) {
+      setPage(1);
     }
   }
 
@@ -338,11 +341,13 @@ function SignupForm({ errorControl, loadingControl,userLogin, isLogin }: Props) 
       )}
       {page === 1 || (
         <Container component="main" maxWidth="sm" className="Profile">
+          <button className="back">
+            <ArrowBackIcon onClick={goToProfile} />
+          </button>
           <Typography component="h1" variant="h5" className="mytitle">
             프로필 선택
           </Typography>
           <ProfileSelector />
-          <div>{userInfo.profileId}</div>
           <Button
             className="mybutton"
             fullWidth

@@ -66,10 +66,12 @@ const Navbar = ({color}:NavbarProps) => {
     };
   return (
     <RootStyle sx={{ backgroundColor: !!color ? color : "" }}>
-      <Container maxWidth="xl">
+      <Container maxWidth="xl" className="myNav">
         <ToolbarStyle disableGutters>
-          <Typography variant="h6" noWrap component="div" sx={{ mr: 2, display: { xs: "none", md: "flex" }, flexGrow: 1 }} className="aaa">
-            <Link to="/" className="cookie">Forest Rap Battle</Link>
+          <Typography variant="h6" noWrap component="div" sx={{ mr: 2, display: { xs: "none", md: "flex" }, flexGrow: 1 }} className="Logo">
+            <Link to="/" className="cookie">
+              Forest Rap Battle
+            </Link>
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -144,11 +146,11 @@ const Navbar = ({color}:NavbarProps) => {
 
           {!isLogin || (
             <Box sx={{ flexGrow: 0 }}>
-              <Tooltip title="Open settings">
+              <Tooltip title="Go to Profile">
                 <IconButton sx={{ p: 0 }}>
-                  <Avatar alt="Remy Sharp">
+                  <Avatar alt="Remy Sharp" className="navAvatar">
                     <Link to={`/profile/${userId}`}>
-                      <img src={profileImg} alt="dd" style={{ width: "100%" }} />
+                      <img src={profileImg} alt="dd" className="navImage" />
                     </Link>
                   </Avatar>
                 </IconButton>
