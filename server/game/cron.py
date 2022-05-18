@@ -12,4 +12,4 @@ def reset_ranking() :
   Words.objects.bulk_create(instances)
   ranking_save()
 
-reset_ranking()
+# reset_ranking()

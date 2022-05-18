@@ -178,5 +178,5 @@ LOGIN_REDIRECT_URL = '/' # 로그인 후, 호출되는 url
 
 # 1분 마다
 CRONJOBS = [
-    ('* * * * *', 'game.cron')
+    ('* * * * *', 'game.cron.reset_ranking', '>> /var/logs/cron.log')
 ]
