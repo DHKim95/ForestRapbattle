@@ -46,8 +46,6 @@
   }
   .profileContainer{
     display: grid;
-    // flex-wrap: wrap;
-    // justify-content: center;
     grid-template-columns: repeat(5, 1fr);
   }
   .profileItem{
