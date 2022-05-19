@@ -2,7 +2,9 @@ FROM python:3.7.9
 
 WORKDIR /usr/src/app
 
-run mkdir wave_file
+RUN mkdir wave_file
+
+RUN apt-get install libsndfile1
 
 COPY requirements.txt ./
 
