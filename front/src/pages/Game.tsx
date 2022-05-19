@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import Unity, { UnityContext } from "react-unity-webgl";
 import "../styles/Game.scss";
@@ -21,7 +21,7 @@ function Game({ setProfileImg }: Props) {
   const win_point = useSelector((state: any) => state.account.win_point);
   const token = localStorage.getItem("accessToken") || "";
   const navigate = useNavigate();
-  // const [loading, setLoading] = useState<boolean>(true);
+  const [loading, setLoading] = useState<boolean>(true);
 
   function setNewProfile(profileId: number, userId: number) {
     const ChangeNewProfile = async () => {
@@ -41,6 +41,10 @@ function Game({ setProfileImg }: Props) {
     navigate("/");
   }
   useEffect(() => {
+    unityContext.on("Loading", function() {
+      console.log('1111111111111111111111')
+      setLoading(false)
+    });
     unityContext.on("GameStart", function() {
       spawnEnemies();
     });
@@ -55,16 +59,19 @@ function Game({ setProfileImg }: Props) {
   return (
     <div className="game">
       <div className="unity">
-        <Unity
-          unityContext={unityContext}
-          className="myUnity"
-          // style={{
-          //   width: "100%",
-          //   height:"100%",
-          //   justifySelf: "center",
-          //   alignSelf: "center"
-          // }}
-        />
+          <Unity
+            unityContext={unityContext}
+            className="myUnity"
+            // style={{
+            //   width: "100%",
+            //   height:"100%",
+            //   justifySelf: "center",
+            //   alignSelf: "center"
+            // }}
+          />
+          {/* <div className="common_alert_loading">
+            <div className="loading"></div>
+          </div> */}
       </div>
     </div>
   );
