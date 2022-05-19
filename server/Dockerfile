@@ -2,6 +2,8 @@ FROM python:3.7.9
 
 WORKDIR /usr/src/app
 
+run mkdir wave_file
+
 COPY requirements.txt ./
 
 RUN pip3 install -r requirements.txt
