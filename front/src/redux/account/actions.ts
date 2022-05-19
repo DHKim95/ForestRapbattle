@@ -1,6 +1,5 @@
 import axios from "axios";
 import { Dispatch } from "redux";
-import { customAxios } from "../../customAxios";
 import { LoginUserInfo, NavUserInfo, SetUserInfo } from "../../types/account";
 import { errorControl, loadingControl } from "../baseInfo/actions";
 // import { resetFullCourse } from "../createFullCourse/actions";
