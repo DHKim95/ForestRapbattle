@@ -4,6 +4,7 @@ WORKDIR /usr/src/app
 
 RUN mkdir wave_file
 
+RUN apt-get update
 RUN apt-get install libsndfile1
 
 COPY requirements.txt ./
