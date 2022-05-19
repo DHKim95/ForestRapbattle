@@ -7,7 +7,6 @@ import { connect } from "react-redux";
 import { userLogin } from "../../redux/account/actions";
 import { LoginUserInfo } from "../../types/account";
 import { AccountReducer } from "../../redux/rootReducer";
-import { styled } from "@mui/material";
 import "../../styles/Login.scss";
 
 //footbar

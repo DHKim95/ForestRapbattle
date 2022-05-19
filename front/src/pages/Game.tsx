@@ -1,12 +1,11 @@
-import React, { useEffect } from 'react'
-import { useSelector } from 'react-redux';
+import React, { useEffect } from "react";
+import { useSelector } from "react-redux";
 import Unity, { UnityContext } from "react-unity-webgl";
 import "../styles/Game.scss";
 import { useNavigate } from "react-router-dom";
 import { connect } from "react-redux";
 import { setProfileImg } from "../redux/account/actions";
 import { customAxios } from "../customAxios";
-
 
 const unityContext = new UnityContext({
   loaderUrl: "Build/Builds.loader.js",
@@ -22,7 +21,8 @@ function Game({ setProfileImg }: Props) {
   const win_point = useSelector((state: any) => state.account.win_point);
   const token = localStorage.getItem("accessToken") || "";
   const navigate = useNavigate();
-  
+  // const [loading, setLoading] = useState<boolean>(true);
+
   function setNewProfile(profileId: number, userId: number) {
     const ChangeNewProfile = async () => {
       const changeRes = await customAxios({
@@ -77,5 +77,7 @@ const mapDispatchToProps = (dispatch: any) => {
 };
 type Props = ReturnType<typeof mapDispatchToProps>;
 
-export default connect(null,mapDispatchToProps)(Game);
-
+export default connect(
+  null,
+  mapDispatchToProps
+)(Game);
