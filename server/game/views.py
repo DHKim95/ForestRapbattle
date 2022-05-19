@@ -165,7 +165,7 @@ def AI(request) :
   # os.chdir(r'/home/ubuntu/docker-volume/jenkins/workspace/forestrapbattle/server/kospeech_latest')
   print(os.getcwd())
   print(os.listdir())
-  input_text = os.popen('python ./bin/inference.py --model_path "/usr/src/app/kospeech_latest/outputs/train_model/10-37-48/model.pt" --audio_path "/usr/src/app/game/wave/sample.wav" --device "cpu"')
+  input_text = os.popen('python ./bin/inference.py --model_path "/usr/src/app/kospeech_latest/outputs/train_model/10-37-48/model.pt" --audio_path "/usr/src/app/game/wave_file/sample.wav" --device "cpu"')
   # input_text = os.popen('python ./bin/inference.py --model_path "C:/Users/SSAFY/Desktop/SSAFY/자율/S06P31E204/server/kospeech_latest/outputs/train_model/10-37-48/model.pt" --audio_path "C:/Users/SSAFY/Desktop/SSAFY/자율/S06P31E204/server/game/wave/sample.wav" --device "cpu"')
   # input_text = os.popen('python ./bin/inference.py --model_path "/home/ubuntu/docker-volume/jenkins/workspace/forestrapbattle/server/kospeech_latest/outputs/train_model/10-37-48/model.pt" --audio_path "/home/ubuntu/docker-volume/jenkins/workspace/forestrapbattle/server/game/wave/sample.wav" --device "cpu"')
   voice_text = input_text.read()
