@@ -2,18 +2,13 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Navbar from '../components/Navbar';
 import "../styles/Profile.scss";
-import { Container, styled, Avatar, Modal, Typography, Box, Button } from "@mui/material";
+import { Container, Avatar, Modal, Typography, Box, Button } from "@mui/material";
 import { useSelector } from "react-redux";
-import LoopIcon from "@mui/icons-material/Loop";
-import DragIndicatorIcon from '@mui/icons-material/DragIndicator';
-import ColorizeIcon from '@mui/icons-material/Colorize';
-import { grey } from "@mui/material/colors";
 import { customAxios } from "../customAxios";
 import { useNavigate } from "react-router-dom";
 import { connect } from "react-redux";
 import { setProfileImg } from "../redux/account/actions";
 import Footer from '../components/Footer'
-import { ClassNames } from "@emotion/react";
 import settings from "../assets/settings.png"
 
 interface svgProps {
@@ -96,7 +91,6 @@ function Profile({ setProfileImg }: Props) {
   const navigate = useNavigate();
   const params = useParams();
   const userId = Number(params["userId"]);
-  const profileImg = useSelector((state: any) => state.account.profileImg);
   const myUserId = useSelector((state: any) => state.account.userId);
   const [nickname, setNickname] = useState<string>("");
   const [myProfileImage, setMyProfileImage] = useState<string>("");

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { styled } from '@mui/material/styles';
 import Navbar from '../components/Navbar'
 import '../styles/Rank.scss'
-import { Container, Stack, Typography, Pagination, Table, TableBody, TableContainer, TableHead, TableRow, Paper   } from "@mui/material";
+import { Container, Stack, Pagination, Table, TableBody, TableContainer, TableHead, TableRow, Paper   } from "@mui/material";
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import { customAxios } from "../customAxios";
 import Footer from '../components/Footer'
