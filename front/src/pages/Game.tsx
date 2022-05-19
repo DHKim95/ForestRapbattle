@@ -20,10 +20,11 @@ function Game() {
   const nickname = useSelector((state: any) => state.account.nickname);
   const user_id = useSelector((state: any) => state.account.userId);
   const win_point = useSelector((state: any) => state.account.win_point);
+  const token = localStorage.getItem("accessToken") || "";
   const navigate = useNavigate();
   console.log(win_point, '들어오나~~~~')
   function spawnEnemies() {
-    unityContext.send("ReactController", "FromReact", `${nickname},${user_id},${profileId},${win_point}`);
+    unityContext.send("ReactController", "FromReact", `${nickname},${user_id},${profileId},${win_point},${token}`);
   }
   function goToHome() {
     navigate("/")
