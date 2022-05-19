@@ -132,42 +132,41 @@ def AI(request) :
   words = request.POST.get('text') # 단어
   # print(type(words))
   # print(words)
+  file_id = request.POST.get('uid')
 
   # print("현재 경로는", os.getcwd())
   # os.chdir(r'C:\Users\SSAFY\Desktop\SSAFY\자율\S06P31E204\server')
   os.chdir(r'/usr/src/app/')
-  # os.chdir(r'/home/ubuntu/docker-volume/jenkins/workspace/forestrapbattle/server/')
 
   # print("경로바꾸기끝")
   # print("사운드 저장시작")
   sound = AudioSegment.from_wav(audio_data)
   sound = sound.set_channels(1)
-  sound.export("/usr/src/app/wave_file/sample.wav", format="wav")
+  # sound.export(f"C:/Users/SSAFY/Desktop/SSAFY/자율/S06P31E204/server/game/wave/{file_id}.wav", format="wav")
+  sound.export(f"/usr/src/app/wave_file/{file_id}.wav", format="wav")
   # print("사운드 저장 끝")
   
   
   sr = 44100
-  # y, sr = librosa.load('C:/Users/SSAFY/Desktop/SSAFY/자율/S06P31E204/server/game/wave/sample.wav', sr=sr)
-  y, sr = librosa.load('/usr/src/app/wave_file/sample.wav', sr=sr)
+  # y, sr = librosa.load(f'C:/Users/SSAFY/Desktop/SSAFY/자율/S06P31E204/server/game/wave/{file_id}.wav', sr=sr)
+  y, sr = librosa.load(f'/usr/src/app/wave_file/{file_id}.wav', sr=sr)
   print("안올거같은데", y, sr)
   half = len(y) / 10
   y2 = y[:round(half)]
   
-  # sf.write('C:/Users/SSAFY/Desktop/SSAFY/자율/S06P31E204/server/game/wave/sample.wav', y2, sr, 'PCM_24')
-  sf.write('/usr/src/app/wave_file/sample.wav', y2, sr, 'PCM_24')
+  # sf.write(f'C:/Users/SSAFY/Desktop/SSAFY/자율/S06P31E204/server/game/wave/{file_id}.wav', y2, sr, 'PCM_24')
+  sf.write(f'/usr/src/app/wave_file/{file_id}.wav', y2, sr, 'PCM_24')
 
   # AI 분석 코드 함수 
   print("출발?")
-  # os.system('dir')
   print(os.getcwd())
-  os.chdir(r'/usr/src/app/kospeech_latest')
   # os.chdir(r'C:\Users\SSAFY\Desktop\SSAFY\자율\S06P31E204\server\kospeech_latest')
-  # os.chdir(r'/home/ubuntu/docker-volume/jenkins/workspace/forestrapbattle/server/kospeech_latest')
+  os.chdir(r'/usr/src/app/kospeech_latest')
+
   print(os.getcwd())
   print(os.listdir())
-  input_text = os.popen('python ./bin/inference.py --model_path "/usr/src/app/kospeech_latest/outputs/train_model/10-37-48/model.pt" --audio_path "/usr/src/app/game/wave/sample.wav" --device "cpu"')
-  # input_text = os.popen('python ./bin/inference.py --model_path "C:/Users/SSAFY/Desktop/SSAFY/자율/S06P31E204/server/kospeech_latest/outputs/train_model/10-37-48/model.pt" --audio_path "C:/Users/SSAFY/Desktop/SSAFY/자율/S06P31E204/server/game/wave/sample.wav" --device "cpu"')
-  # input_text = os.popen('python ./bin/inference.py --model_path "/home/ubuntu/docker-volume/jenkins/workspace/forestrapbattle/server/kospeech_latest/outputs/train_model/10-37-48/model.pt" --audio_path "/home/ubuntu/docker-volume/jenkins/workspace/forestrapbattle/server/game/wave/sample.wav" --device "cpu"')
+  # input_text = os.popen(f'python ./bin/inference.py --model_path "C:/Users/SSAFY/Desktop/SSAFY/자율/S06P31E204/server/kospeech_latest/outputs/train_model/10-37-48/model.pt" --audio_path "C:/Users/SSAFY/Desktop/SSAFY/자율/S06P31E204/server/game/wave/{file_id}.wav" --device "cpu"')
+  input_text = os.popen(f'python ./bin/inference.py --model_path "/usr/src/app/kospeech_latest/outputs/train_model/10-37-48/model.pt" --audio_path "/usr/src/app/wave_file/{file_id}.wav" --device "cpu"')
   voice_text = input_text.read()
   print("입력된 함수", voice_text)
   # input_text = '경찰청창살'
