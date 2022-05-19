@@ -59,20 +59,15 @@ function Game({ setProfileImg }: Props) {
   return (
     <div className="game">
       <div className="unity">
-          <Unity
-            unityContext={unityContext}
-            className="myUnity"
-            // style={{
-            //   width: "100%",
-            //   height:"100%",
-            //   justifySelf: "center",
-            //   alignSelf: "center"
-            // }}
-          />
-          {/* <div className="common_alert_loading">
-            <div className="loading"></div>
-          </div> */}
+        <Unity
+          unityContext={unityContext}
+          className="myUnity"
+        />
       </div>
+      {!loading || (<div className="loading-container">
+        <div className="loading" />
+        <div id="loading-text">loading</div>
+      </div>)}
     </div>
   );
 }
