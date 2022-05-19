@@ -139,7 +139,7 @@ def ProfileImages(request) :
 
 # 프로필 사진 수정
 @api_view(['PUT'])
-# @permission_classes([AllowAny])
+@permission_classes([AllowAny])
 def editProfile(request, user_id,profile_id) :
 
   user = get_object_or_404(User, user_id=user_id)
