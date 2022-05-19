@@ -1,0 +1,23 @@
+.game {
+  background-image: url('../assets/back2.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100%;
+  display: flex;
+  // margin: auto;
+  // aspect-ratio: auto 1920 / 1080;
+  .unity {
+    aspect-ratio: auto 1920 / 1080;
+    width: 80%;
+    margin: auto;
+    .myUnity{
+      aspect-ratio: auto 1920 / 1080;
+      // aspect-ratio: 960 / 600;
+      width: 100%;
+      justify-self: center;
+      align-self: center;
+      height: 100%;
+      border: 5px solid red;
+    }
+  }
+}

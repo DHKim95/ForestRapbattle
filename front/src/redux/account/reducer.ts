@@ -23,6 +23,7 @@ const initialState: AccountStateType = {
   isLogin: false,
   password: "",
   passwordConfirmation: "",
+  win_point: 0,
 };
 
 const accountReducer = (

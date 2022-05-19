@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'accounts',
     'game',
     #3rd
+    'django_crontab',
     'rest_framework',
     'corsheaders',
     #native
@@ -71,7 +72,7 @@ MIDDLEWARE = [
 CORS_ALLOW_ALL_ORIGINS = True
 # CORS_ORIGIN_WHITELIST = [ 'http://localhost:3000','http://127.0.0.1:3000','https://k6e204.p.ssafy.io','http://k6e204.p.ssafy.io:8443','http://localhost:58814']
 CORS_ALLOW_CREDENTIALS = True
-CSRF_TRUSTED_ORIGINS = ['https://k6e204.p.ssafy.io']
+
 
 ROOT_URLCONF = 'forestrapbattle.urls'
 
@@ -175,3 +176,8 @@ AUTHENTICATION_BACKENDS = (
 
 SITE_ID = 1
 LOGIN_REDIRECT_URL = '/' # 로그인 후, 호출되는 url
+
+# 1분 마다
+CRONJOBS = [
+    ('* * * * *', 'game.cron')
+]

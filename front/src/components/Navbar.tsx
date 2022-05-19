@@ -36,14 +36,23 @@ const ToolbarStyle = styled(Toolbar)({
   letterSpacing: "0px",
   width: "100%",
 });
+interface NavbarProps {
+  color?: string,
+}
 
+<<<<<<< HEAD
 const Navbar = () => {
+=======
+
+const Navbar = ({color}:NavbarProps) => {
+>>>>>>> 3ba66079ea831b8a35527e228627dba93fd07392
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const isLogin = useSelector((state: any) => state.account.isLogin);
   const profileImg = useSelector((state: any) => state.account.profileImg);
   const nickname = useSelector((state: any) => state.account.nickname);
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
+  const userId = useSelector((state: any) => state.account.userId);
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -60,11 +69,13 @@ const Navbar = () => {
       } catch (e) {}
     };
   return (
-    <RootStyle>
-      <Container maxWidth="xl">
+    <RootStyle sx={{ backgroundColor: !!color ? color : "" }}>
+      <Container maxWidth="xl" className="myNav">
         <ToolbarStyle disableGutters>
-          <Typography variant="h6" noWrap component="div" sx={{ mr: 2, display: { xs: "none", md: "flex" }, flexGrow: 1 }} className="aaa">
-            <Link to="/">Forest Rap Battle</Link>
+          <Typography variant="h6" noWrap component="div" sx={{ mr: 2, display: { xs: "none", md: "flex" }, flexGrow: 1 }} className="Logo">
+            <Link to="/" className="cookie">
+              Forest Rap Battle
+            </Link>
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -106,7 +117,7 @@ const Navbar = () => {
               </Button>
             ))} */}
             <Button onClick={handleCloseNavMenu} sx={{ my: 2, color: "white", display: "block" }}>
-              게임시작
+              <Link to={isLogin ? "/game" : "/login"}>게임시작</Link>
             </Button>
             <Button onClick={handleCloseNavMenu} sx={{ my: 2, color: "white", display: "block" }}>
               <Link to="/rank">랭킹</Link>
@@ -133,19 +144,31 @@ const Navbar = () => {
               </Button>
             )}
             <Button onClick={handleCloseNavMenu} sx={{ my: 2, color: "white", display: "block" }}>
+<<<<<<< HEAD
               <Link to={`/profile/${nickname}`}>
                 {nickname}
               </Link>
+=======
+              <Link to={`/profile/${userId}`}>{nickname}</Link>
+>>>>>>> 3ba66079ea831b8a35527e228627dba93fd07392
             </Button>
           </Box>
 
           {!isLogin || (
             <Box sx={{ flexGrow: 0 }}>
+<<<<<<< HEAD
               <Tooltip title="Open settings">
                 <IconButton sx={{ p: 0 }}>
                   <Avatar alt="Remy Sharp">
                     <Link to={`/profile/${nickname}`}>
                       <img src={profileImg} alt="dd" style={{ width: "100%" }} />
+=======
+              <Tooltip title="Go to Profile">
+                <IconButton sx={{ p: 0 }}>
+                  <Avatar alt="Remy Sharp" className="navAvatar">
+                    <Link to={`/profile/${userId}`}>
+                      <img src={profileImg} alt="dd" className="navImage" />
+>>>>>>> 3ba66079ea831b8a35527e228627dba93fd07392
                     </Link>
                   </Avatar>
                 </IconButton>

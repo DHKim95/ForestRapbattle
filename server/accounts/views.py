@@ -37,10 +37,10 @@ def signup(request) :
   return Response({'error':'회원가입실패'}, status=status.HTTP_400_BAD_REQUEST)
 
 
-@api_view(['POST'])
+@api_view(['GET'])
 @permission_classes([AllowAny])
-def email(request) :
-  curr_email = request.data.get('email')
+def email(request,email) :
+  curr_email = email
   if get_user_model().objects.filter(email=curr_email).exists() :
     return Response({'result' : False}, status=status.HTTP_200_OK)
   else:
@@ -48,10 +48,10 @@ def email(request) :
 
 
 
-@api_view(['POST'])
+@api_view(['GET'])
 @permission_classes([AllowAny])
-def nickname(request) :
-  curr_nickname = request.data.get('nickname')
+def nickname(request,nickname) :
+  curr_nickname = nickname
   if get_user_model().objects.filter(nickname=curr_nickname).exists() :
     return Response({'result' : False}, status=status.HTTP_200_OK)
   else:
@@ -139,13 +139,13 @@ def ProfileImages(request) :
 
 # 프로필 사진 수정
 @api_view(['PUT'])
-# @permission_classes([AllowAny])
+@permission_classes([AllowAny])
 def editProfile(request, user_id,profile_id) :
 
   user = get_object_or_404(User, user_id=user_id)
   user.profile = get_object_or_404(ProfileImage, profile_id=profile_id)
 
-  if request.user.id == user_id :
+  if request.user.user_id == user_id :
     user.save()
     serializer = UserSerializer(user)
     return Response(serializer.data,status=status.HTTP_200_OK)

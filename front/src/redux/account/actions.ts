@@ -19,6 +19,7 @@ const userLoginSuccess = (navUserInfo: NavUserInfo) => {
 };
 
 export const setProfileImg = (imgUrl: string) => {
+  console.log('들어왔니 ?')
   return {
     type: SET_PROFILE_IMG,
     payload: imgUrl,
@@ -83,7 +84,9 @@ export const userLogin = (userInfo: LoginUserInfo) => {
         profileImg:
           res1.data.profile["profile_img"] ||
           "https://cdn.newspenguin.com/news/photo/202002/1208_2870_473.jpg",
+        win_point: res1.data.win_point
       };
+      localStorage.setItem("profileId",res1.data.profile["profile_id"]);
       dispatch(userLoginSuccess(newUserInfo));
 
       // 로그인 성공시 메인페이지로 이동
