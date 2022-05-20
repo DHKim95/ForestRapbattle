@@ -92,7 +92,7 @@ def profile(request, user_id) :
   user = get_object_or_404(User, user_id=user_id)
   user_serializer = UserInfoSerializer(user)
 
-  matches = Match.objects.filter(user_id=user_id)
+  matches = Match.objects.filter(user_id=user_id).order_by('-date')
   match_serializers = UserMatchResultSerializer(matches, many=True)
   match_user_serializers = []
 
