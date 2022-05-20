@@ -1,0 +1,73 @@
+.SignupContainer {
+  background-color: white;
+  .mytitle {
+    font-weight: 900;
+    text-align: center;
+    padding: 50px;
+    font-family: 'GmarketSansMedium', sans-serif;
+  }
+  .myemail{
+    padding-bottom: 20px;
+  }
+  .mypassword{
+    padding-bottom: 20px;
+  }
+  .mypasswordc{
+    padding-bottom: 20px;
+  }
+  .mybutton{
+    font-family: 'GmarketSansMedium', sans-serif;
+    height: 55px;
+    margin-bottom: 40px;
+  }
+  .mynick{
+    padding-bottom: 20px;
+    width: 100%;
+  }
+  // .mynickbutton{
+    
+  // }
+  }
+.Profile{
+  background-color: white;
+  position: relative;
+  .back {
+    position: absolute;
+    top:9%;
+    left: 7%;
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+  }
+  .mytitle {
+    font-weight: 900;
+    text-align: center;
+    padding: 50px;
+  }
+  .profileContainer{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+  }
+  .profileItem{
+    flex: 0 0 20%;
+    text-align: center;
+    padding: 10px 10px;
+  }
+  .profileImage{
+    width: 100%;
+    cursor: pointer;
+  }
+  .myavatar {
+    border: 3px solid white;
+    width: 90%;
+    height: 90%;
+  }
+  .selectedMyavatar{
+    border: 3px solid rgb(110, 110, 167);
+    width: 90%;
+    height: 90%;
+  }
+  .mybutton {
+    margin: 40px 0px;
+  }
+}

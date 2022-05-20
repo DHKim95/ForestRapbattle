@@ -1,0 +1,111 @@
+@import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
+.rank {
+  font-family: 'Jua', sans-serif;
+  .mytitle {
+    // position: relative;
+    // top: 80px;
+    margin-top: 120px;
+    text-align: center;
+    font-size: 80px;
+    font-weight: bolder;
+  }
+  .top1 {
+    width: 500px;
+    height: 300px;
+    border: 3px solid gray;
+    border-radius: 3%;
+    margin: 40px auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    .svg {
+      position: absolute;
+      top: -28px;
+      width: 80px;
+      height: 80px
+    }
+    img {
+      cursor: pointer;
+      width: 130px;
+    }
+    .nickname {
+      cursor: pointer;
+      font-size: 30px;
+    }
+    .tier {
+      display: flex;
+      flex-direction: row;
+      margin: 10px 0;
+      .tierLogo {
+        margin: 0px 10px;
+      }
+    }
+  }
+  .top23 {
+    display: flex;
+    flex-direction: row;
+  }
+  .tablehead {
+    background-color: "#7DAE88";
+  }
+  .userInfo {
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    .rankingprofile {
+      width: 30px;
+    }
+    .nickname2 {
+      margin: auto 0px;
+    }
+  }
+  #progress {
+    width: 140px;
+    appearance: none;
+    height: 25px;
+    position: relative;
+  }
+
+  #progress::-webkit-progress-bar {
+    background: #EE5A52;
+    border-radius: 5px;
+  }
+
+  #progress::-webkit-progress-value {
+    border-radius: 5px;
+    background: #3D95E5;
+  }
+  .progressbar {
+    position: relative;
+    .winrate {
+      width: 140px;
+      position: absolute;
+      top: 4px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+
+      span {
+        font-size: 12px;
+        color: white;
+        margin: 0px 5px;
+      }
+    }
+
+    .rate {
+      position: absolute;
+      top: 3px;
+      margin-left: 10px;
+    }
+  }
+  .nanum {
+    font-family: 'GmarketSansMedium';
+    font-size: 14px;
+  }
+  .pagination {
+    margin: 30px auto 100px auto;
+  }
+}

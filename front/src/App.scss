@@ -1,0 +1,57 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
+
+@font-face {
+  font-family: 'CookieRun';
+  font-weight: 400;
+  font-style: normal;
+  src: url('https://cdn.jsdelivr.net/gh/webfontworld/cookierun/CookieRunRegular.eot');
+  src: url('https://cdn.jsdelivr.net/gh/webfontworld/cookierun/CookieRunRegular.eot?#iefix') format('embedded-opentype'),
+    url('https://cdn.jsdelivr.net/gh/webfontworld/cookierun/CookieRunRegular.woff2') format('woff2'),
+    url('https://cdn.jsdelivr.net/gh/webfontworld/cookierun/CookieRunRegular.woff') format('woff'),
+    url('https://cdn.jsdelivr.net/gh/webfontworld/cookierun/CookieRunRegular.ttf') format("truetype");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'CookieRun';
+  font-weight: 700;
+  font-style: normal;
+  src: url('https://cdn.jsdelivr.net/gh/webfontworld/cookierun/CookieRunBold.eot');
+  src: url('https://cdn.jsdelivr.net/gh/webfontworld/cookierun/CookieRunBold.eot?#iefix') format('embedded-opentype'),
+    url('https://cdn.jsdelivr.net/gh/webfontworld/cookierun/CookieRunBold.woff2') format('woff2'),
+    url('https://cdn.jsdelivr.net/gh/webfontworld/cookierun/CookieRunBold.woff') format('woff'),
+    url('https://cdn.jsdelivr.net/gh/webfontworld/cookierun/CookieRunBold.ttf') format("truetype");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'CookieRun';
+  font-weight: 900;
+  font-style: normal;
+  src: url('https://cdn.jsdelivr.net/gh/webfontworld/cookierun/CookieRunBlack.eot');
+  src: url('https://cdn.jsdelivr.net/gh/webfontworld/cookierun/CookieRunBlack.eot?#iefix') format('embedded-opentype'),
+    url('https://cdn.jsdelivr.net/gh/webfontworld/cookierun/CookieRunBlack.woff2') format('woff2'),
+    url('https://cdn.jsdelivr.net/gh/webfontworld/cookierun/CookieRunBlack.woff') format('woff'),
+    url('https://cdn.jsdelivr.net/gh/webfontworld/cookierun/CookieRunBlack.ttf') format("truetype");
+  font-display: swap;
+}
+@font-face {
+  font-family: 'GmarketSansMedium';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: 'GmarketSansMedium', sans-serif;
+  .cookie {
+    font-family: 'CookieRun', sans-serif;
+  }
+}
+
+.App {
+  height: 100%;
+}

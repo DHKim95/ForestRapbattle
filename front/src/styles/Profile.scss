@@ -1,0 +1,199 @@
+.profile {
+  .title {
+    margin-top: 140px;
+    text-align: center;
+    font-size: 80px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    .myavatar {
+      cursor: pointer;
+      margin-right: 40px;
+      position: relative;
+      img {
+      }
+      .fdfd {
+        overflow: visible;
+      }
+      .btn {
+        background-color: transparent;
+        border: none;
+        position: absolute;
+        bottom:-10px;
+        right:-5px;
+        img {
+          cursor: pointer;
+          width: 60px;
+        }
+      }
+    }
+    .userInfo {
+      display: flex;
+      flex-direction: column;
+      justify-content: end;
+      .winPoint {
+        display: flex;
+        flex-direction: row;
+        font-size: 30px;
+        .myTier {
+          margin: 0px 20px 0px 0px
+        }
+        div {
+          display: table;
+          span {
+            display: table-cell;
+            vertical-align: bottom;
+          }
+        }
+      }
+    }
+  }
+  .horizion {
+    margin: 50px 0px;
+  }
+  .history {
+    .historyItem {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      height: 250px;
+      margin: 25px 0px;
+      position: relative;
+      .resultW {
+        position: absolute;
+        top:0px;
+        right: 0px;
+          width: 0;
+          height: 0;
+          border-bottom: 50px solid transparent;
+          border-top: 50px solid #5A4BB9;
+          border-left: 50px solid transparent;
+          border-right: 50px solid #5A4BB9;
+        }
+      .resultL {
+        position: absolute;
+        top:0px;
+        right: 0px;
+          width: 0;
+          height: 0;
+          border-bottom: 50px solid transparent;
+          border-top: 50px solid #B94B4B;
+          border-left: 50px solid transparent;
+          border-right: 50px solid #B94B4B;
+        }
+        .Win {
+          position: absolute;
+          top: 20px;
+          right: 20px;
+          font-size: 20px;
+          font-weight: bold;
+          color: white;
+        }
+      .three {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        .info {
+          margin: auto 10px;
+          .infoNickname {
+            cursor: pointer;
+            font-size: 50px;
+          }
+          .infoTier {
+            display: flex;
+            flex-direction: row;
+            .infoPoint {
+              margin: auto 5px;
+              font-size: 20px;
+            }
+          }
+        }
+        .versus {
+          margin: auto 20px;
+        }
+        .tier {
+          margin: auto 0px;
+        }
+        .profileImg {
+          cursor: pointer;
+          width: 150px;
+          height: 150px;
+          margin: auto 20px;
+        }
+      }
+      .one {
+        position: relative;
+        .date {
+          width: 100px;
+          position: absolute;
+          top:80%;
+          font-weight: bold;
+        }
+        .result {
+          width: 0;
+          height: 0;
+          border-bottom: 50px solid transparent;
+          border-top: 50px solid blue;
+          border-left: 50px solid transparent;
+          border-right: 50px solid blue;
+        }
+      }
+    }
+  }
+
+}
+
+.myModal {
+  background-color: black;
+  .modaltitle {
+    font-family: 'GmarketSansMedium', sans-serif;
+    font-size: 25px;
+    font-weight: bold;
+    text-align: center;
+  }
+  .mybtn {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    button {
+      font-family: 'GmarketSansMedium', sans-serif;
+    }
+  }
+}
+
+.profileChange {
+    .profileContainer {
+        display: grid;
+        // flex-wrap: wrap;
+        // justify-content: center;
+        grid-template-columns: repeat(5, 1fr);
+      }
+    
+      .profileItem {
+        flex: 0 0 20%;
+        text-align: center;
+        padding: 10px 10px;
+      }
+          
+      .myavatar {
+        background-color: white;
+        border: 3px solid white;
+        width: 90%;
+        height: 90%;
+        object-fit: fill;
+      }
+      
+      .selectedMyavatar {
+        border: 5px solid rgb(110, 110, 167);
+        width: 90%;
+        height: 90%;
+        object-fit: fill;
+                background-color: white;
+      }
+
+      .profileImage {
+        width: 100%;
+      }
+    }

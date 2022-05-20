@@ -1,0 +1,66 @@
+.Main {
+    width: 100%;
+    overflow: hidden;
+    margin: 0px auto;
+    position: relative;
+    background-color: rgb(125, 174, 136);
+  video {
+    width: 100%;
+  }
+  .button1 {
+    position: absolute;
+    animation-name: move;
+    animation-delay: 3s;
+    animation-duration: 3s;
+    animation-fill-mode: forwards;
+    opacity: 0;
+    top: 50%;
+    left: 45%;
+  }
+  @keyframes move {
+    from{opacity: 0;}
+    to{opacity: 1;}
+  }
+  .title {
+    display: table-cell;
+    text-align: center;
+    vertical-align:middle;
+    p {
+      font-size: 100px;
+      font-weight: bolder;
+      color: white;
+    }
+  }
+}
+
+.title2 {
+  text-align: center;
+  color: white;
+  padding-top: 100px;
+  padding-bottom: 200px;
+  font-size: 65px;
+  font-weight: bolder;
+}
+
+.items {
+  display: flex;
+  align-items: center;
+  padding-bottom: 200px;
+  .rightPic {
+    text-align: end;
+  }
+
+  div {
+    h1 {
+      color: white;
+      font-size: 60px;
+    }
+    p {
+      font-size: 25px;
+      font-weight: bolder;
+    }
+    img {
+      margin-left: auto;
+    }
+  }
+}
