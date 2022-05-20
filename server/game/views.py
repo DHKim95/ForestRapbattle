@@ -316,6 +316,16 @@ def gameResult(request) :
 @api_view(['GET'])
 @permission_classes([AllowAny])
 def ranking(request) :
+  
+  # 랭크 갱신
+  Rank.objects.all().delete()
+  users = User.objects.all().order_by('-win_point')
+  # print(users)
+
+  objs = [ Rank(rank=rank ,user_id=user) for rank,user in zip(range(1,len(users)+1),users)]
+  # print(objs)
+  Rank.objects.bulk_create(objs)
+
   page = request.GET.get('page')
   rank_cnt = Rank.objects.all().count()
   # print(rank_cnt)
@@ -366,17 +376,18 @@ def ranking(request) :
   return Response(serializer, status=status.HTTP_200_OK)
 
 # 랭킹 갱신
+@api_view(['GET'])
+@permission_classes([AllowAny])
 def ranking_save() :
   
-  instances = []
-  instances.append(Words(word_id = 10, word_level = 10, word = 'save'))
-  Words.objects.bulk_create(instances)
+  # instances = []
+  # instances.append(Words(word_id = 10, word_level = 10, word = 'save'))
+  # Words.objects.bulk_create(instances)
 
-
-  # Rank.objects.all().delete()
-  # users = User.objects.all().order_by('-win_point')
+  Rank.objects.all().delete()
+  users = User.objects.all().order_by('-win_point')
   # print(users)
 
-  # objs = [ Rank(rank=rank ,user_id=user) for rank,user in zip(range(1,len(users)+1),users)]
+  objs = [ Rank(rank=rank ,user_id=user) for rank,user in zip(range(1,len(users)+1),users)]
   # print(objs)
-  # Rank.objects.bulk_create(objs)
+  Rank.objects.bulk_create(objs)
