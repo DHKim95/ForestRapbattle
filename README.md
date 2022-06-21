@@ -131,6 +131,6 @@
     <td align="center"><a href="https://github.com/xogxog"><img src="https://avatars.githubusercontent.com/u/87456669?v=4" width="100px;" alt=""/><br /><sub><b>김태현<br>Back-end</b></sub></a><br /></td>
     <td align="center"><a href="https://github.com/cmsj72"><img src="https://avatars.githubusercontent.com/u/53756816?v=4" width="100px;" alt=""/><br /><sub><b>윤찬호<br>Unity</b></sub></a><br /></td>
     <td align="center"><a href="https://github.com/eunnuricho"><img src="https://avatars.githubusercontent.com/u/87456657?v=4" width="100px;" alt=""/><br /><sub><b>조은누리<br>Unity</b></sub></a><br /></td>
-    <td align="center"><a href="https://github.com/choiys1995"><img src="https://avatars.githubusercontent.com/u/77048597?v=4" width="100px;" alt=""/><br /><sub><b>조성현<br>Front-end</b></sub></a><br /></td>
+    <td align="center"><a href="https://github.com/Sungtong1"><img src="https://avatars.githubusercontent.com/u/87457031?v=4" width="100px;" alt=""/><br /><sub><b>조성현<br>Front-end</b></sub></a><br /></td>
     </tr>
 </table>
