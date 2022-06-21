@@ -100,23 +100,23 @@
 
 #### 1. 아키텍처
 
-![아키텍처](/uploads/d65044c07c8bb1f28f82d52f1d32c5a4/아키텍처.png)
+![20220520_121114](readme_image/아키텍처.png)
 
 #### 2. ERD
 
-![ERD](/uploads/45c9ca30ce7f3e41bda67b03aa1bafd5/ERD.png)
+![20220520_121114](readme_image/ERD.png)
 
 #### 3. 와이어프레임
 
-![와이어프레임](/uploads/7dbcb3cae552e93a6ff31363b7af7bd5/와이어프레임.png)
+![20220520_121114](readme_image/와이어프레임.png)
 
 #### 4. 클래스 다이어그램
 
-![ClassDiagram](/uploads/ce5928764bc1bb3ac53295d2c4fb2541/ClassDiagram.png)
+![20220520_121114](readme_image/ClassDiagram.png)
 
 #### 5. 기능 명세서
 
-![기능명세서](/uploads/bf5513f254485d1ec7e93d0c3854f616/기능명세서.png)
+![20220520_121114](readme_image/기능명세서.png)
 
 
 
